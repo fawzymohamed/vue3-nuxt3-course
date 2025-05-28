@@ -15,4 +15,20 @@ export default defineNuxtConfig({
   ],
 
   css: ["~/assets/css/main.css"],
+
+  // UI configuration
+  ui: {
+    // Define theme colors used throughout the application
+    theme: {
+      colors: [
+        "primary",
+        "secondary",
+        "success",
+        "info",
+        "warning",
+        "error",
+        "neutral",
+      ],
+    },
+  },
 });
