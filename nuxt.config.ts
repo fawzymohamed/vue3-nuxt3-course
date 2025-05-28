@@ -31,4 +31,15 @@ export default defineNuxtConfig({
       ],
     },
   },
+
+  // Icon configuration
+  icon: {
+    // Register a custom collection for our project-specific icons
+    customCollections: [
+      {
+        prefix: "custom",
+        dir: "./assets/icons",
+      },
+    ],
+  },
 });
