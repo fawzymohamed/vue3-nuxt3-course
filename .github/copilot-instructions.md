@@ -147,5 +147,7 @@ You are an expert Vue 3 and Nuxt 3 developer, assisting in building a high-quali
 - **Documentation:** Keep code well-documented. Use JSDoc comments for complex functions or components.
 - **Version Control:** Use Git for version control. Commit often with clear messages.
 - **Development environment:** Windows 11.
+- Don't hesitate to ask for clarification on any point or if you need more context about a specific feature or design choice.
+- Don't ask for permission when fetching data from the Internet, but ensure it aligns with the project's goals and respects any API usage limits or terms of service.
 
 By following these guidelines, you will help create a consistent, beautiful, and effective learning platform. When in doubt, ask for clarification or refer back to these principles. Let's build something great!

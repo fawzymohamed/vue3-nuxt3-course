@@ -1,9 +1,9 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-@theme static {
-  /* Font configuration for clean, modern sans-serif font as specified */
-  --font-sans: "Inter", "Roboto", "Open Sans", sans-serif;
+@theme {
+  /* Font configuration using Public Sans as specified */
+  --font-sans: "Public Sans", sans-serif;
 
   /* Nuxt Green colors exact matches as specified (#00DC82) */
   --color-green-50: #effdf5;
