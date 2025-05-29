@@ -12,9 +12,31 @@ export default defineNuxtConfig({
     "@nuxt/scripts",
     "@nuxt/test-utils",
     "@nuxt/ui",
+    "@nuxtjs/i18n",
   ],
 
   css: ["~/assets/css/main.css"],
+
+  i18n: {
+    locales: [
+      {
+        code: "ar",
+        name: "Arabic",
+        file: "ar.json",
+      },
+      {
+        code: "en",
+        name: "English",
+        file: "en.json",
+      },
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_redirected",
+      redirectOn: "root",
+      cookieCrossOrigin: true,
+    },
+  },
 
   // Color mode configuration
   colorMode: {

@@ -1,0 +1,10 @@
+{
+  "welcome": "مرحبا بكم في منصة التعلم Vue/Nuxt",
+  "description": "منصة تعليمية شاملة لتعلم Vue.js و Nuxt.js",
+  "courses": "الدورات",
+  "resources": "الموارد",
+  "about": "حول",
+  "footer": {
+    "copyright": "حقوق النشر © {year} منصة التعلم Vue/Nuxt"
+  }
+}

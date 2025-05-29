@@ -1,0 +1,10 @@
+{
+  "welcome": "Welcome to the Vue/Nuxt Learning Platform",
+  "description": "A comprehensive learning platform for Vue.js and Nuxt.js",
+  "courses": "Courses",
+  "resources": "Resources",
+  "about": "About",
+  "footer": {
+    "copyright": "Copyright © {year} Vue/Nuxt Learning Platform"
+  }
+}
