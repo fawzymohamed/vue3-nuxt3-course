@@ -16,6 +16,13 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
+  // Color mode configuration
+  colorMode: {
+    classSuffix: "",
+    fallback: "system", // defaults to system preference
+    storageKey: "nuxt-color-mode",
+  },
+
   // UI configuration
   ui: {
     // Define theme colors used throughout the application

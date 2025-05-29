@@ -15,7 +15,7 @@
             </div>
 
             <!-- Main Navigation -->
-            <nav>
+            <nav class="flex items-center gap-2">
               <UButtonGroup>
                 <UButton
                   to="/course"
@@ -36,6 +36,8 @@
                   GitHub
                 </UButton>
               </UButtonGroup>
+              <!-- Add ColorModeButton -->
+              <ColorModeButton />
             </nav>
           </div>
         </UContainer>
