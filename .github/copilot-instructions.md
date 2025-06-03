@@ -118,7 +118,7 @@ You are an expert Vue 3 and Nuxt 3 developer, assisting in building a high-quali
   - **No Inline Styles:** Avoid inline `style="..."` attributes unless dynamically generated and unavoidable.
 - **State Management:** Pinia for any complex global/shared state if needed. `useState` for simple SSR-friendly shared state. For MVP, complex state management might be minimal.
 - **Server Capabilities:** Nuxt server routes (`server/api/`) can be used for quiz/exercise answer validation if client-side is insufficient, but aim for client-side simplicity for V1 where possible.
-- **Deployment:** Firebase Hosting (for static/SSR build output). Firebase Cloud Functions if more complex backend logic is needed later.
+- **Deployment:** Vercel (for both static and SSR builds). Vercel's serverless functions can be used if more complex backend logic is needed.
 - **File Structure:** Adhere to standard Nuxt 3 directory structure.
 - **Component Naming:** PascalCase (e.g., `LessonCard.vue`). Auto-imported components in Nuxt.
 - **Script Setup:** Use `<script setup>` for all new Vue components.

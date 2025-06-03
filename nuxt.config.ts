@@ -1,7 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
-  devtools: { enabled: true },
+  devtools: { enabled: true }, // Configure for static site generation  ssr: true,
+  nitro: {
+    preset: "vercel",
+  },
 
   modules: [
     "@nuxt/content",
