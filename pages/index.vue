@@ -29,6 +29,7 @@ const { data: home } = await useAsyncData(() =>
         {{ loc.name }}
       </NuxtLink>
       <h1 class="py-5 text-3xl">{{ $t("welcome") }}</h1>
+      <h1 class="py-5 text-3xl">This is a testing Message!</h1>
     </div>
   </UContainer>
 </template>
