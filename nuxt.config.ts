@@ -1,9 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
-  devtools: { enabled: true }, // Configure for static site generation  ssr: true,
+  devtools: { enabled: true },
+  ssr: true, // Ensure SSR is enabled
   nitro: {
     preset: "vercel",
+    publicAssets: [
+      {
+        baseURL: "/_nuxt",
+        dir: ".nuxt/dist/client",
+      },
+      {
+        baseURL: "/_fonts",
+        dir: ".output/public/_fonts",
+      },
+    ],
   },
 
   modules: [

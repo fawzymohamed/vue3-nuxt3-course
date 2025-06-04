@@ -1,11 +1,10 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": ".output",
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
+  "outputDirectory": ".output/public",
+  "rewrites": [
+    { "source": "/_nuxt/(.*)", "destination": "/_nuxt/$1" },
+    { "source": "/_fonts/(.*)", "destination": "/_fonts/$1" },
+    { "source": "/(.*)", "destination": "/" }
   ]
 }
