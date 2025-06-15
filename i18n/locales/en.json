@@ -1,9 +1,64 @@
 {
-  "welcome": "Welcome to the Vue/Nuxt Learning Platform",
-  "description": "A comprehensive learning platform for Vue.js and Nuxt.js",
-  "courses": "Courses",
   "resources": "Resources",
   "about": "About",
+  "languages": {
+    "en": "English",
+    "ar": "Arabic"
+  },
+  "homepage": {
+    "meta": {
+      "title": "Master Vue.js and Nuxt.js from Beginner to Advanced",
+      "description": "Your comprehensive, hands-on journey to becoming proficient in Vue and Nuxt. Build real-world applications and elevate your development skills."
+    },
+    "hero": {
+      "title": "Master Vue.js and Nuxt.js from",
+      "cta": "Get Started Now",
+      "titleHighlight": "Beginner to Advanced",
+      "subtitle": "Your comprehensive, hands-on journey to becoming proficient in Vue and Nuxt. Build real-world applications and elevate your development skills."
+    },
+    "benefits": {
+      "title": "Why This Course?",
+      "subtitle": "Everything you need to master modern Vue.js and Nuxt.js development",
+      "comprehensive": {
+        "title": "Comprehensive Curriculum",
+        "description": "Covering Vue 3 and Nuxt 3 from fundamentals to advanced topics with structured learning paths."
+      },
+      "handson": {
+        "title": "Hands-On Learning",
+        "description": "Interactive exercises, quizzes, and real-world projects to reinforce your learning."
+      },
+      "modern": {
+        "title": "Modern Best Practices",
+        "description": "Built with Vite, TypeScript, Pinia, and the Composition API using current industry standards."
+      },
+      "expert": {
+        "title": "Expert-Led Instruction",
+        "description": "Clear explanations and practical examples from experienced Vue and Nuxt developers."
+      }
+    },
+    "modules": {
+      "title": "Modules You'll Explore",
+      "subtitle": "A structured journey from Vue basics to advanced Nuxt applications",
+      "module1": {
+        "title": "Vue.js Fundamentals",
+        "description": "Learn the core concepts of Vue 3, including reactivity, components, and the Composition API."
+      },
+      "module2": {
+        "title": "Intermediate Vue & State Management",
+        "description": "Dive deeper into Vue with advanced patterns, Pinia for state management, and complex component interactions."
+      },
+      "module3": {
+        "title": "Introduction to Nuxt.js",
+        "description": "Discover the power of Nuxt 3 for building full-stack applications with server-side rendering and more."
+      }
+    },
+    "finalCta": {
+      "title": "Ready to Start Your Vue & Nuxt Journey?",
+      "subtitle": "Join thousands of developers who have transformed their careers with our comprehensive Vue and Nuxt course.",
+      "primaryCta": "Explore Full Syllabus",
+      "secondaryCta": "View Sample Lessons"
+    }
+  },
   "footer": {
     "copyright": "Copyright © {year} Vue/Nuxt Learning Platform"
   }

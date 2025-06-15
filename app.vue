@@ -29,29 +29,11 @@ useHead({
                 <span class="text-primary">Vue/Nuxt</span> Learning Platform
               </NuxtLink>
             </div>
-
             <!-- Main Navigation -->
             <nav class="flex items-center gap-2">
-              <UButtonGroup>
-                <UButton
-                  to="/course"
-                  variant="ghost"
-                  icon="i-heroicons-academic-cap"
-                >
-                  Courses
-                </UButton>
-                <UButton to="/icons" variant="ghost" icon="i-lucide-palette">
-                  Icons Demo
-                </UButton>
-                <UButton
-                  to="https://github.com/nuxt/ui"
-                  variant="ghost"
-                  icon="i-lucide-github"
-                  target="_blank"
-                >
-                  GitHub
-                </UButton>
-              </UButtonGroup>
+              <!-- Language Switcher -->
+              <LanguageSwitcher />
+
               <!-- Add ColorModeButton -->
               <ColorModeButton />
             </nav>
@@ -73,7 +55,7 @@ useHead({
             <!-- Left side -->
             <div class="text-sm text-muted flex items-center gap-2">
               <UIcon name="i-lucide-copyright" class="size-4" />
-              {{ new Date().getFullYear() }} Vue/Nuxt Learning Platform
+              {{ $t("footer.copyright", { year: new Date().getFullYear() }) }}
             </div>
 
             <!-- Right side -->
@@ -85,7 +67,7 @@ useHead({
                 size="sm"
                 color="neutral"
               >
-                Resources
+                {{ $t("resources") }}
               </UButton>
               <UButton
                 icon="i-lucide-info"
@@ -94,7 +76,7 @@ useHead({
                 size="sm"
                 color="neutral"
               >
-                About
+                {{ $t("about") }}
               </UButton>
             </div>
           </div>

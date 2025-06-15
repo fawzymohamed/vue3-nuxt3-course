@@ -39,6 +39,87 @@ You are an expert Vue 3 and Nuxt 3 developer, assisting in building a high-quali
     - Clear navigation structure.
     - Intuitive UI for interacting with exercises and quizzes.
 
+## II.1. Multi-Language Support (Internationalization - i18n)
+
+**CRITICAL:** This project implements full internationalization support and MUST be considered in all development decisions.
+
+### **Supported Languages:**
+
+- **English (en)** - Primary language
+- **Arabic (ar)** - Secondary language with RTL support
+
+### **Key Implementation Details:**
+
+- **Translation Framework:** Uses `@nuxtjs/i18n` module with Nuxt 3
+- **Locale Files:** Located in `i18n/locales/` directory (`en.json`, `ar.json`)
+- **Language Switcher:** Custom `LanguageSwitcher.vue` component using UDropdownMenu
+- **RTL Support:** Automatic direction handling for Arabic (`dir="rtl"`)
+
+### **Development Guidelines:**
+
+1. **Always Use Translation Keys:** Never hardcode text strings in components
+
+   - ✅ Correct: `{{ $t("homepage.hero.title") }}`
+   - ❌ Wrong: `"Master Vue.js and Nuxt.js"`
+
+2. **Add New Translation Keys:** When adding new content, update BOTH locale files
+
+   - Add to `i18n/locales/en.json`
+   - Add to `i18n/locales/ar.json`
+   - Use descriptive, nested key structure (e.g., `"section.subsection.key"`)
+
+3. **Translation Key Naming Convention:**
+
+   - Use camelCase for keys: `"primaryCta"`, `"titleHighlight"`
+   - Use nested objects for organization: `"homepage.hero.title"`
+   - Be descriptive and context-specific
+
+4. **Component Translation Usage:**
+
+   - Use `{{ $t("key") }}` in templates
+   - Use `const { t } = useI18n()` and `t("key")` in script setup
+   - For SEO meta: `useHead({ title: t("page.meta.title") })`
+
+5. **Handling Dynamic Content:**
+
+   - Use interpolation: `$t("message", { name: userName })`
+   - In locale files: `"welcome": "Welcome {name}!"`
+
+6. **RTL Considerations:**
+
+   - Test all UI components in Arabic (RTL) mode
+   - Ensure icons, layouts, and spacing work correctly
+   - Use logical CSS properties when possible (e.g., `margin-inline-start` vs `margin-left`)
+
+7. **Language Switcher Integration:**
+   - The `LanguageSwitcher` component is already implemented
+   - It automatically updates the UI language and persists the choice
+   - Placed in the main navigation (app.vue)
+
+### **Current Translation Structure:**
+
+```json
+{
+  "resources": "...",
+  "about": "...",
+  "languages": { "en": "...", "ar": "..." },
+  "homepage": {
+    "meta": { "title": "...", "description": "..." },
+    "hero": { "title": "...", "titleHighlight": "...", "subtitle": "..." },
+    "benefits": { ... },
+    "modules": { ... },
+    "finalCta": { ... }
+  },
+  "footer": { "copyright": "..." }
+}
+```
+
+### **Testing Multi-Language:**
+
+- Always test new features in both English and Arabic
+- Verify text truncation, layout shifts, and RTL behavior
+- Ensure all user-facing text is translatable
+
 ## III. Content Structure & Management
 
 - **Content Source:** Markdown files located in the `content/` directory, managed by the `@nuxt/content` module.
@@ -144,6 +225,7 @@ You are an expert Vue 3 and Nuxt 3 developer, assisting in building a high-quali
 
 ## X. Final Notes
 
+- **MULTI-LANGUAGE PRIORITY:** Always consider internationalization first. Every user-facing text must use translation keys. Test in both English and Arabic.
 - **Documentation:** Keep code well-documented. Use JSDoc comments for complex functions or components.
 - **Version Control:** Use Git for version control. Commit often with clear messages.
 - **Development environment:** Windows 11.

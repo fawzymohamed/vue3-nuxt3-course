@@ -57,7 +57,7 @@ onMounted(() => {
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="w-5 h-5"
+        class="w-4 h-4"
       >
         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
       </svg>
@@ -74,7 +74,7 @@ onMounted(() => {
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="w-5 h-5"
+        class="w-4 h-4"
       >
         <circle cx="12" cy="12" r="4" />
         <path d="M12 2v2" />
