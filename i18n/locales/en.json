@@ -1,4 +1,5 @@
 {
+  "siteName": "VueNuxtMasters",
   "resources": "Resources",
   "about": "About",
   "languages": {
@@ -60,7 +61,7 @@
     }
   },
   "footer": {
-    "copyright": "Copyright © {year} Vue/Nuxt Learning Platform"
+    "copyright": "Copyright ©{year} - VueNuxtMasters"
   },
   "curriculum": {
     "meta": {
@@ -78,5 +79,10 @@
     "beginner": "Beginner",
     "intermediate": "Intermediate",
     "advanced": "Advanced"
+  },
+  "error": {
+    "goHome": "Go Home",
+    "pageNotFound": "Page Not Found",
+    "pageNotFoundMessage": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
   }
 }

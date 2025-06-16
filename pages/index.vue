@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 // SEO Meta for homepage with i18n
 useHead({
@@ -38,7 +39,7 @@ useHead({
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <UButton
-              to="/curriculum"
+              :to="localePath('/curriculum')"
               size="xl"
               class="bg-green-400 hover:bg-green-500 text-white font-semibold py-3 px-8 rounded-md transition-colors duration-200"
             >
@@ -160,7 +161,7 @@ useHead({
     </section>
 
     <!-- Curriculum Sneak Peek Section -->
-    <section class="py-16 lg:py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="modules" class="py-16 lg:py-20 bg-gray-50 dark:bg-gray-900">
       <UContainer>
         <div class="max-w-4xl mx-auto">
           <div class="text-center mb-12">
@@ -265,14 +266,14 @@ useHead({
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <UButton
-              to="/curriculum"
+              :to="localePath('/curriculum')"
               size="lg"
               class="bg-green-400 hover:bg-green-500 text-white font-semibold py-3 px-8 rounded-md transition-colors duration-200"
             >
               {{ $t("homepage.finalCta.primaryCta") }}
             </UButton>
             <UButton
-              to="/#modules"
+              :to="{ path: localePath('/'), hash: '#modules' }"
               variant="outline"
               size="lg"
               class="border-green-400 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 py-3 px-8 rounded-md transition-colors duration-200"

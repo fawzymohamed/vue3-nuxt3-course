@@ -41,7 +41,7 @@ onMounted(() => {
   <ClientOnly>
     <button
       type="button"
-      class="flex items-center justify-center rounded-md p-2 transition-colors duration-300 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+      class="cursor-pointer flex items-center justify-center rounded-md p-2 transition-colors duration-300 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
       aria-label="Toggle color mode"
       @click="isDark = !isDark"
     >

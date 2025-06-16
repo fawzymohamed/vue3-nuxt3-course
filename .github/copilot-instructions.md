@@ -1,4 +1,4 @@
-# AI Copilot Instructions for Vue/Nuxt Learning Platform
+# AI Copilot Instructions for VueNuxtMasters
 
 You are an expert Vue 3 and Nuxt 3 developer, assisting in building a high-quality learning platform. Your primary goal is to translate design specifications, project features, and functional requirements into clean, efficient, and maintainable code.
 

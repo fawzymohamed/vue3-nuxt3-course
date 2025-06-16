@@ -24,10 +24,16 @@ useHead({
         <UContainer class="py-4">
           <div class="flex justify-between items-center">
             <!-- Logo/Site Name -->
-            <div class="flex items-center gap-x-2">
-              <UIcon name="i-lucide-code" class="text-primary size-6" />
-              <NuxtLink :to="localePath('/')" class="font-bold text-lg">
-                <span class="text-primary">Vue/Nuxt</span> Learning Platform
+            <div class="flex items-center">
+              <NuxtLink :to="localePath('/')" class="flex items-center">
+                <NuxtImg
+                  src="/logo.png"
+                  :alt="$t('siteName')"
+                  class="h-8 w-auto"
+                  loading="eager"
+                  preload
+                />
+                <span class="text-primary">VueNuxtMasters</span>
               </NuxtLink>
             </div>
             <!-- Main Navigation -->
@@ -46,38 +52,24 @@ useHead({
       <main class="flex-1">
         <NuxtPage />
       </main>
-
       <!-- Footer -->
       <footer class="border-t border-default">
-        <UContainer class="py-4">
-          <div
-            class="flex flex-col sm:flex-row justify-between items-center gap-4"
-          >
-            <!-- Left side -->
-            <div class="text-sm text-muted flex items-center gap-2">
-              <UIcon name="i-lucide-copyright" class="size-4" />
-              {{ $t("footer.copyright", { year: new Date().getFullYear() }) }}
+        <UContainer class="py-6">
+          <div class="flex justify-center gap-4">
+            <!-- Footer Logo -->
+            <div class="flex items-center">
+              <NuxtLink :to="localePath('/')" class="flex items-center">
+                <NuxtImg
+                  src="/logo.png"
+                  :alt="$t('siteName')"
+                  class="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                />
+              </NuxtLink>
             </div>
-            <!-- Right side -->
-            <div class="flex gap-4">
-              <UButton
-                icon="i-lucide-book"
-                :to="localePath('/resources')"
-                variant="ghost"
-                size="sm"
-                color="neutral"
-              >
-                {{ $t("resources") }}
-              </UButton>
-              <UButton
-                icon="i-lucide-info"
-                :to="localePath('/about')"
-                variant="ghost"
-                size="sm"
-                color="neutral"
-              >
-                {{ $t("about") }}
-              </UButton>
+
+            <!-- Copyright -->
+            <div class="text-sm text-muted text-center">
+              {{ $t("footer.copyright", { year: new Date().getFullYear() }) }}
             </div>
           </div>
         </UContainer>
