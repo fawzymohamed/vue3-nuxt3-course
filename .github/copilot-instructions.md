@@ -92,9 +92,17 @@ You are an expert Vue 3 and Nuxt 3 developer, assisting in building a high-quali
    - Use logical CSS properties when possible (e.g., `margin-inline-start` vs `margin-left`)
 
 7. **Language Switcher Integration:**
+
    - The `LanguageSwitcher` component is already implemented
    - It automatically updates the UI language and persists the choice
    - Placed in the main navigation (app.vue)
+
+8. **Navigation with i18n:**
+   - Always use `localePath` for route generation in navigation links
+   - ✅ Correct: `:to="localePath('/curriculum')"`
+   - ❌ Wrong: `to="/curriculum"`
+   - Import using: `const localePath = useLocalePath()` in script setup
+   - This ensures links work correctly across language changes
 
 ### **Current Translation Structure:**
 

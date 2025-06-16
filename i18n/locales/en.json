@@ -61,5 +61,22 @@
   },
   "footer": {
     "copyright": "Copyright © {year} Vue/Nuxt Learning Platform"
+  },
+  "curriculum": {
+    "meta": {
+      "title": "Vue & Nuxt Curriculum | Complete Learning Path",
+      "description": "Explore our comprehensive Vue.js and Nuxt.js curriculum from beginner fundamentals to advanced real-world projects with hands-on exercises."
+    },
+    "hero": {
+      "title": "Complete Course Curriculum",
+      "subtitle": "Your structured learning path from beginner fundamentals to advanced mastery"
+    },
+    "moduleTitle": "Module {number}: {title}",
+    "sectionTitle": "Section {number}: {title}",
+    "lessonTitle": "Lesson {number}: {title}",
+    "project": "Project {number}: {title}",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
   }
 }

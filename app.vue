@@ -2,6 +2,7 @@
 import * as locales from "@nuxt/ui/locale";
 
 const { locale } = useI18n();
+const localePath = useLocalePath();
 
 const lang = computed(() => locales[locale.value].code);
 const dir = computed(() => locales[locale.value].dir);
@@ -25,12 +26,12 @@ useHead({
             <!-- Logo/Site Name -->
             <div class="flex items-center gap-x-2">
               <UIcon name="i-lucide-code" class="text-primary size-6" />
-              <NuxtLink to="/" class="font-bold text-lg">
+              <NuxtLink :to="localePath('/')" class="font-bold text-lg">
                 <span class="text-primary">Vue/Nuxt</span> Learning Platform
               </NuxtLink>
             </div>
             <!-- Main Navigation -->
-            <nav class="flex items-center gap-2">
+            <nav class="flex items-center gap-4">
               <!-- Language Switcher -->
               <LanguageSwitcher />
 
@@ -57,12 +58,11 @@ useHead({
               <UIcon name="i-lucide-copyright" class="size-4" />
               {{ $t("footer.copyright", { year: new Date().getFullYear() }) }}
             </div>
-
             <!-- Right side -->
             <div class="flex gap-4">
               <UButton
                 icon="i-lucide-book"
-                to="/resources"
+                :to="localePath('/resources')"
                 variant="ghost"
                 size="sm"
                 color="neutral"
@@ -71,7 +71,7 @@ useHead({
               </UButton>
               <UButton
                 icon="i-lucide-info"
-                to="/about"
+                :to="localePath('/about')"
                 variant="ghost"
                 size="sm"
                 color="neutral"

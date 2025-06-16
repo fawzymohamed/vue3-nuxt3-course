@@ -61,5 +61,22 @@
   },
   "footer": {
     "copyright": "حقوق النشر © {year} منصة التعلم Vue/Nuxt"
+  },
+  "curriculum": {
+    "meta": {
+      "title": "منهج Vue و Nuxt | مسار تعليمي كامل",
+      "description": "استكشف منهجنا الشامل لـ Vue.js و Nuxt.js من أساسيات المبتدئين إلى المشاريع المتقدمة العملية مع تمارين عملية."
+    },
+    "hero": {
+      "title": "منهج الدورة الكامل",
+      "subtitle": "مسار التعلم المنظم الخاص بك من أساسيات المبتدئين إلى الإتقان المتقدم"
+    },
+    "moduleTitle": "الوحدة {number}: {title}",
+    "sectionTitle": "القسم {number}: {title}",
+    "lessonTitle": "الدرس {number}: {title}",
+    "project": "المشروع {number}: {title}",
+    "beginner": "مبتدئ",
+    "intermediate": "متوسط",
+    "advanced": "متقدم"
   }
 }

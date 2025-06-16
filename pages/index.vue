@@ -272,7 +272,7 @@ useHead({
               {{ $t("homepage.finalCta.primaryCta") }}
             </UButton>
             <UButton
-              to="/curriculum"
+              to="/#modules"
               variant="outline"
               size="lg"
               class="border-green-400 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 py-3 px-8 rounded-md transition-colors duration-200"
