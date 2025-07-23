@@ -83,6 +83,29 @@
   "error": {
     "goHome": "Go Home",
     "pageNotFound": "Page Not Found",
-    "pageNotFoundMessage": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+    "pageNotFoundMessage": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "lessonNotFound": "Lesson Not Found",
+    "lessonNotFoundDescription": "The lesson you're looking for could not be found. It may have been moved or doesn't exist.",
+    "generalError": "Something went wrong",
+    "tryAgain": "Please try again later"
+  },
+  "lesson": {
+    "backToCurriculum": "Back to Curriculum",
+    "nextLesson": "Next Lesson",
+    "previousLesson": "Previous Lesson",
+    "lessonNumber": "Lesson {number}",
+    "currentModule": "Current Module",
+    "moduleProgress": "Module Progress",
+    "lessonEstimatedTime": "{minutes} min read",
+    "completeLesson": "Mark as Complete",
+    "lessonCompleted": "Completed",
+    "exercise": "Exercise",
+    "quiz": "Quiz",
+    "tryAgain": "Try Again",
+    "checkAnswer": "Check Answer",
+    "correctAnswer": "Correct!",
+    "incorrectAnswer": "Incorrect. Try again.",
+    "showSolution": "Show Solution",
+    "hideSolution": "Hide Solution"
   }
 }

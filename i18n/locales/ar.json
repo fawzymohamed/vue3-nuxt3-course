@@ -83,6 +83,29 @@
   "error": {
     "goHome": "الذهاب للرئيسية",
     "pageNotFound": "الصفحة غير موجودة",
-    "pageNotFoundMessage": "الصفحة التي تبحث عنها قد تكون محذوفة أو تم تغيير اسمها أو غير متاحة مؤقتاً."
+    "pageNotFoundMessage": "الصفحة التي تبحث عنها قد تكون محذوفة أو تم تغيير اسمها أو غير متاحة مؤقتاً.",
+    "lessonNotFound": "الدرس غير موجود",
+    "lessonNotFoundDescription": "تعذر العثور على الدرس الذي تبحث عنه. ربما تم نقله أو غير موجود.",
+    "generalError": "حدث خطأ ما",
+    "tryAgain": "يرجى المحاولة مرة أخرى لاحقًا"
+  },
+  "lesson": {
+    "backToCurriculum": "العودة إلى المنهج",
+    "nextLesson": "الدرس التالي",
+    "previousLesson": "الدرس السابق",
+    "lessonNumber": "الدرس {number}",
+    "currentModule": "الوحدة الحالية",
+    "moduleProgress": "تقدم الوحدة",
+    "lessonEstimatedTime": "{minutes} دقيقة للقراءة",
+    "completeLesson": "وضع علامة كمكتمل",
+    "lessonCompleted": "مكتمل",
+    "exercise": "تمرين",
+    "quiz": "اختبار",
+    "tryAgain": "حاول مرة أخرى",
+    "checkAnswer": "تحقق من الإجابة",
+    "correctAnswer": "صحيح!",
+    "incorrectAnswer": "غير صحيح. حاول مرة أخرى.",
+    "showSolution": "عرض الحل",
+    "hideSolution": "إخفاء الحل"
   }
 }
