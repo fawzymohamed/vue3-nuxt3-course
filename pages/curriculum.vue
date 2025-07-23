@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 // SEO Meta for curriculum page with i18n
 useHead({
@@ -302,6 +303,16 @@ const parseCourseOutline = (): CourseModule[] => {
 
 // Parse the course outline
 const courseModules = parseCourseOutline();
+
+// Function to generate lesson URL
+const generateLessonUrl = (
+  moduleNumber: number,
+  lessonNumber: number
+): string => {
+  return `/lesson/module${moduleNumber}-${
+    useNuxtApp().$i18n.locale.value
+  }/lesson${lessonNumber}`;
+};
 </script>
 
 <template>
@@ -423,12 +434,21 @@ const courseModules = parseCourseOutline();
                         "
                       >
                         <template v-if="item.type === 'lesson'">
-                          {{
-                            $t("curriculum.lessonTitle", {
-                              number: item.number,
-                              title: item.title,
-                            })
-                          }}
+                          <NuxtLink
+                            :to="
+                              localePath(
+                                generateLessonUrl(module.number, item.number)
+                              )
+                            "
+                            class="hover:text-primary transition-colors duration-200 hover:underline"
+                          >
+                            {{
+                              $t("curriculum.lessonTitle", {
+                                number: item.number,
+                                title: item.title,
+                              })
+                            }}
+                          </NuxtLink>
                         </template>
                         <template v-else-if="item.type === 'project'">
                           {{
