@@ -90,6 +90,7 @@
     "tryAgain": "يرجى المحاولة مرة أخرى لاحقًا"
   },
   "lesson": {
+    "notFound": "محتوى الدرس غير موجود",
     "backToCurriculum": "العودة إلى المنهج",
     "nextLesson": "الدرس التالي",
     "previousLesson": "الدرس السابق",

@@ -1,23 +1,68 @@
 <script setup>
 const route = useRoute();
+// const router = useRouter();
+const { locale } = useI18n();
+const localePath = useLocalePath();
 
 // Get module and lesson slug from route params
-const module = route.params.module;
-const lessonSlug = route.params.lessonSlug;
+const module = computed(() => route.params.module);
+const lessonSlug = computed(() => route.params.lessonSlug);
 
-// Get current locale
-// const { locale } = useI18n();
+// Function to map module names between languages
+function mapModuleToLanguage(currentModule, targetLang) {
+  // Extract module base name (assuming format like "module1-en")
+  const moduleMatch = currentModule.match(/^(.+)-([a-z]{2})$/);
+  if (!moduleMatch) return currentModule; // Return unchanged if pattern doesn't match
+
+  const [_, moduleBase] = moduleMatch;
+  return `${moduleBase}-${targetLang}`;
+}
+
+// Watch for language changes
+watch(locale, async (newLocale) => {
+  // Map current module to module in new language
+  const newModule = mapModuleToLanguage(module.value, newLocale);
+
+  // Only redirect if the module name would change
+  if (newModule !== module.value) {
+    try {
+      // Create the new URL path
+      const newPath = `/lesson/${newModule}/${lessonSlug.value}`;
+
+      // Try a more direct navigation approach
+      const localizedPath = localePath(newPath);
+
+      setTimeout(async () => {
+        // Navigate to the new path with replace option
+        await navigateTo(localizedPath, { replace: true });
+      }, 100);
+
+      // Wait for the next tick instead of an arbitrary timeout
+      // await nextTick();
+      // await navigateTo(localizedPath, { replace: true });
+    } catch (error) {
+      console.error("Navigation error:", error);
+    }
+  }
+});
 
 // Get content with appropriate locale path
-const { data: home } = await useAsyncData(() =>
-  queryCollection("content").path(`/lesson/${module}/${lessonSlug}`).first()
+const { data: lesson } = await useAsyncData(
+  `lesson-${module.value}-${lessonSlug.value}`,
+  () =>
+    queryCollection("content")
+      .path(`/lesson/${module.value}/${lessonSlug.value}`)
+      .first()
 );
 </script>
 
 <template>
-  <div class="p-4">
-    <h1 class="text-2xl font-bold mb-4">Module: {{ module }}</h1>
-    <h2 class="text-xl mb-2">Lesson: {{ lessonSlug }}</h2>
-    <ContentRenderer v-if="home" :value="home" />
-  </div>
+  <section>
+    <UContainer>
+      <ContentRenderer v-if="lesson" :value="lesson" />
+      <div v-else class="py-4 text-red-500">
+        {{ $t("lesson.notFound") }}
+      </div>
+    </UContainer>
+  </section>
 </template>

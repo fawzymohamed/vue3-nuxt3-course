@@ -90,6 +90,7 @@
     "tryAgain": "Please try again later"
   },
   "lesson": {
+    "notFound": "Lesson content not found",
     "backToCurriculum": "Back to Curriculum",
     "nextLesson": "Next Lesson",
     "previousLesson": "Previous Lesson",

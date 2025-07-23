@@ -1,12 +1,10 @@
-## -vue-fundamentals/1-what-is-vue.md
-
+---
 title: "ما هو Vue.js؟ ولماذا Vue؟"
 description: "مقدمة في Vue.js، بيئته، فوائد الأداء، وتجربة المطور"
 number: 1
 module: 1
 section: 1
-level: "beginner"
-
+level: "مبتدئ"
 ---
 
 # ما هو Vue.js؟ ولماذا Vue؟
