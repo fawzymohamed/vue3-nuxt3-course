@@ -1,13 +1,103 @@
 # AI Copilot Instructions for VueNuxtMasters
 
-You are an expert Vue 3 and Nuxt 3 developer, assisting in building a high-quality learning platform. Your primary goal is to translate design specifications, project features, and functional requirements into clean, efficient, and maintainable code.
+You are an expert Vue 3 and Nuxt 3 developer, assisting in building a high-quality bilingual learning platform. Focus on understanding the existing architecture patterns before making changes.
 
-## 0. Project Overview & Core Mission
+## 0. Project Architecture Overview
 
-- **Project Goal:** To create a comprehensive, single-course learning website teaching Vue.js and Nuxt.js from beginner to advanced levels.
-- **Target Audience:** Developers of all levels (beginner, intermediate, advanced) looking to learn or master Vue and Nuxt.
-- **Monetization:** Initially free or an "early access" model. No complex payment gateways or user authentication for V1. Progress tracking might be client-side (localStorage) only.
-- **Core Philosophy:** Provide high-quality, practical, and engaging learning content in a user-friendly interface.
+**VueNuxtMasters** is a Nuxt 3-based learning platform with full internationalization support (English/Arabic with RTL). The architecture follows these key patterns:
+
+### Content Architecture
+
+- **Dual-language content structure**: `content/lesson/module1-en/` and `content/lesson/module1-ar/`
+- **Language-specific routing**: Dynamic routes at `/lesson/[module]/[lessonSlug]` where module includes language suffix
+- **Content managed via @nuxt/content** with frontmatter structure: `title`, `description`, `number`, `module`, `section`, `level`
+
+### i18n Architecture
+
+- **Critical**: ALL user-facing text uses translation keys (`$t("key")`) - never hardcode strings
+- **Language switching logic**: `LanguageSwitcher.vue` with automatic module mapping (`module1-en` ↔ `module1-ar`)
+- **Route localization**: Always use `localePath()` for navigation, imported via `useLocalePath()`
+- **RTL support**: Automatic `dir` attribute switching in `app.vue` using computed properties
+
+### Tech Stack Essentials
+
+- **Nuxt 3** with SSR enabled, TypeScript, and `<script setup>` pattern
+- **@nuxt/ui** (NOT Nuxt UI Pro) with custom icon collections in `assets/icons/`
+- **Vercel deployment** with nitro preset configured
+- **@nuxtjs/i18n** with cookie-based language persistence
+
+### Translation Implementation
+
+```vue
+// ✅ Correct patterns
+<script setup>
+const { t } = useI18n();
+const localePath = useLocalePath();
+</script>
+
+<template>
+  <h1>{{ $t("homepage.hero.title") }}</h1>
+  <NuxtLink :to="localePath('/curriculum')">{{
+    $t("navigation.curriculum")
+  }}</NuxtLink>
+</template>
+```
+
+### Language Module Mapping
+
+- Modules follow pattern: `module1-en` ↔ `module1-ar`
+- Language switching logic in `pages/lesson/[module]/[lessonSlug].vue` handles module name mapping
+- Watch for `locale` changes and redirect to equivalent module in new language
+
+### Content Frontmatter Schema
+
+```yaml
+---
+title: "Localized lesson title"
+description: "Brief lesson summary for SEO"
+number: 1 # Lesson order within module
+module: 1 # Module number
+section: 1 # Section within module
+level: "beginner" # difficulty level
+---
+```
+
+## Critical Development Rules
+
+1. **Never hardcode text** - Always use `$t("key")` or `t("key")`
+2. **Always use `localePath()`** for navigation links
+3. **Test in both languages** - Components must work in RTL (Arabic) mode
+4. **Follow the dual-content structure** - Add content to both `module1-en/` and `module1-ar/`
+5. **Use `<script setup>`** - Standard for all Vue components
+6. **Leverage @nuxt/ui components** - Use UButton, UContainer, UDropdownMenu, etc.
+
+## Essential File Locations
+
+- **i18n config**: `nuxt.config.ts` (locales, detection settings)
+- **Translation files**: `i18n/locales/en.json`, `i18n/locales/ar.json`
+- **Content**: `content/lesson/module{N}-{lang}/lesson{N}.md`
+- **Main layout**: `app.vue` (handles language switching, RTL direction)
+- **Language switcher**: `components/LanguageSwitcher.vue`
+
+## Common Commands
+
+```bash
+npm run dev          # Development server
+npm run build        # Production build
+npm run generate     # Static generation
+```
+
+## When Adding New Features
+
+1. Check existing translation keys in `i18n/locales/`
+2. Add new keys to BOTH language files
+3. Use descriptive nested keys: `"section.component.action"`
+4. Test language switching functionality
+5. Verify RTL layout in Arabic mode
+
+---
+
+_The sections below contain additional styling and design guidelines. Focus on the architectural patterns above for immediate productivity._
 
 ## I. Overall Design Philosophy & Aesthetics
 
