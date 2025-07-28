@@ -33,7 +33,7 @@ const currentLanguage = computed(() => {
 const isOpen = ref(false);
 
 // Hover event handlers
-function onButtonHover() {
+function openLangList() {
   isOpen.value = true;
 }
 </script>
@@ -45,15 +45,17 @@ function onButtonHover() {
     :popper="{ placement: 'bottom-end' }"
     :ui="{
       content: 'w-40',
+      item: 'cursor-pointer',
     }"
   >
     <UButton
       variant="ghost"
+      class="cursor-pointer"
       color="neutral"
       :label="currentLanguage"
       icon="i-lucide-globe"
       trailing-icon="i-lucide-chevron-down"
-      @mouseenter="onButtonHover"
+      @click="openLangList"
     />
   </UDropdownMenu>
 </template>

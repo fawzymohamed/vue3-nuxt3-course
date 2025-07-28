@@ -22,7 +22,7 @@ const copyCode = async () => {
 </script>
 
 <template>
-  <div class="code-example my-8">
+  <div class="code-example my-8" dir="ltr">
     <div
       class="bg-gray-50 dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700"
     >
@@ -88,6 +88,17 @@ const copyCode = async () => {
 
 .code-example :deep(code) {
   font-size: 0.875rem;
+}
+
+/* Ensure code content is always LTR regardless of page direction */
+.code-example [dir="ltr"] {
+  text-align: left;
+  direction: ltr;
+}
+
+.code-example [dir="ltr"] :deep(*) {
+  direction: ltr;
+  text-align: left;
 }
 
 /* Light theme code styling */
