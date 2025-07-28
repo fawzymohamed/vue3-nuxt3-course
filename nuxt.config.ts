@@ -3,6 +3,10 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
   ssr: true, // Ensure SSR is enabled
+
+  // Configure srcDir to use the app directory (Nuxt 4 default)
+  srcDir: "app/",
+
   // App configuration
   app: {
     head: {
@@ -76,6 +80,9 @@ export default defineNuxtConfig({
       redirectOn: "root",
       cookieCrossOrigin: true,
     },
+    bundle: {
+      optimizeTranslationDirective: false,
+    },
   },
 
   // Color mode configuration
@@ -107,7 +114,7 @@ export default defineNuxtConfig({
     customCollections: [
       {
         prefix: "custom",
-        dir: "./assets/icons",
+        dir: "./app/assets/icons",
       },
     ],
   },
