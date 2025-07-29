@@ -247,25 +247,18 @@ Predefined categories with consistent visual styling:
 
 ## 🔧 Development Tools
 
-### Package.json Script
+The course registry system includes built-in validation utilities that can be used within the Vue/Nuxt application context to ensure configuration integrity.
 
-```json
-{
-  "scripts": {
-    "validate-courses": "node scripts/validate-courses.mjs"
-  }
-}
-```
+### Course Validation Functions
 
-### Validation Script (`scripts/validate-courses.mjs`)
+Available validation utilities in `utils/courseValidation.ts`:
 
-Comprehensive validation tool for:
+- `validateCourseConfig()` - Individual course validation
+- `validateAllCourses()` - Validate entire course registry
+- `checkCourseConsistency()` - Configuration consistency checks
+- `generateCourseSummary()` - Course summaries and statistics
 
-- Individual course validation
-- Configuration consistency checks
-- Course summaries and statistics
-- Translation completeness
-- Overall platform metrics
+These functions can be imported and used within components and composables for real-time validation during development.
 
 ## ✅ Validation Results
 
