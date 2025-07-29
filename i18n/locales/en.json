@@ -125,9 +125,39 @@
       "description": "{description}"
     },
     "instructor": "Instructor",
+    "modules": "Modules",
+    "lessons": "Lessons",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "difficulty": "Difficulty",
+    "prerequisites": "Prerequisites",
+    "technologies": "Technologies",
+    "categories": "Categories",
+    "price": "Price",
+    "rating": "Rating",
+    "enrollments": "Enrollments",
+    "progress": "Progress",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "notStarted": "Not Started",
+    "continue": "Continue Learning",
     "startLearning": "Start Learning",
+    "enrollNow": "Enroll Now",
     "viewCurriculum": "View Curriculum",
     "curriculum": "Course Curriculum",
+    "estimatedTime": "Estimated Time",
+    "features": {
+      "hasQuizzes": "Interactive Quizzes",
+      "hasExercises": "Hands-on Exercises",
+      "hasCertificates": "Completion Certificate",
+      "hasDownloads": "Downloadable Resources",
+      "hasVideoContent": "Video Content",
+      "hasLiveSupport": "Live Support"
+    },
+    "errors": {
+      "notFound": "Course not found",
+      "loadFailed": "Failed to load course"
+    },
     "notFound": "Course not found"
   },
   "navigation": {

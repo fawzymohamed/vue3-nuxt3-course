@@ -4,72 +4,45 @@ const { locale } = useI18n();
 const localePath = useLocalePath();
 const route = useRoute();
 
+// Use the new course registry system
+const { getCourseBySlug, validateCourse } = useCourseRegistry();
+const { getCourseProgress, getCourseProgressPercentage } = useCourseProgress();
+
 const courseId = computed(() => route.params.courseId as string);
 
-// For now, we'll use static data. In Phase 3, this will query from content
-const courseData = {
-  "vue-nuxt-mastery": {
-    title: {
-      en: "Vue.js & Nuxt.js Mastery",
-      ar: "إتقان Vue.js و Nuxt.js",
-    },
-    description: {
-      en: "Complete guide from Vue basics to advanced Nuxt development",
-      ar: "دليل شامل من أساسيات Vue إلى التطوير المتقدم مع Nuxt",
-    },
-    difficulty: "beginner",
-    estimatedHours: 40,
-    instructor: {
-      name: "VueNuxtMasters Team",
-      bio: {
-        en: "Expert Vue.js and Nuxt.js developers with years of experience",
-        ar: "مطورون خبراء في Vue.js و Nuxt.js مع سنوات من الخبرة",
-      },
-    },
-    modules: [
-      {
-        id: "module1",
-        title: {
-          en: "Vue.js - The Progressive Framework",
-          ar: "Vue.js - الإطار التدريجي",
-        },
-        description: {
-          en: "Introduction to Vue.js fundamentals and core concepts",
-          ar: "مقدمة عن أساسيات Vue.js والمفاهيم الأساسية",
-        },
-        lessons: [
-          {
-            id: "lesson1",
-            title: {
-              en: "What is Vue.js? Why Vue?",
-              ar: "ما هو Vue.js؟ لماذا Vue؟",
-            },
-            slug: "lesson1",
-          },
-          {
-            id: "lesson2",
-            title: {
-              en: "Setting Up Your Environment",
-              ar: "إعداد بيئة التطوير",
-            },
-            slug: "lesson2",
-          },
-        ],
-      },
-    ],
-  },
-};
+// Get course data from the registry
+const course = computed(() => {
+  const courseData = getCourseBySlug(courseId.value);
+  if (!courseData) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: t("course.errors.notFound"),
+    });
+  }
+  return courseData;
+});
 
-const course = computed(
-  () => courseData[courseId.value as keyof typeof courseData]
+// Get user progress for this course
+const progress = computed(() => getCourseProgress(course.value.id));
+const progressPercentage = computed(() =>
+  getCourseProgressPercentage(course.value.id)
 );
 
-// Handle course not found
-if (!course.value) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: t("course.notFound"),
-  });
+// Validate course configuration in development
+if (process.dev && course.value) {
+  const validation = validateCourse(course.value);
+  if (!validation.valid) {
+    console.warn(
+      `Course validation errors for ${course.value.id}:`,
+      validation.errors
+    );
+  }
+  if (validation.errors.length > 0) {
+    console.warn(
+      `Course validation warnings for ${course.value.id}:`,
+      validation.errors
+    );
+  }
 }
 
 // SEO Meta

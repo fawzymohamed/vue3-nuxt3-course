@@ -125,9 +125,39 @@
       "description": "{description}"
     },
     "instructor": "المدرب",
+    "modules": "الوحدات",
+    "lessons": "الدروس",
+    "hours": "ساعات",
+    "minutes": "دقائق",
+    "difficulty": "مستوى الصعوبة",
+    "prerequisites": "المتطلبات المسبقة",
+    "technologies": "التقنيات",
+    "categories": "الفئات",
+    "price": "السعر",
+    "rating": "التقييم",
+    "enrollments": "المشتركين",
+    "progress": "التقدم",
+    "completed": "مكتمل",
+    "inProgress": "قيد التنفيذ",
+    "notStarted": "لم يبدأ",
+    "continue": "متابعة التعلم",
     "startLearning": "بدء التعلم",
+    "enrollNow": "اشترك الآن",
     "viewCurriculum": "عرض المنهج",
     "curriculum": "منهج الدورة",
+    "estimatedTime": "الوقت المقدر",
+    "features": {
+      "hasQuizzes": "اختبارات تفاعلية",
+      "hasExercises": "تمارين عملية",
+      "hasCertificates": "شهادة إتمام",
+      "hasDownloads": "موارد قابلة للتنزيل",
+      "hasVideoContent": "محتوى فيديو",
+      "hasLiveSupport": "دعم مباشر"
+    },
+    "errors": {
+      "notFound": "الدورة غير موجودة",
+      "loadFailed": "فشل في تحميل الدورة"
+    },
     "notFound": "الدورة غير موجودة"
   },
   "navigation": {

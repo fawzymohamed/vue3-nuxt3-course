@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "validate-courses": "node scripts/validate-courses.mjs"
   },
   "dependencies": {
     "@iconify-json/heroicons": "^1.2.2",
