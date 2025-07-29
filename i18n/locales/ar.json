@@ -107,6 +107,40 @@
     "correctAnswer": "صحيح!",
     "incorrectAnswer": "غير صحيح. حاول مرة أخرى.",
     "showSolution": "عرض الحل",
-    "hideSolution": "إخفاء الحل"
+    "hideSolution": "إخفاء الحل",
+    "backToCourse": "العودة إلى الدورة"
+  },
+  "courses": {
+    "meta": {
+      "title": "جميع الدورات - VueNuxtMasters",
+      "description": "تصفح مجموعتنا الشاملة من دورات البرمجة بلغات متعددة"
+    },
+    "title": "جميع الدورات",
+    "subtitle": "تصفح مجموعتنا الشاملة من دورات البرمجة",
+    "comingSoon": "قريباً"
+  },
+  "course": {
+    "meta": {
+      "title": "{title} - VueNuxtMasters",
+      "description": "{description}"
+    },
+    "instructor": "المدرب",
+    "startLearning": "بدء التعلم",
+    "viewCurriculum": "عرض المنهج",
+    "curriculum": "منهج الدورة",
+    "notFound": "الدورة غير موجودة"
+  },
+  "navigation": {
+    "courses": "الدورات"
+  },
+  "difficulty": {
+    "beginner": "مبتدئ",
+    "intermediate": "متوسط",
+    "advanced": "متقدم"
+  },
+  "common": {
+    "hours": "ساعة",
+    "modules": "وحدة",
+    "module": "الوحدة"
   }
 }

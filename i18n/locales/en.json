@@ -107,6 +107,74 @@
     "correctAnswer": "Correct!",
     "incorrectAnswer": "Incorrect. Try again.",
     "showSolution": "Show Solution",
-    "hideSolution": "Hide Solution"
+    "hideSolution": "Hide Solution",
+    "backToCourse": "Back to Course"
+  },
+  "courses": {
+    "meta": {
+      "title": "All Courses - VueNuxtMasters",
+      "description": "Browse our comprehensive collection of programming courses in multiple languages"
+    },
+    "title": "All Courses",
+    "subtitle": "Browse our comprehensive collection of programming courses",
+    "comingSoon": "Coming Soon"
+  },
+  "course": {
+    "meta": {
+      "title": "{title} - VueNuxtMasters",
+      "description": "{description}"
+    },
+    "instructor": "Instructor",
+    "startLearning": "Start Learning",
+    "viewCurriculum": "View Curriculum",
+    "curriculum": "Course Curriculum",
+    "notFound": "Course not found"
+  },
+  "navigation": {
+    "courses": "Courses"
+  },
+  "difficulty": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "aboutPage": {
+    "meta": {
+      "title": "About - VueNuxtMasters",
+      "description": "Learn about our mission to provide high-quality Vue.js and Nuxt.js education"
+    },
+    "title": "About VueNuxtMasters",
+    "subtitle": "Empowering developers with comprehensive Vue.js and Nuxt.js education",
+    "content": {
+      "intro": "VueNuxtMasters is dedicated to providing high-quality, comprehensive education for Vue.js and Nuxt.js development.",
+      "mission": {
+        "title": "Our Mission",
+        "description": "To make Vue.js and Nuxt.js accessible to developers worldwide through structured, hands-on learning experiences."
+      },
+      "approach": {
+        "title": "Our Approach",
+        "description": "We believe in learning by doing. Our courses combine theoretical knowledge with practical projects to ensure you gain real-world skills."
+      }
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Contact - VueNuxtMasters",
+      "description": "Get in touch with the VueNuxtMasters team"
+    },
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you",
+    "content": "Have questions about our courses or need support? Reach out to us through any of the channels below.",
+    "email": {
+      "label": "Email"
+    },
+    "social": {
+      "label": "Follow us"
+    }
+  },
+  "common": {
+    "hours": "hours",
+    "modules": "modules",
+    "module": "Module"
   }
 }
