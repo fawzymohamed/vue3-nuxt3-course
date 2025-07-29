@@ -39,7 +39,7 @@ useHead({
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <UButton
-              :to="localePath('/curriculum')"
+              :to="localePath('/courses')"
               size="xl"
               class="bg-green-400 hover:bg-green-500 text-white font-semibold py-3 px-8 rounded-md transition-colors duration-200"
             >

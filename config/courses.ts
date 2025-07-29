@@ -31,7 +31,7 @@ export const coursesConfig: Course[] = [
         website: "https://vuenuxtmasters.com",
       },
     },
-    thumbnail: "/course-vue-nuxt.png",
+    thumbnail: "/course-vue-nuxt.jpg",
     price: {
       amount: 0,
       currency: "USD",

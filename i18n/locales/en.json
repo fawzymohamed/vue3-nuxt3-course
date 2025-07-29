@@ -94,6 +94,8 @@
     "backToCurriculum": "Back to Curriculum",
     "nextLesson": "Next Lesson",
     "previousLesson": "Previous Lesson",
+    "next": "Next",
+    "previous": "Previous",
     "lessonNumber": "Lesson {number}",
     "currentModule": "Current Module",
     "moduleProgress": "Module Progress",
@@ -206,5 +208,30 @@
     "hours": "hours",
     "modules": "modules",
     "module": "Module"
+  },
+  "components": {
+    "demo": {
+      "meta": {
+        "title": "Course Components Demo - VueNuxtMasters",
+        "description": "Interactive demonstration of course-aware components with progress tracking and navigation"
+      },
+      "title": "Course Components Demo",
+      "subtitle": "Interactive demonstration of course-aware components with progress tracking and navigation",
+      "features": {
+        "title": "Component Features",
+        "progress": {
+          "title": "Progress Tracking",
+          "description": "Real-time progress tracking across courses, modules, and lessons with visual indicators."
+        },
+        "i18n": {
+          "title": "Internationalization",
+          "description": "Full support for multiple languages with RTL layout support for Arabic."
+        },
+        "responsive": {
+          "title": "Responsive Design",
+          "description": "Mobile-first responsive design that works seamlessly across all device sizes."
+        }
+      }
+    }
   }
 }
