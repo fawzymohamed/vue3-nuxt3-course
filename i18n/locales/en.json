@@ -98,12 +98,20 @@
     "previous": "Previous",
     "current": "Current Lesson",
     "markComplete": "Mark as Complete",
+    "markIncomplete": "Mark as Incomplete",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "number": "Lesson",
     "lessonNumber": "Lesson {number}",
     "currentModule": "Current Module",
     "moduleProgress": "Module Progress",
     "lessonEstimatedTime": "{minutes} min read",
     "completeLesson": "Mark as Complete",
     "lessonCompleted": "Completed",
+    "bookmark": "Bookmark",
+    "bookmarked": "Bookmarked",
+    "takeNotes": "Take Notes",
+    "reportIssue": "Report Issue",
     "exercise": "Exercise",
     "quiz": "Quiz",
     "tryAgain": "Try Again",
@@ -112,7 +120,24 @@
     "incorrectAnswer": "Incorrect. Try again.",
     "showSolution": "Show Solution",
     "hideSolution": "Hide Solution",
-    "backToCourse": "Back to Course"
+    "backToCourse": "Back to Course",
+    "navigation": {
+      "title": "Lesson Navigation",
+      "previous": "Previous",
+      "next": "Next",
+      "firstLesson": "This is the first lesson",
+      "lastLesson": "This is the last lesson",
+      "courseComplete": "🎉 Course Complete!",
+      "courseCompleteDescription": "Congratulations! You've completed all lessons in this course."
+    },
+    "actions": {
+      "title": "Lesson Actions"
+    },
+    "reportForm": {
+      "type": "Issue Type",
+      "description": "Description",
+      "placeholder": "Please describe the issue you encountered..."
+    }
   },
   "courses": {
     "meta": {
@@ -217,7 +242,10 @@
   "common": {
     "hours": "hours",
     "modules": "modules",
-    "module": "Module"
+    "module": "Module",
+    "complete": "complete",
+    "cancel": "Cancel",
+    "submit": "Submit"
   },
   "components": {
     "demo": {
