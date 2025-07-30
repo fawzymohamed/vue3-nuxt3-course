@@ -229,10 +229,12 @@ const toggleModule = (moduleId: string) => {
 
 // Calculate module progress
 const getModuleProgress = (module: ModuleMetadata) => {
-  if (!progress.value) return 0;
+  if (!progress.value || !Array.isArray(progress.value.completedLessons))
+    return 0;
 
   const moduleCompletedLessons = progress.value.completedLessons.filter(
-    (lessonKey: string) => lessonKey.startsWith(`${module.id}.`)
+    (lessonKey: string) =>
+      typeof lessonKey === "string" && lessonKey.startsWith(`${module.id}.`)
   );
 
   return Math.round(
@@ -248,7 +250,9 @@ const overallProgress = computed(() => {
     (total, module) => total + module.lessons.length,
     0
   );
-  const completedLessons = progress.value.completedLessons.length;
+  const completedLessons = Array.isArray(progress.value.completedLessons)
+    ? progress.value.completedLessons.length
+    : 0;
 
   return Math.round((completedLessons / totalLessons) * 100);
 });

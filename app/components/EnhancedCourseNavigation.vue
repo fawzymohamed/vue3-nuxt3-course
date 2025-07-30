@@ -166,13 +166,17 @@ const progressPercentage = computed(() => {
     (total, module) => total + module.lessons.length,
     0
   );
-  const completedLessons = progress.value.completedLessons.length;
+  const completedLessons = Array.isArray(progress.value?.completedLessons)
+    ? progress.value.completedLessons.length
+    : 0;
 
   return Math.round((completedLessons / totalLessons) * 100);
 });
 
-const completedLessons = computed(
-  () => progress.value?.completedLessons.length || 0
+const completedLessons = computed(() =>
+  Array.isArray(progress.value?.completedLessons)
+    ? progress.value.completedLessons.length
+    : 0
 );
 
 const totalLessons = computed(
