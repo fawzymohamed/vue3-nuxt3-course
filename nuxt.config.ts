@@ -62,16 +62,23 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
 
   i18n: {
+    defaultLocale: "en",
+    strategy: "prefix_except_default",
+    lazy: true,
+    langDir: "../i18n/locales/",
     locales: [
-      {
-        code: "ar",
-        name: "Arabic",
-        file: "ar.json",
-      },
       {
         code: "en",
         name: "English",
         file: "en.json",
+        iso: "en-US",
+      },
+      {
+        code: "ar",
+        name: "Arabic",
+        file: "ar.json",
+        iso: "ar-SA",
+        dir: "rtl",
       },
     ],
     detectBrowserLanguage: {
