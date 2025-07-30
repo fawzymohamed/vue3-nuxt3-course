@@ -123,24 +123,15 @@ useHead({
               >
                 {{ $t("course.startLearning") }}
               </UButton>
-
-              <UButton
-                variant="outline"
-                size="lg"
-                class="w-full"
-                @click="() => {}"
-              >
-                {{ $t("course.viewCurriculum") }}
-              </UButton>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Course Curriculum -->
+      <!-- Course Modules -->
       <div class="border-t border-gray-200 dark:border-gray-700 pt-8">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-          {{ $t("course.curriculum") }}
+          {{ $t("course.modules") }}
         </h2>
 
         <div class="space-y-6">

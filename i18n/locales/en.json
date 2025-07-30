@@ -21,7 +21,7 @@
       "title": "Why This Course?",
       "subtitle": "Everything you need to master modern Vue.js and Nuxt.js development",
       "comprehensive": {
-        "title": "Comprehensive Curriculum",
+        "title": "Comprehensive Course Content",
         "description": "Covering Vue 3 and Nuxt 3 from fundamentals to advanced topics with structured learning paths."
       },
       "handson": {
@@ -63,23 +63,6 @@
   "footer": {
     "copyright": "Copyright ©{year} - VueNuxtMasters"
   },
-  "curriculum": {
-    "meta": {
-      "title": "Vue & Nuxt Curriculum | Complete Learning Path",
-      "description": "Explore our comprehensive Vue.js and Nuxt.js curriculum from beginner fundamentals to advanced real-world projects with hands-on exercises."
-    },
-    "hero": {
-      "title": "Complete Course Curriculum",
-      "subtitle": "Your structured learning path from beginner fundamentals to advanced mastery"
-    },
-    "moduleTitle": "Module {number}: {title}",
-    "sectionTitle": "Section {number}: {title}",
-    "lessonTitle": "Lesson {number}: {title}",
-    "project": "Project {number}: {title}",
-    "beginner": "Beginner",
-    "intermediate": "Intermediate",
-    "advanced": "Advanced"
-  },
   "error": {
     "goHome": "Go Home",
     "pageNotFound": "Page Not Found",
@@ -91,7 +74,6 @@
   },
   "lesson": {
     "notFound": "Lesson content not found",
-    "backToCurriculum": "Back to Curriculum",
     "nextLesson": "Next Lesson",
     "previousLesson": "Previous Lesson",
     "next": "Next",
@@ -172,8 +154,6 @@
     "continue": "Continue Learning",
     "startLearning": "Start Learning",
     "enrollNow": "Enroll Now",
-    "viewCurriculum": "View Curriculum",
-    "curriculum": "Course Curriculum",
     "estimatedTime": "Estimated Time",
     "complete": "Complete",
     "total": "Total",

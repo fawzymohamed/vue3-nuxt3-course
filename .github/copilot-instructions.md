@@ -213,14 +213,14 @@ const progress = getCourseProgress(course.id);
 <template>
   <h1>{{ course.title[locale] }}</h1>
   <NuxtLink :to="localePath(`/courses/${course.slug}`)">
-    {{ $t("course.viewCurriculum") }}
+    {{ $t("course.viewCourse") }}
   </NuxtLink>
 </template>
 ```
 
 ### Multi-Course Routing Patterns
 
-- **Course Overview**: `/courses/[courseId]` - course information and curriculum
+- **Course Overview**: `/courses/[courseId]` - course information and modules
 - **Lesson Content**: `/courses/[courseId]/[module]/[lessonSlug]` - individual lessons
 - **Course Listing**: `/courses` - browse all available courses
 - **Legacy Support**: `/lesson/[module]/[lessonSlug]` - backward compatibility maintained
@@ -383,7 +383,7 @@ _The sections below contain additional styling and design guidelines. Focus on t
 
 1. **Course Management:**
    - Course Listing Page: Browse all available courses with filtering and search
-   - Course Overview Page: Individual course information, curriculum, and enrollment
+   - Course Overview Page: Individual course information, modules, and enrollment
    - Course Progress Tracking: User progress across multiple courses
 2. **Lesson Consumption:**
    - Individual Lesson View Page: Display lesson content with course context
@@ -416,8 +416,8 @@ _The sections below contain additional styling and design guidelines. Focus on t
 ## II. Core Features (MVP - To be delivered from the start)
 
 1.  **Course Display:**
-    - Homepage/Course Landing Page: Overview, benefits, CTA to view curriculum.
-    - Course Curriculum/Syllabus Page: List all modules and lessons. Lessons should indicate if they contain exercises or quizzes.
+    - Homepage/Course Landing Page: Overview, benefits, CTA to view courses.
+    - Course Overview Page: List all modules and lessons. Lessons should indicate if they contain exercises or quizzes.
 2.  **Lesson Consumption:**
     - Individual Lesson View Page: Display lesson content.
     - Navigation: Easy "Next Lesson" / "Previous Lesson" buttons. Sidebar navigation tree for current module.
@@ -483,8 +483,8 @@ _The sections below contain additional styling and design guidelines. Focus on t
 
 8. **Navigation with i18n:**
    - Always use `localePath` for route generation in navigation links
-   - ✅ Correct: `:to="localePath('/curriculum')"`
-   - ❌ Wrong: `to="/curriculum"`
+   - ✅ Correct: `:to="localePath('/courses')"`
+   - ❌ Wrong: `to="/courses"`
    - Import using: `const localePath = useLocalePath()` in script setup
    - This ensures links work correctly across language changes
 
@@ -582,7 +582,7 @@ _The sections below contain additional styling and design guidelines. Focus on t
 - **Grid System:** Primarily use CSS Flexbox or CSS Grid for layout (Tailwind classes preferred).
 - **Common Layouts:**
   - **Main App Layout (`layouts/default.vue`):**
-    - Header: Logo/Site Title, main navigation links (e.g., "Course Curriculum").
+    - Header: Logo/Site Title, main navigation links (e.g., "Courses").
     - Main Content Slot: `<slot />` for page content.
     - Footer: Copyright, other relevant links.
   - **Lesson View Layout (potentially a separate layout or achieved with components):** Sidebar for lesson navigation within the current module, main area for lesson content.

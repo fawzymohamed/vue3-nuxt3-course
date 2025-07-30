@@ -35,13 +35,6 @@ useHead({
 
             <!-- Navigation Controls -->
             <div class="flex items-center gap-4">
-              <NuxtLink
-                :to="localePath('/curriculum')"
-                class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
-              >
-                {{ $t("curriculum.title") }}
-              </NuxtLink>
-
               <!-- Language Switcher -->
               <LanguageSwitcher />
 
@@ -59,15 +52,6 @@ useHead({
           class="hidden md:block w-64 xl:w-72 border-e border-gray-200 dark:border-gray-800 overflow-y-auto"
         >
           <div class="p-4 sticky top-0">
-            <!-- Back to Curriculum Link -->
-            <NuxtLink
-              :to="localePath('/curriculum')"
-              class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors mb-6"
-            >
-              <UIcon name="i-heroicons-arrow-left" />
-              {{ $t("lesson.backToCurriculum") }}
-            </NuxtLink>
-
             <!-- Module Title - Will be dynamic in future -->
             <h3 class="font-semibold mb-3 text-gray-900 dark:text-white">
               {{ $t("lesson.currentModule") }}

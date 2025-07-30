@@ -160,7 +160,7 @@ useHead({
       </UContainer>
     </section>
 
-    <!-- Curriculum Sneak Peek Section -->
+    <!-- Course Modules Sneak Peek Section -->
     <section id="modules" class="py-16 lg:py-20 bg-gray-50 dark:bg-gray-900">
       <UContainer>
         <div class="max-w-4xl mx-auto">
@@ -266,7 +266,7 @@ useHead({
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <UButton
-              :to="localePath('/curriculum')"
+              :to="localePath('/courses')"
               size="lg"
               class="bg-green-400 hover:bg-green-500 text-white font-semibold py-3 px-8 rounded-md transition-colors duration-200"
             >
