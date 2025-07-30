@@ -96,6 +96,8 @@
     "previousLesson": "الدرس السابق",
     "next": "التالي",
     "previous": "السابق",
+    "current": "الدرس الحالي",
+    "markComplete": "وضع علامة كمكتمل",
     "lessonNumber": "الدرس {number}",
     "currentModule": "الوحدة الحالية",
     "moduleProgress": "تقدم الوحدة",
@@ -148,6 +150,11 @@
     "viewCurriculum": "عرض المنهج",
     "curriculum": "منهج الدورة",
     "estimatedTime": "الوقت المقدر",
+    "complete": "مكتمل",
+    "total": "المجموع",
+    "overview": "نظرة عامة على الدورة",
+    "overallProgress": "التقدم الإجمالي",
+    "markComplete": "وضع علامة كمكتمل",
     "features": {
       "hasQuizzes": "اختبارات تفاعلية",
       "hasExercises": "تمارين عملية",
@@ -163,7 +170,10 @@
     "notFound": "الدورة غير موجودة"
   },
   "navigation": {
-    "courses": "الدورات"
+    "courses": "الدورات",
+    "home": "الرئيسية",
+    "breadcrumb": "شريط التنقل",
+    "quickActions": "إجراءات سريعة"
   },
   "difficulty": {
     "beginner": "مبتدئ",

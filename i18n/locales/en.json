@@ -96,6 +96,8 @@
     "previousLesson": "Previous Lesson",
     "next": "Next",
     "previous": "Previous",
+    "current": "Current Lesson",
+    "markComplete": "Mark as Complete",
     "lessonNumber": "Lesson {number}",
     "currentModule": "Current Module",
     "moduleProgress": "Module Progress",
@@ -148,6 +150,11 @@
     "viewCurriculum": "View Curriculum",
     "curriculum": "Course Curriculum",
     "estimatedTime": "Estimated Time",
+    "complete": "Complete",
+    "total": "Total",
+    "overview": "Course Overview",
+    "overallProgress": "Overall Progress",
+    "markComplete": "Mark Complete",
     "features": {
       "hasQuizzes": "Interactive Quizzes",
       "hasExercises": "Hands-on Exercises",
@@ -163,7 +170,10 @@
     "notFound": "Course not found"
   },
   "navigation": {
-    "courses": "Courses"
+    "home": "Home",
+    "courses": "Courses",
+    "breadcrumb": "Navigation breadcrumb",
+    "quickActions": "Quick Actions"
   },
   "difficulty": {
     "beginner": "Beginner",

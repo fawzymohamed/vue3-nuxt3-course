@@ -4,7 +4,156 @@ You are an expert Vue 3 and Nuxt 3 developer, assisting in building a high-quali
 
 ## 0. Project Architecture Overview
 
-**VueNuxtMasters** is a Nuxt 3-based multi-course learning platform with full internationalization support (English/Arabic with RTL). The platform has been transformed from a single-course system to a scalable multi-course architecture with centralized course management.
+**VueNuxtMasters** is a Nuxt 3-based multi-course learning platform with full internationalization support (English/Arabic with RTL). The platform has been transformed from a single-course system to a scalable multi-course architecture w### Course Validation Utilities
+
+```typescript
+// Validate course configuration
+import {
+  validateCourseConfig,
+  validateAllCourses,
+  checkCourseConsistency,
+} from "~/utils/courseValidation";
+
+// Generate course summaries
+import { generateCourseSummary } from "~/utils/courseValidation";
+```
+
+### Course-Aware Components (Phase 2.1)
+
+The platform includes comprehensive course-aware components for multi-course functionality:
+
+#### 1. Course Card Component (`CourseCard.vue`)
+
+```vue
+<!-- Clickable course display for listings -->
+<CourseCard :course="course" :show-progress="true" :compact="false" />
+```
+
+- **Features**: Course metadata display, progress indicators, instructor information
+- **Navigation**: Clickable card wrapper using NuxtLink for reliable routing
+- **Responsive**: Adapts layout for different card sizes
+- **Progress**: Visual progress bars and completion status
+
+#### 2. Course Navigation Component (`CourseNavigation.vue`)
+
+```vue
+<!-- Main course navigation for lesson pages -->
+<CourseNavigation
+  :course="course"
+  :current-lesson="currentLesson"
+  @navigate="handleNavigation"
+/>
+```
+
+- **Features**: Course-aware lesson navigation, module structure, progress tracking
+- **Functionality**: Previous/Next lesson logic, module overview
+- **Integration**: Works with course registry and progress system
+
+#### 3. Course Breadcrumb Component (`CourseBreadcrumb.vue`)
+
+```vue
+<!-- Course-aware breadcrumb navigation -->
+<CourseBreadcrumb
+  :course-slug="courseSlug"
+  :module-id="moduleId"
+  :lesson-slug="lessonSlug"
+/>
+```
+
+- **Features**: Dynamic breadcrumb generation, course context awareness
+- **Navigation**: Proper course/module/lesson hierarchy
+- **Localization**: Multi-language breadcrumb labels
+
+#### 4. Course Module Navigation (`CourseModuleNav.vue`)
+
+```vue
+<!-- Module-specific navigation sidebar -->
+<CourseModuleNav
+  :modules="course.modules"
+  :current-module="currentModule"
+  :current-lesson="currentLesson"
+/>
+```
+
+- **Features**: Module listing, lesson organization, completion tracking
+- **Interactive**: Expandable modules, lesson selection
+- **State**: Current lesson highlighting, progress indicators
+
+#### 5. Course Lesson Navigation (`CourseLessonNav.vue`)
+
+```vue
+<!-- Lesson-specific navigation controls -->
+<CourseLessonNav
+  :course="course"
+  :current-lesson="currentLesson"
+  @previous="handlePrevious"
+  @next="handleNext"
+/>
+```
+
+- **Features**: Previous/Next lesson buttons, completion actions
+- **Logic**: Smart navigation across modules, course boundaries
+- **Progress**: Lesson completion tracking integration
+
+#### Component Usage Patterns:
+
+```vue
+<script setup>
+// Course-aware component integration
+const { getCourseBySlug } = useCourseRegistry();
+const { getCourseProgress, markLessonComplete } = useCourseProgress();
+const localePath = useLocalePath();
+
+// Get course data
+const course = getCourseBySlug("vue-nuxt-mastery");
+const progress = getCourseProgress(course.id);
+
+// Navigation handlers
+const handleNavigation = (lesson) => {
+  navigateTo(
+    localePath(`/courses/${course.slug}/${lesson.moduleId}/${lesson.slug}`)
+  );
+};
+
+const handleLessonComplete = () => {
+  markLessonComplete(course.id, currentLesson.value.id);
+};
+</script>
+
+<template>
+  <div class="course-layout">
+    <!-- Course-aware breadcrumb -->
+    <CourseBreadcrumb
+      :course-slug="course.slug"
+      :module-id="currentModule.id"
+      :lesson-slug="currentLesson.slug"
+    />
+
+    <!-- Main navigation -->
+    <CourseNavigation
+      :course="course"
+      :current-lesson="currentLesson"
+      @navigate="handleNavigation"
+    />
+
+    <!-- Module sidebar -->
+    <CourseModuleNav
+      :modules="course.modules"
+      :current-module="currentModule"
+      :current-lesson="currentLesson"
+    />
+
+    <!-- Lesson controls -->
+    <CourseLessonNav
+      :course="course"
+      :current-lesson="currentLesson"
+      @complete="handleLessonComplete"
+    />
+  </div>
+</template>
+```
+
+### Enhanced Navigation Components (Phase 2.2) course management.
 
 ### Multi-Course Architecture
 
@@ -573,6 +722,107 @@ Comprehensive type definitions available in `types/course.ts`:
 - `CourseProgress` - User progress tracking
 - `CourseFilters` - Advanced filtering options
 - `CourseSortOptions` - Sorting configurations
+
+### Enhanced Navigation Components (Phase 2.2)
+
+The platform now includes sophisticated navigation components with advanced features:
+
+#### 1. Enhanced Course Breadcrumb (`CourseBreadcrumb.vue`)
+
+```vue
+// Enhanced breadcrumb using @nuxt/ui UBreadcrumb
+<CourseBreadcrumb
+  :course-slug="courseSlug"
+  :module-id="moduleId"
+  :lesson-slug="lessonSlug"
+/>
+```
+
+- **Features**: Dynamic path generation, icons, configurable home link
+- **@nuxt/ui Integration**: Uses UBreadcrumb component with proper color schemes
+- **Responsive**: Adapts to different screen sizes with overflow handling
+
+#### 2. Enhanced Course Module Navigation (`EnhancedCourseModuleNav.vue`)
+
+```vue
+// Advanced module navigation with expandable panels
+<EnhancedCourseModuleNav
+  :course="course"
+  :current-module="currentModule"
+  :current-lesson="currentLesson"
+  @lesson-select="handleLessonSelect"
+/>
+```
+
+- **Features**: Collapsible module panels, progress tracking, lesson status indicators
+- **Interactive**: Click to expand/collapse modules, lesson navigation
+- **Progress Visualization**: Visual indicators for completed/current/upcoming lessons
+- **Responsive**: Mobile-friendly with touch interactions
+
+#### 3. Enhanced Course Navigation Wrapper (`EnhancedCourseNavigation.vue`)
+
+```vue
+// Comprehensive navigation with responsive layout
+<EnhancedCourseNavigation
+  :course="course"
+  :current-progress="progress"
+  :show-breadcrumb="true"
+  :show-quick-actions="true"
+/>
+```
+
+- **Features**: 3-column responsive grid, progress overview, quick actions sidebar
+- **Layout**: Breadcrumb + Module Navigation + Quick Actions
+- **Progress Management**: Course completion tracking, next lesson suggestions
+- **Accessibility**: Keyboard navigation, ARIA labels, screen reader support
+
+#### Implementation Patterns:
+
+```vue
+<script setup>
+// Enhanced navigation usage
+const { getCourseBySlug } = useCourseRegistry();
+const { getCourseProgress, markLessonComplete } = useCourseProgress();
+
+const course = getCourseBySlug("vue-nuxt-mastery");
+const progress = getCourseProgress(course.id);
+
+// Handle lesson navigation
+const handleLessonSelect = (lesson) => {
+  navigateTo(
+    localePath(`/courses/${course.slug}/${lesson.moduleId}/${lesson.slug}`)
+  );
+};
+
+// Mark lesson as complete
+const handleLessonComplete = (lessonId) => {
+  markLessonComplete(course.id, lessonId);
+};
+</script>
+
+<template>
+  <!-- Enhanced navigation with full feature set -->
+  <EnhancedCourseNavigation
+    :course="course"
+    :current-progress="progress"
+    @lesson-select="handleLessonSelect"
+    @lesson-complete="handleLessonComplete"
+  />
+</template>
+```
+
+#### @nuxt/ui Color Compatibility:
+
+- **Approved Colors**: `primary`, `secondary`, `success`, `info`, `warning`, `error`, `neutral`
+- **Avoid**: `gray`, `zinc`, `slate` (use `neutral` instead)
+- **Pattern**: Always test components with approved color schemes
+
+#### Responsive Design Features:
+
+- **Mobile First**: Components adapt from mobile to desktop
+- **Touch Interactions**: Optimized for touch devices
+- **Overflow Handling**: Graceful handling of long content
+- **Layout Flexibility**: Grid systems adapt to screen size
 
 ---
 
