@@ -10,19 +10,19 @@ export default defineNuxtConfig({
   // App configuration
   app: {
     head: {
-      title: "VueNuxtMasters",
+      title: "Learnova Academy",
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { name: "format-detection", content: "telephone=no" },
         { name: "theme-color", content: "#00DC82" },
         { property: "og:type", content: "website" },
-        { property: "og:site_name", content: "VueNuxtMasters" },
+        { property: "og:site_name", content: "Learnova Academy" },
         { property: "og:image", content: "/logo.png" },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
         { property: "twitter:card", content: "summary_large_image" },
-        { property: "twitter:site", content: "@VueNuxtMasters" },
+        { property: "twitter:site", content: "@LearnovaAcademy" },
         { property: "twitter:image", content: "/logo.png" },
       ],
       link: [

@@ -30,7 +30,9 @@ useHead({
           <div class="flex justify-between items-center">
             <!-- Logo/Site Name -->
             <NuxtLink :to="localePath('/')" class="flex items-center gap-2">
-              <span class="font-bold text-xl text-primary">VueNuxtMasters</span>
+              <span class="font-bold text-xl text-primary"
+                >Learnova Academy</span
+              >
             </NuxtLink>
 
             <!-- Navigation Controls -->

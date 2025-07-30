@@ -9,12 +9,12 @@ if (import.meta.env.PROD) {
 
 // SEO Meta for icons examples page (only in development)
 useHead({
-  title: "Icon System Examples - VueNuxtMasters (Dev Only)",
+  title: "Learnova Academy - Icons System",
   meta: [
     {
       name: "description",
       content:
-        "Complete guide to using icons in VueNuxtMasters project - Heroicons, Lucide, custom icons, and more.",
+        "Complete guide to using icons in Learnova Academy project - Heroicons, Lucide, custom icons, and more.",
     },
     {
       name: "robots",
@@ -69,7 +69,7 @@ useHead({
           </h1>
           <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl">
             Complete guide to using all types of icons available in this
-            VueNuxtMasters project. Each section shows implementation examples
+            Learnova Academy project. Each section shows implementation examples
             with detailed explanations.
           </p>
         </div>

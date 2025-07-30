@@ -32,7 +32,7 @@ const breadcrumbLinks = computed(() => {
   // Platform home
   if (props.showHome) {
     links.push({
-      label: "VueNuxtMasters",
+      label: "Learnova Academy",
       to: localePath("/"),
       icon: "i-heroicons-home",
     });

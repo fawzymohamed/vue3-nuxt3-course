@@ -8,7 +8,7 @@ estimatedHours: 40
 prerequisites: ["basic-javascript", "html-css"]
 technologies: ["vue", "nuxt", "typescript", "pinia"]
 instructor:
-  name: "VueNuxtMasters Team"
+  name: "Learnova Academy Team"
   bio: "Expert Vue.js and Nuxt.js developers with years of experience building modern web applications"
   avatar: "/instructor-avatar.png"
 thumbnail: "/course-vue-nuxt.png"

@@ -19,16 +19,16 @@ export const coursesConfig: Course[] = [
     technologies: ["vue", "nuxt", "typescript", "pinia"],
     categories: ["frontend", "web-development", "javascript"],
     instructor: {
-      name: "VueNuxtMasters Team",
+      name: "Learnova Academy Team",
       bio: {
         en: "Expert Vue.js and Nuxt.js developers with years of experience building modern web applications",
         ar: "فريق من الخبراء في Vue.js و Nuxt.js مع سنوات من الخبرة في بناء تطبيقات الويب الحديثة",
       },
       avatar: "/instructor-avatar.png",
       social: {
-        github: "https://github.com/vuenuxtmasters",
-        twitter: "https://twitter.com/vuenuxtmasters",
-        website: "https://vuenuxtmasters.com",
+        github: "https://github.com/learnovaacademy",
+        twitter: "https://twitter.com/learnovaacademy",
+        website: "https://learnovaacademy.com",
       },
     },
     thumbnail: "/course-vue-nuxt.jpg",

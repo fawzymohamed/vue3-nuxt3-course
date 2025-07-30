@@ -1,5 +1,5 @@
 {
-  "siteName": "VueNuxtMasters",
+  "siteName": "أكاديمية ليرنوفا",
   "resources": "الموارد",
   "about": "حول",
   "languages": {
@@ -61,7 +61,7 @@
     }
   },
   "footer": {
-    "copyright": "حقوق النشر © {year} - VueNuxtMasters"
+    "copyright": "حقوق النشر © {year} - أكاديمية ليرنوفا"
   },
   "error": {
     "goHome": "الذهاب للرئيسية",
@@ -123,7 +123,7 @@
   },
   "courses": {
     "meta": {
-      "title": "جميع الدورات - VueNuxtMasters",
+      "title": "جميع الدورات - أكاديمية ليرنوفا",
       "description": "تصفح مجموعتنا الشاملة من دورات البرمجة بلغات متعددة"
     },
     "title": "جميع الدورات",
@@ -132,7 +132,7 @@
   },
   "course": {
     "meta": {
-      "title": "{title} - VueNuxtMasters",
+      "title": "{title} - أكاديمية ليرنوفا",
       "description": "{description}"
     },
     "instructor": "المدرب",
@@ -196,7 +196,7 @@
   "components": {
     "demo": {
       "meta": {
-        "title": "عرض مكونات الدورات - VueNuxtMasters",
+        "title": "عرض مكونات الدورات - أكاديمية ليرنوفا",
         "description": "عرض تفاعلي لمكونات الدورات مع تتبع التقدم والتنقل"
       },
       "title": "عرض مكونات الدورات",

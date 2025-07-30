@@ -8,7 +8,7 @@ estimatedHours: 40
 prerequisites: ["basic-javascript", "html-css"]
 technologies: ["vue", "nuxt", "typescript", "pinia"]
 instructor:
-  name: "فريق VueNuxtMasters"
+  name: "فريق أكاديمية ليرنوفا"
   bio: "مطورون خبراء في Vue.js و Nuxt.js مع سنوات من الخبرة في بناء تطبيقات الويب الحديثة"
   avatar: "/instructor-avatar.png"
 thumbnail: "/course-vue-nuxt.png"

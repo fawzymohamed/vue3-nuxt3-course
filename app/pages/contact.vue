@@ -38,10 +38,10 @@ useHead({
               <p>
                 <strong>{{ t("contact.email.label") }}:</strong>
                 <a
-                  href="mailto:hello@vuenuxtmasters.com"
+                  href="mailto:hello@learnovaacademy.com"
                   class="text-primary-600 hover:text-primary-500"
                 >
-                  hello@vuenuxtmasters.com
+                  hello@learnovaacademy.com
                 </a>
               </p>
 

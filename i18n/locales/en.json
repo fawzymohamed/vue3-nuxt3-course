@@ -1,5 +1,5 @@
 {
-  "siteName": "VueNuxtMasters",
+  "siteName": "Learnova Academy",
   "resources": "Resources",
   "about": "About",
   "languages": {
@@ -61,7 +61,7 @@
     }
   },
   "footer": {
-    "copyright": "Copyright ©{year} - VueNuxtMasters"
+    "copyright": "Copyright ©{year} - Learnova Academy"
   },
   "error": {
     "goHome": "Go Home",
@@ -123,7 +123,7 @@
   },
   "courses": {
     "meta": {
-      "title": "All Courses - VueNuxtMasters",
+      "title": "All Courses - Learnova Academy",
       "description": "Browse our comprehensive collection of programming courses in multiple languages"
     },
     "title": "All Courses",
@@ -132,7 +132,7 @@
   },
   "course": {
     "meta": {
-      "title": "{title} - VueNuxtMasters",
+      "title": "{title} - Learnova Academy",
       "description": "{description}"
     },
     "instructor": "Instructor",
@@ -187,13 +187,13 @@
   },
   "aboutPage": {
     "meta": {
-      "title": "About - VueNuxtMasters",
+      "title": "About - Learnova Academy",
       "description": "Learn about our mission to provide high-quality Vue.js and Nuxt.js education"
     },
-    "title": "About VueNuxtMasters",
+    "title": "About Learnova Academy",
     "subtitle": "Empowering developers with comprehensive Vue.js and Nuxt.js education",
     "content": {
-      "intro": "VueNuxtMasters is dedicated to providing high-quality, comprehensive education for Vue.js and Nuxt.js development.",
+      "intro": "Learnova Academy is dedicated to providing high-quality, comprehensive education across multiple fields including programming, design, business, and technology.",
       "mission": {
         "title": "Our Mission",
         "description": "To make Vue.js and Nuxt.js accessible to developers worldwide through structured, hands-on learning experiences."
@@ -206,8 +206,8 @@
   },
   "contact": {
     "meta": {
-      "title": "Contact - VueNuxtMasters",
-      "description": "Get in touch with the VueNuxtMasters team"
+      "title": "Contact - Learnova Academy",
+      "description": "Get in touch with the Learnova Academy team"
     },
     "title": "Contact Us",
     "subtitle": "We'd love to hear from you",
@@ -230,7 +230,7 @@
   "components": {
     "demo": {
       "meta": {
-        "title": "Course Components Demo - VueNuxtMasters",
+        "title": "Course Components Demo - Learnova Academy",
         "description": "Interactive demonstration of course-aware components with progress tracking and navigation"
       },
       "title": "Course Components Demo",

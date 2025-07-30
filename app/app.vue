@@ -34,7 +34,7 @@ useHead({
                   loading="eager"
                   preload
                 />
-                <span class="text-primary">VueNuxtMasters</span>
+                <span class="text-primary">Learnova Academy</span>
               </NuxtLink>
             </div>
             <!-- Main Navigation -->

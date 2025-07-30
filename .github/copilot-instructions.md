@@ -1,10 +1,10 @@
-# AI Copilot Instructions for VueNuxtMasters Learning Platform
+# AI Copilot Instructions for Learnova Academy Learning Platform
 
 You are an expert Vue 3 and Nuxt 4 developer, assisting in building a high-quality bilingual multi-course learning platform. Focus on understanding the existing architecture patterns before making changes.
 
 ## 🎯 Project Overview
 
-**VueNuxtMasters** is a Nuxt 4-based multi-course learning platform with full internationalization support (English/Arabic with RTL). The platform uses a scalable multi-course architecture that supports various programming courses while maintaining excellent bilingual support and developer experience.
+**Learnova Academy** is a Nuxt 4-based multi-course learning platform with full internationalization support (English/Arabic with RTL). The platform uses a scalable multi-course architecture that supports various programming courses while maintaining excellent bilingual support and developer experience.
 
 ### Core Architecture
 
@@ -318,7 +318,7 @@ const lessonUrl = localePath(
 ```json
 {
   "platform": {
-    "name": "VueNuxtMasters",
+    "name": "Learnova Academy",
     "tagline": "Master Programming Skills"
   },
   "courses": {

@@ -1,6 +1,6 @@
 # Examples System Documentation
 
-This directory contains development-only example pages for the VueNuxtMasters project.
+This directory contains development-only example pages for the Learnova Academy project.
 
 ## Structure
 
@@ -42,7 +42,7 @@ if (import.meta.env.PROD) {
 
 // SEO Meta (only in development)
 useHead({
-  title: "Your Example Title - VueNuxtMasters (Dev Only)",
+  title: "Your Example Title - Learnova Academy (Dev Only)",
   meta: [
     {
       name: "description",

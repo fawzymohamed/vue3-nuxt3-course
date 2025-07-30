@@ -9,12 +9,12 @@ if (import.meta.env.PROD) {
 
 // SEO Meta for examples hub page (only in development)
 useHead({
-  title: "Examples Hub - VueNuxtMasters (Dev Only)",
+  title: "Examples Hub - Learnova Academy (Dev Only)",
   meta: [
     {
       name: "description",
       content:
-        "Development examples and code demonstrations for VueNuxtMasters project.",
+        "Development examples and code demonstrations for Learnova Academy project.",
     },
     {
       name: "robots",
@@ -39,7 +39,7 @@ const examplePages = [
   // Future example pages can be added here
   {
     id: "components",
-    title: "UI Components",
+    title: "Learnova Academy - Examples",
     description:
       "Showcase of reusable Vue components and their usage patterns.",
     icon: "i-lucide-blocks",
@@ -133,7 +133,7 @@ const getColorClasses = (color: string) => {
             </h1>
             <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
               A collection of code examples, component demonstrations, and
-              implementation guides for the VueNuxtMasters project. These
+              implementation guides for the Learnova Academy project. These
               examples showcase best practices and provide reference
               implementations for common patterns.
             </p>
