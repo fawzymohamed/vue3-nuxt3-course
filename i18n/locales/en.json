@@ -8,56 +8,134 @@
   },
   "homepage": {
     "meta": {
-      "title": "Master Vue.js and Nuxt.js from Beginner to Advanced",
-      "description": "Your comprehensive, hands-on journey to becoming proficient in Vue and Nuxt. Build real-world applications and elevate your development skills."
+      "title": "Learnova Academy - Master Programming Skills with Expert-Led Courses",
+      "description": "Learn programming with comprehensive, bilingual courses in Vue.js, React, Python, and more. Expert instructors, hands-on projects, and flexible learning paths."
     },
     "hero": {
-      "title": "Master Vue.js and Nuxt.js from",
-      "cta": "Get Started Now",
-      "titleHighlight": "Beginner to Advanced",
-      "subtitle": "Your comprehensive, hands-on journey to becoming proficient in Vue and Nuxt. Build real-world applications and elevate your development skills."
+      "title": "Master Programming Skills with",
+      "titleHighlight": "Expert-Led Courses",
+      "subtitle": "Comprehensive, bilingual programming courses designed for developers at every level. Learn from industry experts and build real-world projects.",
+      "primaryCta": "Explore Courses",
+      "secondaryCta": "Learn More"
+    },
+    "stats": {
+      "courses": "5+",
+      "coursesLabel": "Courses Available",
+      "students": "2.5K+",
+      "studentsLabel": "Active Students",
+      "languages": "2",
+      "languagesLabel": "Languages Supported",
+      "hours": "15K+",
+      "hoursLabel": "Learning Hours"
+    },
+    "featuredCourses": {
+      "title": "Featured Courses",
+      "subtitle": "Start your learning journey with our most popular and comprehensive courses",
+      "viewAllCourses": "View All Courses"
+    },
+    "categories": {
+      "title": "Explore by Category",
+      "subtitle": "Choose your learning path from our diverse range of programming disciplines",
+      "courseCount": {
+        "singular": "{count} course",
+        "plural": "{count} courses"
+      },
+      "browseAll": "Browse All Categories"
+    },
+    "learningPaths": {
+      "title": "Learning Paths",
+      "subtitle": "Structured pathways to help you achieve your programming goals",
+      "frontend": {
+        "title": "Frontend Development",
+        "description": "Master modern frontend technologies and build beautiful, interactive user interfaces",
+        "duration": "3-6 months",
+        "level": "Beginner to Advanced"
+      },
+      "backend": {
+        "title": "Backend Development",
+        "description": "Learn server-side development, APIs, and database management",
+        "duration": "4-8 months",
+        "level": "Intermediate to Advanced"
+      },
+      "fullstack": {
+        "title": "Full-Stack Development",
+        "description": "Become a complete developer with end-to-end application development skills",
+        "duration": "6-12 months",
+        "level": "Intermediate to Expert"
+      },
+      "startLearning": "Start Your Learning Journey"
+    },
+    "platformStats": {
+      "title": "Join Thousands of Successful Developers",
+      "subtitle": "Our platform has helped developers worldwide advance their careers and build amazing projects",
+      "courses": {
+        "title": "Expert Courses",
+        "description": "Comprehensive and up-to-date"
+      },
+      "students": {
+        "title": "Active Learners",
+        "description": "From 50+ countries worldwide"
+      },
+      "hours": {
+        "title": "Learning Hours",
+        "description": "Quality content delivered"
+      },
+      "success": {
+        "title": "Success Rate",
+        "description": "Course completion rate"
+      },
+      "additional": {
+        "languages": "Languages Supported",
+        "rating": "Average Course Rating",
+        "certifications": "Certificates Issued"
+      }
+    },
+    "instructors": {
+      "title": "Learn from Industry Experts",
+      "subtitle": "Our experienced instructors bring real-world knowledge and proven teaching methods",
+      "learnMore": "Meet Our Team"
     },
     "benefits": {
-      "title": "Why This Course?",
-      "subtitle": "Everything you need to master modern Vue.js and Nuxt.js development",
+      "title": "Why Choose Learnova Academy?",
+      "subtitle": "Everything you need to excel in modern programming",
       "comprehensive": {
-        "title": "Comprehensive Course Content",
-        "description": "Covering Vue 3 and Nuxt 3 from fundamentals to advanced topics with structured learning paths."
+        "title": "Comprehensive Content",
+        "description": "From fundamentals to advanced topics with structured learning paths and hands-on projects."
       },
       "handson": {
         "title": "Hands-On Learning",
-        "description": "Interactive exercises, quizzes, and real-world projects to reinforce your learning."
+        "description": "Interactive exercises, real-world projects, and practical examples to reinforce your skills."
       },
       "modern": {
-        "title": "Modern Best Practices",
-        "description": "Built with Vite, TypeScript, Pinia, and the Composition API using current industry standards."
+        "title": "Modern Technologies",
+        "description": "Learn the latest frameworks, tools, and best practices used in the industry today."
       },
       "expert": {
-        "title": "Expert-Led Instruction",
-        "description": "Clear explanations and practical examples from experienced Vue and Nuxt developers."
+        "title": "Expert Instruction",
+        "description": "Learn from experienced developers with proven track records in building successful applications."
       }
     },
     "modules": {
-      "title": "Modules You'll Explore",
-      "subtitle": "A structured journey from Vue basics to advanced Nuxt applications",
+      "title": "Sample Learning Modules",
+      "subtitle": "Get a preview of our structured approach to teaching programming",
       "module1": {
-        "title": "Vue.js Fundamentals",
-        "description": "Learn the core concepts of Vue 3, including reactivity, components, and the Composition API."
+        "title": "Foundation Concepts",
+        "description": "Start with core programming concepts, syntax, and fundamental patterns."
       },
       "module2": {
-        "title": "Intermediate Vue & State Management",
-        "description": "Dive deeper into Vue with advanced patterns, Pinia for state management, and complex component interactions."
+        "title": "Practical Application",
+        "description": "Apply your knowledge through guided projects and real-world scenarios."
       },
       "module3": {
-        "title": "Introduction to Nuxt.js",
-        "description": "Discover the power of Nuxt 3 for building full-stack applications with server-side rendering and more."
+        "title": "Advanced Techniques",
+        "description": "Master advanced patterns, optimization, and professional development practices."
       }
     },
     "finalCta": {
-      "title": "Ready to Start Your Vue & Nuxt Journey?",
-      "subtitle": "Join thousands of developers who have transformed their careers with our comprehensive Vue and Nuxt course.",
-      "primaryCta": "Explore Full Syllabus",
-      "secondaryCta": "View Sample Lessons"
+      "title": "Ready to Start Your Programming Journey?",
+      "subtitle": "Join thousands of developers who have advanced their careers with our comprehensive courses.",
+      "primaryCta": "Browse All Courses",
+      "secondaryCta": "View Sample Content"
     }
   },
   "footer": {
