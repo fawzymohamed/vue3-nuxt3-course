@@ -267,6 +267,7 @@
     "rating": "Rating",
     "enrollments": "Enrollments",
     "progress": "Progress",
+    "curriculum": "Curriculum",
     "completed": "Completed",
     "inProgress": "In Progress",
     "notStarted": "Not Started",
@@ -279,6 +280,20 @@
     "overview": "Course Overview",
     "overallProgress": "Overall Progress",
     "markComplete": "Mark Complete",
+    "thisIncludes": "This course includes",
+    "lifetimeAccess": "Lifetime access",
+    "mobileFriendly": "Mobile & desktop access",
+    "bilingualSupport": "English & Arabic support",
+    "practicalExercises": "Practical exercises",
+    "certificateCompletion": "Certificate of completion",
+    "oneTimePayment": "One-time payment",
+    "of": "of",
+    "lessonsCompleted": "lessons completed",
+    "totalDuration": "Total Duration",
+    "exercise": "Exercise",
+    "quiz": "Quiz",
+    "keepLearning": "Keep Learning!",
+    "progressMessage": "You've completed {completed} out of {total} lessons. Keep up the great work!",
     "features": {
       "hasQuizzes": "Interactive Quizzes",
       "hasExercises": "Hands-on Exercises",
@@ -292,6 +307,43 @@
       "loadFailed": "Failed to load course"
     },
     "notFound": "Course not found"
+  },
+  "instructor": {
+    "students": "Students",
+    "courses": "Courses",
+    "rating": "Rating",
+    "reviews": "Reviews",
+    "specialties": "Specialties",
+    "experience": "Experience",
+    "achievements": "Achievements",
+    "teachingPhilosophy": "Teaching Philosophy",
+    "practicalApproach": "Practical Approach",
+    "practicalApproachDesc": "Focus on real-world projects and hands-on coding experience.",
+    "studentCentered": "Student-Centered",
+    "studentCenteredDesc": "Personalized learning paths adapted to individual needs.",
+    "continuousImprovement": "Continuous Improvement",
+    "continuousImprovementDesc": "Always updating content with latest industry trends.",
+    "courseMessage": {
+      "title": "A Message from Your Instructor",
+      "text": "Welcome to {courseName}! I'm excited to guide you through this learning journey.",
+      "quote": "The best way to learn programming is by building real projects. That's exactly what we'll do together in this course."
+    }
+  },
+  "reviews": {
+    "ratingsAndReviews": "Ratings and Reviews",
+    "basedOnReviews": "Based on {count} reviews",
+    "shareYourExperience": "Share Your Experience",
+    "shareYourExperienceDesc": "Help other students by sharing your thoughts about this course.",
+    "writeReview": "Write a Review",
+    "loginRequired": "Login required to write a review",
+    "studentReviews": "Student Reviews",
+    "helpful": "Helpful",
+    "report": "Report",
+    "loadMore": "Load More Reviews",
+    "comingSoon": {
+      "title": "Reviews Feature Coming Soon",
+      "description": "We're working on implementing a comprehensive review system. For now, enjoy these sample reviews to get a feel for the course quality."
+    }
   },
   "navigation": {
     "home": "Home",

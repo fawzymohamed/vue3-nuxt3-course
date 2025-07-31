@@ -267,6 +267,7 @@
     "rating": "التقييم",
     "enrollments": "المشتركين",
     "progress": "التقدم",
+    "curriculum": "المنهج",
     "completed": "مكتمل",
     "inProgress": "قيد التنفيذ",
     "notStarted": "لم يبدأ",
@@ -279,6 +280,20 @@
     "overview": "نظرة عامة على الدورة",
     "overallProgress": "التقدم الإجمالي",
     "markComplete": "وضع علامة كمكتمل",
+    "thisIncludes": "تشمل هذه الدورة",
+    "lifetimeAccess": "وصول مدى الحياة",
+    "mobileFriendly": "متاح على الجوال والحاسوب",
+    "bilingualSupport": "دعم العربية والإنجليزية",
+    "practicalExercises": "تمارين عملية",
+    "certificateCompletion": "شهادة إتمام",
+    "oneTimePayment": "دفعة واحدة",
+    "of": "من",
+    "lessonsCompleted": "درس مكتمل",
+    "totalDuration": "المدة الإجمالية",
+    "exercise": "تمرين",
+    "quiz": "اختبار",
+    "keepLearning": "استمر في التعلم!",
+    "progressMessage": "لقد أكملت {completed} من أصل {total} درس. استمر في العمل الرائع!",
     "features": {
       "hasQuizzes": "اختبارات تفاعلية",
       "hasExercises": "تمارين عملية",
@@ -292,6 +307,43 @@
       "loadFailed": "فشل في تحميل الدورة"
     },
     "notFound": "الدورة غير موجودة"
+  },
+  "instructor": {
+    "students": "الطلاب",
+    "courses": "الدورات",
+    "rating": "التقييم",
+    "reviews": "المراجعات",
+    "specialties": "التخصصات",
+    "experience": "الخبرة",
+    "achievements": "الإنجازات",
+    "teachingPhilosophy": "فلسفة التدريس",
+    "practicalApproach": "منهج عملي",
+    "practicalApproachDesc": "التركيز على المشاريع الحقيقية والخبرة العملية في البرمجة.",
+    "studentCentered": "محور الطالب",
+    "studentCenteredDesc": "مسارات تعلم مخصصة تتكيف مع الاحتياجات الفردية.",
+    "continuousImprovement": "التحسين المستمر",
+    "continuousImprovementDesc": "تحديث المحتوى دائماً بأحدث اتجاهات الصناعة.",
+    "courseMessage": {
+      "title": "رسالة من مدربك",
+      "text": "مرحباً بك في {courseName}! أنا متحمس لإرشادك خلال رحلة التعلم هذه.",
+      "quote": "أفضل طريقة لتعلم البرمجة هي ببناء مشاريع حقيقية. هذا بالضبط ما سنفعله معاً في هذه الدورة."
+    }
+  },
+  "reviews": {
+    "ratingsAndReviews": "التقييمات والمراجعات",
+    "basedOnReviews": "بناء على {count} مراجعة",
+    "shareYourExperience": "شارك تجربتك",
+    "shareYourExperienceDesc": "ساعد الطلاب الآخرين بمشاركة أفكارك حول هذه الدورة.",
+    "writeReview": "اكتب مراجعة",
+    "loginRequired": "يتطلب تسجيل الدخول لكتابة مراجعة",
+    "studentReviews": "مراجعات الطلاب",
+    "helpful": "مفيد",
+    "report": "بلاغ",
+    "loadMore": "تحميل المزيد من المراجعات",
+    "comingSoon": {
+      "title": "ميزة المراجعات قريباً",
+      "description": "نحن نعمل على تطبيق نظام مراجعات شامل. في الوقت الحالي، استمتع بهذه المراجعات النموذجية للحصول على فكرة عن جودة الدورة."
+    }
   },
   "navigation": {
     "courses": "الدورات",

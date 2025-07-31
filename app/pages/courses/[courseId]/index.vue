@@ -55,129 +55,76 @@ useHead({
     },
   ],
 });
+
+// Tab configuration for course details
+const tabItems = [
+  {
+    key: "curriculum",
+    label: t("course.curriculum"),
+    icon: "i-heroicons-academic-cap",
+  },
+  {
+    key: "instructor",
+    label: t("course.instructor"),
+    icon: "i-heroicons-user-circle",
+  },
+  {
+    key: "reviews",
+    label: t("reviews.ratingsAndReviews"),
+    icon: "i-heroicons-star",
+  },
+];
+
+// Default active tab
+const activeTab = ref("curriculum");
 </script>
 
 <template>
   <div>
+    <!-- Course Hero Section -->
+    <CourseHeroSection :course="course" :progress="progress" />
+
+    <!-- Course Details with Tabs -->
     <UContainer>
-      <!-- Course Hero Section -->
-      <div class="py-8 lg:py-16">
-        <div class="lg:grid lg:grid-cols-12 lg:gap-x-8">
-          <div class="lg:col-span-8">
-            <h1
-              class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
+      <div class="py-12">
+        <!-- Tab Navigation -->
+        <div class="border-b border-gray-200 dark:border-gray-700 mb-8">
+          <nav class="flex space-x-8">
+            <button
+              v-for="tab in tabItems"
+              :key="tab.key"
+              @click="activeTab = tab.key"
+              :class="[
+                'py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2',
+                activeTab === tab.key
+                  ? 'border-primary-500 text-primary-600 dark:text-primary-400'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300',
+              ]"
             >
-              {{ course.title[locale] }}
-            </h1>
-            <p class="mt-4 text-xl text-gray-600 dark:text-gray-300">
-              {{ course.description[locale] }}
-            </p>
-
-            <!-- Course Meta -->
-            <div class="mt-6 flex flex-wrap items-center gap-4">
-              <UBadge
-                :color="
-                  course.difficulty === 'beginner'
-                    ? 'success'
-                    : course.difficulty === 'intermediate'
-                      ? 'warning'
-                      : 'error'
-                "
-                variant="subtle"
-                size="lg"
-              >
-                {{ $t(`difficulty.${course.difficulty}`) }}
-              </UBadge>
-              <span class="text-gray-600 dark:text-gray-300">
-                {{ course.estimatedHours }} {{ $t("common.hours") }}
-              </span>
-              <span class="text-gray-600 dark:text-gray-300">
-                {{ course.modules.length }} {{ $t("common.modules") }}
-              </span>
-            </div>
-
-            <!-- Instructor Info -->
-            <div class="mt-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <h3 class="font-semibold text-gray-900 dark:text-white">
-                {{ $t("course.instructor") }}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                {{ course.instructor.name }}
-              </p>
-              <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                {{ course.instructor.bio[locale] }}
-              </p>
-            </div>
-          </div>
-
-          <div class="mt-8 lg:mt-0 lg:col-span-4">
-            <!-- Course Actions -->
-            <div
-              class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-6"
-            >
-              <UButton
-                :to="localePath(`/courses/${courseId}/module1/lesson1`)"
-                color="primary"
-                size="lg"
-                class="w-full mb-4"
-              >
-                {{ $t("course.startLearning") }}
-              </UButton>
-            </div>
-          </div>
+              <UIcon :name="tab.icon" class="w-4 h-4" />
+              {{ tab.label }}
+            </button>
+          </nav>
         </div>
-      </div>
 
-      <!-- Course Modules -->
-      <div class="border-t border-gray-200 dark:border-gray-700 pt-8">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-          {{ $t("course.modules") }}
-        </h2>
+        <!-- Tab Content -->
+        <div class="tab-content">
+          <!-- Curriculum Tab -->
+          <div v-show="activeTab === 'curriculum'">
+            <CourseCurriculum :course="course" />
+          </div>
 
-        <div class="space-y-6">
-          <div
-            v-for="(module, moduleIndex) in course.modules"
-            :key="module.id"
-            class="border border-gray-200 dark:border-gray-700 rounded-lg"
-          >
-            <div
-              class="p-4 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700"
-            >
-              <h3 class="font-semibold text-gray-900 dark:text-white">
-                {{ $t("common.module") }} {{ moduleIndex + 1 }}:
-                {{ module.title[locale] }}
-              </h3>
-              <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                {{ module.description[locale] }}
-              </p>
-            </div>
+          <!-- Instructor Tab -->
+          <div v-show="activeTab === 'instructor'">
+            <InstructorProfile
+              :instructor="course.instructor"
+              :course="course"
+            />
+          </div>
 
-            <div class="p-4">
-              <ul class="space-y-2">
-                <li
-                  v-for="(lesson, lessonIndex) in module.lessons"
-                  :key="lesson.id"
-                >
-                  <NuxtLink
-                    :to="
-                      localePath(
-                        `/courses/${courseId}/${module.id}/${lesson.slug}`
-                      )
-                    "
-                    class="flex items-center p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-                  >
-                    <span
-                      class="flex-shrink-0 w-6 h-6 bg-primary-100 dark:bg-primary-800 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-sm font-medium mr-3"
-                    >
-                      {{ lessonIndex + 1 }}
-                    </span>
-                    <span class="text-gray-900 dark:text-white">
-                      {{ lesson.title[locale] }}
-                    </span>
-                  </NuxtLink>
-                </li>
-              </ul>
-            </div>
+          <!-- Reviews Tab -->
+          <div v-show="activeTab === 'reviews'">
+            <CourseReviews :course-id="course.id" />
           </div>
         </div>
       </div>
