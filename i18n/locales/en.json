@@ -206,7 +206,47 @@
     },
     "title": "All Courses",
     "subtitle": "Browse our comprehensive collection of programming courses",
-    "comingSoon": "Coming Soon"
+    "comingSoon": "Coming Soon",
+    "noResults": "No courses found matching your criteria",
+    "showing": "Showing {start}-{end} of {total} courses",
+    "resultsPerPage": "courses per page"
+  },
+  "filters": {
+    "title": "Filter Courses",
+    "reset": "Reset Filters",
+    "activeFilters": "Active Filters",
+    "search": {
+      "label": "Search Courses",
+      "placeholder": "Search by title, description, or technology..."
+    },
+    "difficulty": {
+      "label": "Difficulty Level",
+      "all": "All Levels",
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "technology": {
+      "label": "Technology",
+      "all": "All Technologies"
+    },
+    "status": {
+      "label": "Status",
+      "all": "All Status",
+      "published": "Published",
+      "comingSoon": "Coming Soon"
+    },
+    "sort": {
+      "label": "Sort By",
+      "title": "Title",
+      "difficulty": "Difficulty",
+      "duration": "Duration",
+      "newest": "Newest"
+    },
+    "sortOrder": {
+      "ascending": "A-Z",
+      "descending": "Z-A"
+    }
   },
   "course": {
     "meta": {
@@ -223,6 +263,7 @@
     "technologies": "Technologies",
     "categories": "Categories",
     "price": "Price",
+    "free": "Free",
     "rating": "Rating",
     "enrollments": "Enrollments",
     "progress": "Progress",

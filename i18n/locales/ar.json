@@ -206,7 +206,47 @@
     },
     "title": "جميع الدورات",
     "subtitle": "تصفح مجموعتنا الشاملة من دورات البرمجة",
-    "comingSoon": "قريباً"
+    "comingSoon": "قريباً",
+    "noResults": "لم يتم العثور على دورات تطابق معاييرك",
+    "showing": "عرض {start}-{end} من {total} دورة",
+    "resultsPerPage": "دورة في الصفحة"
+  },
+  "filters": {
+    "title": "تصفية الدورات",
+    "reset": "إعادة تعيين التصفية",
+    "activeFilters": "المرشحات النشطة",
+    "search": {
+      "label": "البحث في الدورات",
+      "placeholder": "البحث بالعنوان أو الوصف أو التقنية..."
+    },
+    "difficulty": {
+      "label": "مستوى الصعوبة",
+      "all": "جميع المستويات",
+      "beginner": "مبتدئ",
+      "intermediate": "متوسط",
+      "advanced": "متقدم"
+    },
+    "technology": {
+      "label": "التقنية",
+      "all": "جميع التقنيات"
+    },
+    "status": {
+      "label": "الحالة",
+      "all": "جميع الحالات",
+      "published": "منشور",
+      "comingSoon": "قريباً"
+    },
+    "sort": {
+      "label": "ترتيب حسب",
+      "title": "العنوان",
+      "difficulty": "مستوى الصعوبة",
+      "duration": "المدة",
+      "newest": "الأحدث"
+    },
+    "sortOrder": {
+      "ascending": "أ-ي",
+      "descending": "ي-أ"
+    }
   },
   "course": {
     "meta": {
@@ -223,6 +263,7 @@
     "technologies": "التقنيات",
     "categories": "الفئات",
     "price": "السعر",
+    "free": "مجاني",
     "rating": "التقييم",
     "enrollments": "المشتركين",
     "progress": "التقدم",
