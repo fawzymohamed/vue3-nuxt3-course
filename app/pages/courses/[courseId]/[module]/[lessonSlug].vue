@@ -8,33 +8,18 @@ const courseId = computed(() => route.params.courseId as string);
 const moduleId = computed(() => route.params.module as string);
 const lessonSlug = computed(() => route.params.lessonSlug as string);
 
-// Get content from the new structure first, fallback to old structure for backward compatibility
+// Get lesson content from the new course structure
 const { data: newLesson } = await useAsyncData(
   `course-lesson-${courseId.value}-${moduleId.value}-${lessonSlug.value}`,
   async () => {
     try {
-      // Try new course structure first
-      const newStructureLesson = await queryCollection("content")
+      return await queryCollection("content")
         .path(
           `/courses/${courseId.value}/${locale.value}/modules/${moduleId.value}/lessons/${lessonSlug.value}`
         )
         .first();
-
-      if (newStructureLesson) {
-        return newStructureLesson;
-      }
     } catch (error) {
-      // Silence the error and try fallback
-    }
-
-    try {
-      // Fallback to old structure for backward compatibility
-      // Map new route format to old content structure
-      const legacyModule = `${moduleId.value}-${locale.value}`;
-      return await queryCollection("content")
-        .path(`/lesson/${legacyModule}/${lessonSlug.value}`)
-        .first();
-    } catch (fallbackError) {
+      console.error("Error fetching lesson:", error);
       return null;
     }
   }
@@ -85,18 +70,9 @@ const navigationData = {
   },
 };
 
-// Function to map module names between languages for navigation
-function mapModuleToLanguage(currentModule: string, targetLang: string) {
-  const moduleMatch = currentModule.match(/^(.+)-([a-z]{2})$/);
-  if (!moduleMatch) return currentModule;
-
-  const [_, moduleBase] = moduleMatch;
-  return `${moduleBase}-${targetLang}`;
-}
-
 // Watch for language changes and redirect to equivalent lesson
 watch(locale, async (newLocale) => {
-  // For new course structure, update route to new language
+  // Update route to new language in course structure
   if (courseId.value && moduleId.value && lessonSlug.value) {
     const newPath = `/courses/${courseId.value}/${moduleId.value}/${lessonSlug.value}`;
     await navigateTo(localePath(newPath));

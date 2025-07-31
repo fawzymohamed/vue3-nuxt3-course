@@ -9,7 +9,6 @@
  * - Module and lesson retrieval with proper sorting
  * - Caching and error handling
  * - Type-safe content operations
- * - Support for both new and legacy content structures
  */
 
 export const useCourses = () => {
@@ -338,29 +337,6 @@ export const useCourses = () => {
   };
 
   /**
-   * Legacy content support: Get lesson from old content structure
-   * This provides backward compatibility during the migration period
-   */
-  const getLegacyLesson = async (moduleSlug: string, lessonSlug: string) => {
-    try {
-      const content = await $fetch("/api/_content/query", {
-        method: "get",
-        query: {
-          _params: JSON.stringify({
-            first: true,
-            where: [{ _path: { $eq: `lesson/${moduleSlug}/${lessonSlug}` } }],
-          }),
-        },
-      });
-
-      return content || null;
-    } catch (error) {
-      console.error(`Error fetching legacy lesson '${lessonSlug}':`, error);
-      return null;
-    }
-  };
-
-  /**
    * Get content statistics for a course
    */
   const getCourseStats = async (courseId: string) => {
@@ -422,8 +398,5 @@ export const useCourses = () => {
     // Navigation and stats
     getCourseNavigation,
     getCourseStats,
-
-    // Legacy support
-    getLegacyLesson,
   };
 };

@@ -35,16 +35,11 @@ Phase 3.1 of the multi-course transformation plan has been successfully implemen
 - `getCourseNavigation(courseId)` - Optimized navigation data for components
 - `getCourseStats(courseId)` - Content statistics (modules, lessons, time, exercises)
 
-#### 4. **Legacy Support**
-
-- `getLegacyLesson(moduleSlug, lessonSlug)` - Backward compatibility for old content structure
-
 ### 🏗️ Technical Architecture
 
 #### **Content Structure Support**
 
-- **New Structure**: `courses/[courseId]/[locale]/modules/[moduleId]/lessons/[lessonSlug].md`
-- **Legacy Structure**: `lesson/[moduleSlug]/[lessonSlug].md`
+- **Course Structure**: `courses/[courseId]/[locale]/modules/[moduleId]/lessons/[lessonSlug].md`
 - **Locale-Aware**: Automatically queries content in the current locale
 
 #### **API Integration**

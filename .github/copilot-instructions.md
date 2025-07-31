@@ -68,7 +68,6 @@ const progress = getCourseProgress(course.id);
 
 - **Multi-course paths**: `content/courses/[courseId]/[locale]/modules/[moduleId]/lessons/`
 - **Course metadata**: Centralized in `config/courses.ts`
-- **Legacy support**: Maintain backward compatibility with existing content
 
 ## II. Tech Stack & Dependencies
 
@@ -284,9 +283,6 @@ addLessonNotes(courseId, moduleId, lessonId, "Important notes");
 /courses                         # All courses listing
 /courses/[courseId]             # Course overview
 /courses/[courseId]/[module]/[lessonSlug]  # Individual lessons
-
-// Legacy routes (maintained for compatibility)
-/lesson/[module]/[lessonSlug]   # Original structure
 ```
 
 ### Navigation Best Practices
@@ -493,7 +489,6 @@ if (!isValid) {
 ### Content Structure
 
 - **Multi-Course Content**: `content/courses/[courseId]/[locale]/modules/[moduleId]/lessons/`
-- **Legacy Content**: `content/lesson/module{N}-{lang}/` (maintained for compatibility)
 
 ### Translation Files
 

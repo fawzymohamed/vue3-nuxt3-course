@@ -46,7 +46,7 @@ interface CourseProgress {
   totalLessons: number;
   completedLessons: number;
   completionPercentage: number;
-  progressPercentage: number; // For backward compatibility
+  progressPercentage: number;
   startedAt?: string;
   completedAt?: string;
   lastAccessedAt?: string;
@@ -351,7 +351,7 @@ export const useCourseProgress = () => {
   };
 
   /**
-   * Get module progress percentage - backward compatibility
+   * Get module progress percentage
    */
   const getModuleProgressPercentage = async (
     courseId: string,
@@ -436,7 +436,7 @@ export const useCourseProgress = () => {
         totalLessons,
         completedLessons,
         completionPercentage,
-        progressPercentage: completionPercentage, // For backward compatibility
+        progressPercentage: completionPercentage,
         startedAt:
           progressData.value.courses[courseId]?.startedAt ||
           (completedLessons > 0 ? now : undefined),
@@ -475,7 +475,7 @@ export const useCourseProgress = () => {
   };
 
   /**
-   * Get progress percentage for a course - backward compatibility
+   * Get progress percentage for a course
    */
   const getCourseProgressPercentage = (courseId: string): number => {
     const progress = progressData.value.courses[courseId];
@@ -736,7 +736,7 @@ export const useCourseProgress = () => {
   };
 
   /**
-   * Calculate overall course progress percentage - backward compatibility
+   * Calculate overall course progress percentage
    */
   const calculateProgressPercentage = (
     courseId: string,
@@ -791,12 +791,12 @@ export const useCourseProgress = () => {
     // Module progress
     updateModuleProgress,
     getModuleProgress,
-    getModuleProgressPercentage, // Backward compatibility
+    getModuleProgressPercentage,
 
     // Course progress
     updateCourseProgress,
     getCourseProgress,
-    getCourseProgressPercentage, // Backward compatibility
+    getCourseProgressPercentage,
     markCourseCompleted,
     isCourseCompleted,
 
@@ -818,6 +818,6 @@ export const useCourseProgress = () => {
     importProgress,
     loadProgress,
     saveProgress,
-    calculateProgressPercentage, // Backward compatibility
+    calculateProgressPercentage,
   };
 };
