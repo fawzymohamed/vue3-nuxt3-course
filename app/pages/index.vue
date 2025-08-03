@@ -31,6 +31,6 @@ useHead({
     <HomepagePlatformStatsSection />
 
     <!-- Instructor showcase -->
-    <HomepageInstructorShowcase />
+    <!-- <HomepageInstructorShowcase /> -->
   </div>
 </template>

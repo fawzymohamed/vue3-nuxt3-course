@@ -26,6 +26,17 @@ useHead({
 // Example pages data
 const examplePages = [
   {
+    id: "dev-guide",
+    title: "Developer Guide",
+    description:
+      "Comprehensive development documentation and guidelines for working on this project.",
+    icon: "i-heroicons-document-text",
+    color: "emerald",
+    path: "/dev-guide",
+    tags: ["Documentation", "Guide", "Development"],
+    status: "ready",
+  },
+  {
     id: "icons-system",
     title: "Icon System",
     description:

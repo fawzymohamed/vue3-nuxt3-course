@@ -139,7 +139,7 @@
     }
   },
   "footer": {
-    "copyright": "Copyright ©{year} - Learnova Academy"
+    "copyright": "Copyright 2024 - Learnova Academy"
   },
   "error": {
     "goHome": "Go Home",
@@ -650,6 +650,176 @@
       "error": "Error",
       "saveFailed": "Failed to save content",
       "loadFailed": "Failed to load content"
+    }
+  },
+  "devGuide": {
+    "title": "Developer Guide",
+    "subtitle": "Comprehensive guide for developers working on Learnova Academy",
+    "developmentOnly": "Development Only",
+    "backToHome": "Back to Home",
+    "meta": {
+      "title": "Developer Guide - Learnova Academy",
+      "description": "Comprehensive development guide for Learnova Academy learning platform"
+    },
+    "navigation": {
+      "title": "Guide Sections"
+    },
+    "sections": {
+      "overview": {
+        "title": "Project Overview",
+        "description": "Learnova Academy is a comprehensive bilingual learning platform built with Nuxt 4, Vue 3, and TypeScript. It supports multiple programming courses with full internationalization and progress tracking.",
+        "keyFeatures": "Key Features",
+        "features": {
+          "multiCourse": "Multi-course architecture with centralized management",
+          "bilingual": "Full bilingual support (English/Arabic) with RTL layout",
+          "progress": "Comprehensive progress tracking and user analytics",
+          "responsive": "Mobile-first responsive design with Nuxt UI components",
+          "ssr": "Server-side rendering with static generation support"
+        },
+        "techStack": "Technology Stack"
+      },
+      "gettingStarted": {
+        "title": "Getting Started",
+        "prerequisites": "Prerequisites",
+        "installation": "Installation & Setup",
+        "projectStructure": "Project Structure"
+      },
+      "architecture": {
+        "title": "Architecture",
+        "description": "Understanding the core architecture patterns and design decisions behind Learnova Academy.",
+        "multiCourse": "Multi-Course System",
+        "multiCourseDesc": "The platform uses a centralized course registry with individual course management, allowing multiple courses to coexist with shared infrastructure.",
+        "courseFlow": "Course Registry → Content Structure → Progress Tracking\n├── config/courses.ts (Course definitions)\n├── content/courses/[courseId]/ (Course content)\n└── composables/ (Business logic)",
+        "composables": "Core Composables",
+        "dataFlow": "Data Flow Architecture",
+        "dataFlowExample": "Example: useCourseRegistry() loads course config, useCourses() fetches content, useCourseProgress() tracks completion status."
+      },
+      "courseManagement": {
+        "title": "Course Management",
+        "description": "Learn how to create, manage, and structure courses in the Learnova Academy platform.",
+        "registry": "Course Registry",
+        "registryDescription": "All courses are defined in the centralized course registry located at config/courses.ts",
+        "contentStructure": "Content Structure",
+        "composables": "Course Composables"
+      },
+      "components": {
+        "title": "Component Library",
+        "description": "Comprehensive overview of the component architecture used throughout Learnova Academy.",
+        "courseComponents": "Course-Specific Components",
+        "courseCard": {
+          "description": "Display course information with progress indicators and clickable navigation."
+        },
+        "navigation": {
+          "description": "Complete course navigation system with breadcrumbs and progress tracking."
+        },
+        "moduleNav": {
+          "description": "Interactive module and lesson navigation with collapsible sections."
+        },
+        "lessonRenderer": {
+          "description": "Render lesson content with course context and progress integration."
+        },
+        "nuxtUI": "Nuxt UI Components",
+        "nuxtUIDesc": "We use Nuxt UI components as our primary design system. Always prefer these over custom implementations.",
+        "nuxtUIComponents": "Primary Nuxt UI components: UContainer, UCard, UButton, UInput, USelect, UProgress, UBadge, UIcon, UModal, UDropdown, UTooltip, UAlert. Always prefer these over custom implementations."
+      },
+      "i18n": {
+        "title": "Internationalization",
+        "description": "Complete guide to the internationalization system supporting English and Arabic with RTL layout.",
+        "setup": "i18n Setup",
+        "setupDesc": "The platform uses Nuxt i18n module for comprehensive internationalization support with cookie-based language persistence.",
+        "basicUsage": "Use the i18n composable and localePath for navigation. In templates use translation keys for all text content.",
+        "bestPractices": "Best Practices",
+        "practices": {
+          "keys": "Always use translation keys - never hardcode text",
+          "navigation": "Use localePath() for all navigation links",
+          "nested": "Use nested keys for organization: 'course.progress.completed'",
+          "rtl": "Test all components in both LTR and RTL modes"
+        },
+        "rtlSupport": "RTL Support",
+        "rtlDesc": "The platform fully supports RTL (Right-to-Left) layout for Arabic. Use logical CSS properties for proper RTL behavior.",
+        "rtlExample": "Use CSS logical properties for RTL support: padding-inline instead of padding-left/right, margin-inline-start instead of margin-left, text-align: start instead of text-align: left.",
+        "addingLanguage": "Adding a New Language",
+        "addingDesc": "To add support for a new language, follow these steps:",
+        "steps": {
+          "createFile": "Create a new locale file in i18n/locales/[lang].json",
+          "updateConfig": "Update nuxt.config.ts to include the new locale",
+          "addContent": "Add translated content for all existing keys",
+          "testRTL": "Test RTL support if the language requires it"
+        }
+      },
+      "progressSystem": {
+        "title": "Progress System",
+        "description": "Comprehensive progress tracking system that monitors user learning across courses, modules, and lessons.",
+        "architecture": "Progress Architecture",
+        "architectureDesc": "The progress system operates at three levels: lesson, module, and course, with persistent local storage.",
+        "usage": "Progress System Usage",
+        "usageExample": "",
+        "persistence": "Data Persistence",
+        "persistenceDesc": "Progress data is stored in localStorage with automatic synchronization across browser sessions.",
+        "debugging": "Debugging Progress",
+        "debuggingDesc": "Use browser developer tools to inspect and debug progress data.",
+        "debugCommands": "Use browser console to debug progress: check localStorage, inspect progress object, verify course IDs."
+      },
+      "workflow": {
+        "title": "Development Workflow",
+        "description": "Recommended development practices, git workflow, and deployment procedures for Learnova Academy.",
+        "gitWorkflow": "Git Workflow",
+        "gitDesc": "We follow a feature-branch workflow with pull requests for all changes.",
+        "gitCommands": "Standard git workflow: create feature branch, add changes, commit with descriptive message, push to origin, create pull request, review and merge to main.",
+        "development": "Development Environment",
+        "codeReview": "Code Review Checklist",
+        "codeReviewDesc": "Every pull request should be reviewed for these key areas:",
+        "review": {
+          "i18n": "i18n compliance - all text uses translation keys",
+          "types": "TypeScript - proper type safety throughout",
+          "responsive": "Responsive design - works on mobile and desktop",
+          "performance": "Performance - optimized loading and rendering"
+        },
+        "deployment": "Deployment Process",
+        "deploymentDesc": "The platform is deployed to Vercel with automatic deployments from the main branch.",
+        "deploymentSteps": "Deployment checklist: 1. Run full test suite 2. Type check 3. Build check 4. Validate courses 5. Merge to main branch 6. Vercel auto-deploys from main"
+      },
+      "troubleshooting": {
+        "title": "Troubleshooting",
+        "description": "Common issues and their solutions when developing with Learnova Academy.",
+        "common": "Common Issues",
+        "issues": {
+          "i18nError": {
+            "title": "i18n Linked Format Error",
+            "description": "Error when special symbols appear in translation text, causing linked format parsing issues.",
+            "solution": "Replace problematic symbols in translations. Instead of using special characters, use descriptive text. For example, use 'Nuxt UI components' instead of component package names."
+          },
+          "buildError": {
+            "title": "Build Cache Issues",
+            "description": "Stale cache causing build failures or unexpected behavior during development.",
+            "solution": "Clear all caches and restart development server. Remove .nuxt directory, clear node_modules cache, then restart with npm run dev."
+          },
+          "progressLost": {
+            "title": "Progress Data Lost",
+            "description": "User progress not persisting or being lost between sessions.",
+            "solution": "Check localStorage in browser, verify progress composable usage, ensure courseId, moduleId, lessonId are correct."
+          },
+          "performance": {
+            "title": "Slow Page Loading",
+            "description": "Pages loading slowly, especially course content pages with large amounts of data.",
+            "solution": "Use lazy loading for heavy components and optimize content queries. Check bundle size and implement performance optimizations."
+          }
+        },
+        "debugging": "Debugging Tools",
+        "debuggingDesc": "Essential debugging tools and techniques for Learnova Academy development.",
+        "debuggingTools": "Use Vue DevTools to inspect component state, Browser DevTools to check localStorage, Nuxt DevTools for performance analysis, and TypeScript compiler to catch type errors.",
+        "resources": "Additional Resources",
+        "resourcesList": {
+          "nuxt": "Nuxt 4 Documentation",
+          "vue": "Vue 3 Composition API Documentation",
+          "nuxtUI": "Nuxt UI Components Documentation",
+          "i18n": "Nuxt i18n Module Documentation"
+        }
+      },
+      "comingSoon": {
+        "title": "Section Coming Soon",
+        "description": "This section is currently being developed. Check back later for comprehensive documentation."
+      }
     }
   }
 }
