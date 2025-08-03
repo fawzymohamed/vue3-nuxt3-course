@@ -80,13 +80,9 @@ const sections = ref([
 
 const activeSection = ref("overview");
 
-// Smooth scroll to section
-function scrollToSection(sectionId: string) {
+// Switch to selected section
+function selectSection(sectionId: string) {
   activeSection.value = sectionId;
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
 }
 </script>
 
@@ -100,15 +96,7 @@ function scrollToSection(sectionId: string) {
           Comprehensive guide to developing and maintaining the Learnova Academy
           platform
         </p>
-        <div class="mt-4 p-4 bg-warning/10 border border-warning rounded-lg">
-          <p class="text-sm text-warning-foreground">
-            <Icon
-              name="heroicons:exclamation-triangle"
-              class="w-4 h-4 inline mr-2"
-            />
-            This development guide is only available in development mode
-          </p>
-        </div>
+        <hr class="my-4" />
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -116,20 +104,20 @@ function scrollToSection(sectionId: string) {
         <aside class="lg:col-span-1">
           <div class="sticky top-8">
             <h2 class="text-lg font-semibold mb-4 text-foreground">Contents</h2>
-            <nav class="space-y-2">
+            <nav class="space-y-1">
               <button
                 v-for="section in sections"
                 :key="section.id"
-                @click="scrollToSection(section.id)"
+                @click="selectSection(section.id)"
                 :class="[
-                  'w-full text-left px-3 py-2 rounded-md transition-colors flex items-center gap-2',
+                  'w-full text-left px-3 py-2 rounded-md transition-colors flex items-center gap-3 text-sm',
                   activeSection === section.id
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted',
+                    ? 'bg-primary/10 text-primary border-l-2 border-primary font-medium'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50',
                 ]"
               >
-                <Icon :name="section.icon" class="w-4 h-4" />
-                <span class="text-sm">{{ section.title }}</span>
+                <Icon :name="section.icon" class="w-4 h-4 flex-shrink-0" />
+                <span>{{ section.title }}</span>
               </button>
             </nav>
           </div>
@@ -137,72 +125,106 @@ function scrollToSection(sectionId: string) {
 
         <!-- Main Content -->
         <main class="lg:col-span-3">
-          <UCard class="divide-y divide-border">
+          <div class="prose prose-gray dark:prose-invert max-w-none">
             <!-- Project Overview -->
-            <section id="overview" class="p-6">
-              <h2
-                class="text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"
-              >
-                <Icon name="heroicons:document-text" class="w-6 h-6" />
+            <div v-if="activeSection === 'overview'">
+              <h1 class="flex items-center gap-3 mb-6">
+                <Icon
+                  name="heroicons:document-text"
+                  class="w-8 h-8 text-primary"
+                />
                 Project Overview
-              </h2>
-              <div class="space-y-4 text-muted-foreground">
-                <p>
-                  Learnova Academy is a modern, multilingual learning management
-                  system built with cutting-edge web technologies. The platform
-                  supports both English and Arabic languages with comprehensive
-                  course management capabilities.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div class="bg-muted p-4 rounded-lg">
-                    <h3 class="font-semibold mb-2 text-foreground">
-                      Tech Stack
-                    </h3>
-                    <ul class="text-sm space-y-1">
-                      <li>• Nuxt 4 (Vue 3 + TypeScript)</li>
-                      <li>• Nuxt Content for course content</li>
-                      <li>• Nuxt I18n for multilingual support</li>
-                      <li>• Nuxt UI for component library</li>
-                    </ul>
-                  </div>
-                  <div class="bg-muted p-4 rounded-lg">
-                    <h3 class="font-semibold mb-2 text-foreground">
-                      Key Features
-                    </h3>
-                    <ul class="text-sm space-y-1">
-                      <li>• Multi-language support (EN/AR)</li>
-                      <li>• Course progress tracking</li>
-                      <li>• Responsive design</li>
-                      <li>• SEO optimized</li>
-                    </ul>
+              </h1>
+
+              <p class="text-lg text-muted-foreground mb-6">
+                Learnova Academy is a modern, multilingual learning management
+                system built with cutting-edge web technologies. The platform
+                supports both English and Arabic languages with comprehensive
+                course management capabilities.
+              </p>
+
+              <h2>Tech Stack</h2>
+              <ul>
+                <li>
+                  <strong>Nuxt 4</strong> - Vue 3 framework with TypeScript
+                  support
+                </li>
+                <li>
+                  <strong>Nuxt Content</strong> - File-based content management
+                  system
+                </li>
+                <li>
+                  <strong>Nuxt I18n</strong> - Comprehensive
+                  internationalization support
+                </li>
+                <li><strong>Nuxt UI</strong> - Modern component library</li>
+              </ul>
+
+              <h2>Key Features</h2>
+              <ul>
+                <li>
+                  <strong>Multi-language support</strong> - Full English/Arabic
+                  with RTL
+                </li>
+                <li>
+                  <strong>Course progress tracking</strong> - Comprehensive
+                  learning analytics
+                </li>
+                <li>
+                  <strong>Responsive design</strong> - Mobile-first approach
+                </li>
+                <li>
+                  <strong>SEO optimized</strong> - Built-in SEO best practices
+                </li>
+              </ul>
+
+              <div
+                class="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 my-6"
+              >
+                <div class="flex items-start gap-3">
+                  <Icon
+                    name="heroicons:information-circle"
+                    class="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0"
+                  />
+                  <div>
+                    <p class="text-sm text-blue-800 dark:text-blue-200 m-0">
+                      This platform prioritizes user experience, type safety,
+                      internationalization, and scalable course management.
+                    </p>
                   </div>
                 </div>
               </div>
-            </section>
+            </div>
 
             <!-- Getting Started -->
-            <section id="getting-started" class="p-6">
-              <h2
-                class="text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"
-              >
-                <Icon name="heroicons:rocket-launch" class="w-6 h-6" />
+            <div v-else-if="activeSection === 'getting-started'">
+              <h1 class="flex items-center gap-3 mb-6">
+                <Icon
+                  name="heroicons:rocket-launch"
+                  class="w-8 h-8 text-primary"
+                />
                 Getting Started
-              </h2>
-              <div class="space-y-4 text-muted-foreground">
-                <h3 class="text-lg font-semibold text-foreground">
-                  Prerequisites
-                </h3>
-                <ul class="list-disc list-inside space-y-1">
-                  <li>Node.js 18+ installed</li>
-                  <li>npm or yarn package manager</li>
-                  <li>Basic knowledge of Vue.js and TypeScript</li>
-                </ul>
+              </h1>
 
-                <h3 class="text-lg font-semibold text-foreground">
-                  Installation
-                </h3>
-                <div class="bg-muted p-4 rounded-lg">
-                  <pre class="text-sm"><code># Clone the repository
+              <p class="text-lg text-muted-foreground mb-6">
+                Follow these steps to set up your development environment and
+                start working with the Learnova Academy platform.
+              </p>
+
+              <h2>Prerequisites</h2>
+              <ul>
+                <li>Node.js 18+ installed</li>
+                <li>npm or yarn package manager</li>
+                <li>Basic knowledge of Vue.js and TypeScript</li>
+              </ul>
+
+              <h2>Installation</h2>
+              <div
+                class="bg-gray-50 dark:bg-gray-900 border rounded-lg p-4 my-4"
+              >
+                <pre
+                  class="text-sm overflow-x-auto"
+                ><code># Clone the repository
 git clone [repository-url]
 cd learnova-academy
 
@@ -211,34 +233,53 @@ npm install
 
 # Start development server
 npm run dev</code></pre>
-                </div>
-
-                <h3 class="text-lg font-semibold text-foreground">
-                  Environment Setup
-                </h3>
-                <p>
-                  The development server will be available at
-                  <code class="bg-muted px-2 py-1 rounded"
-                    >http://localhost:3000</code
-                  >
-                </p>
               </div>
-            </section>
+
+              <h2>Environment Setup</h2>
+              <p>
+                The development server will be available at
+                <code>http://localhost:3000</code>
+              </p>
+
+              <div
+                class="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-lg p-4 my-6"
+              >
+                <div class="flex items-start gap-3">
+                  <Icon
+                    name="heroicons:check-circle"
+                    class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
+                  />
+                  <div>
+                    <p class="text-sm text-green-800 dark:text-green-200 m-0">
+                      <strong>Success!</strong> Your development environment is
+                      now ready. You can start building amazing learning
+                      experiences.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <!-- Architecture -->
-            <section id="architecture" class="p-6">
-              <h2
-                class="text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"
-              >
-                <Icon name="heroicons:building-library" class="w-6 h-6" />
+            <div v-else-if="activeSection === 'architecture'">
+              <h1 class="flex items-center gap-3 mb-6">
+                <Icon
+                  name="heroicons:building-library"
+                  class="w-8 h-8 text-primary"
+                />
                 Architecture
-              </h2>
-              <div class="space-y-4 text-muted-foreground">
-                <h3 class="text-lg font-semibold text-foreground">
-                  Directory Structure
-                </h3>
-                <div class="bg-muted p-4 rounded-lg">
-                  <pre class="text-sm"><code>learnova-academy/
+              </h1>
+
+              <p class="text-lg text-muted-foreground mb-6">
+                Understanding the architectural patterns and directory structure
+                of the Learnova Academy platform.
+              </p>
+
+              <h2>Directory Structure</h2>
+              <div
+                class="bg-gray-50 dark:bg-gray-900 border rounded-lg p-4 my-4"
+              >
+                <pre class="text-sm overflow-x-auto"><code>learnova-academy/
 ├── app/
 │   ├── components/      # Reusable Vue components
 │   ├── composables/     # Vue composables
@@ -251,64 +292,64 @@ npm run dev</code></pre>
 ├── config/             # Configuration files
 ├── types/              # TypeScript type definitions
 └── utils/              # Utility functions</code></pre>
-                </div>
-
-                <h3 class="text-lg font-semibold text-foreground">
-                  Key Architectural Patterns
-                </h3>
-                <ul class="list-disc list-inside space-y-1">
-                  <li>
-                    <strong>Composables:</strong> Reusable logic for course
-                    management and progress tracking
-                  </li>
-                  <li>
-                    <strong>Component Architecture:</strong> Modular, reusable
-                    components with TypeScript
-                  </li>
-                  <li>
-                    <strong>Content Management:</strong> Markdown-based course
-                    content with frontmatter
-                  </li>
-                  <li>
-                    <strong>Internationalization:</strong> Vue I18n for
-                    multilingual support
-                  </li>
-                </ul>
               </div>
-            </section>
+
+              <h2>Key Architectural Patterns</h2>
+              <ul>
+                <li>
+                  <strong>Composables</strong> - Reusable logic for course
+                  management and progress tracking
+                </li>
+                <li>
+                  <strong>Component Architecture</strong> - Modular, reusable
+                  components with TypeScript
+                </li>
+                <li>
+                  <strong>Content Management</strong> - Markdown-based course
+                  content with frontmatter
+                </li>
+                <li>
+                  <strong>Internationalization</strong> - Vue I18n for
+                  multilingual support
+                </li>
+              </ul>
+            </div>
 
             <!-- Course Management -->
-            <section id="course-management" class="p-6">
-              <h2
-                class="text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"
-              >
-                <Icon name="heroicons:academic-cap" class="w-6 h-6" />
+            <div v-else-if="activeSection === 'course-management'">
+              <h1 class="flex items-center gap-3 mb-6">
+                <Icon
+                  name="heroicons:academic-cap"
+                  class="w-8 h-8 text-primary"
+                />
                 Course Management
-              </h2>
-              <div class="space-y-4 text-muted-foreground">
-                <h3 class="text-lg font-semibold text-foreground">
-                  Course Configuration
-                </h3>
-                <p>
-                  Courses are configured in
-                  <code class="bg-muted px-2 py-1 rounded"
-                    >config/courses.ts</code
-                  >
-                  with metadata including:
-                </p>
-                <ul class="list-disc list-inside space-y-1 ml-4">
-                  <li>Course ID and title</li>
-                  <li>Description and objectives</li>
-                  <li>Instructor information</li>
-                  <li>Module structure</li>
-                  <li>Prerequisites and difficulty level</li>
-                </ul>
+              </h1>
 
-                <h3 class="text-lg font-semibold text-foreground">
-                  Content Structure
-                </h3>
-                <div class="bg-muted p-4 rounded-lg">
-                  <pre class="text-sm"><code>content/courses/[course-id]/
+              <p class="text-lg text-muted-foreground mb-6">
+                Learn how to configure, manage, and structure courses within the
+                platform.
+              </p>
+
+              <h2>Course Configuration</h2>
+              <p>
+                Courses are configured in <code>config/courses.ts</code> with
+                metadata including:
+              </p>
+              <ul>
+                <li>Course ID and title</li>
+                <li>Description and objectives</li>
+                <li>Instructor information</li>
+                <li>Module structure</li>
+                <li>Prerequisites and difficulty level</li>
+              </ul>
+
+              <h2>Content Structure</h2>
+              <div
+                class="bg-gray-50 dark:bg-gray-900 border rounded-lg p-4 my-4"
+              >
+                <pre
+                  class="text-sm overflow-x-auto"
+                ><code>content/courses/[course-id]/
 ├── [locale]/
 │   ├── index.md         # Course overview
 │   ├── modules/
@@ -318,79 +359,63 @@ npm run dev</code></pre>
 │   │   │   └── lesson-2.md
 │   │   └── module-2/
 │   └── resources/       # Additional resources</code></pre>
-                </div>
-
-                <h3 class="text-lg font-semibold text-foreground">
-                  Course Registry
-                </h3>
-                <p>
-                  The
-                  <code class="bg-muted px-2 py-1 rounded"
-                    >useCourseRegistry</code
-                  >
-                  composable manages course data and provides methods for:
-                </p>
-                <ul class="list-disc list-inside space-y-1 ml-4">
-                  <li>Course validation and registration</li>
-                  <li>Module and lesson discovery</li>
-                  <li>Progress tracking integration</li>
-                </ul>
               </div>
-            </section>
+
+              <h2>Course Registry</h2>
+              <p>
+                The <code>useCourseRegistry</code> composable manages course
+                data and provides methods for:
+              </p>
+              <ul>
+                <li>Course validation and registration</li>
+                <li>Module and lesson discovery</li>
+                <li>Progress tracking integration</li>
+              </ul>
+            </div>
 
             <!-- Content Management -->
-            <section id="content-management" class="p-6">
-              <h2
-                class="text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"
-              >
-                <Icon name="heroicons:document-duplicate" class="w-6 h-6" />
+            <div v-else-if="activeSection === 'content-management'">
+              <h1 class="flex items-center gap-3 mb-6">
+                <Icon
+                  name="heroicons:document-duplicate"
+                  class="w-8 h-8 text-primary"
+                />
                 Content Management
-              </h2>
-              <div class="space-y-4 text-muted-foreground">
-                <h3 class="text-lg font-semibold text-foreground">
-                  Nuxt Content Integration
-                </h3>
-                <p>
-                  Content is managed using Nuxt Content with Markdown files
-                  supporting:
-                </p>
-                <ul class="list-disc list-inside space-y-1 ml-4">
-                  <li>Frontmatter for metadata</li>
-                  <li>MDC (Markdown Components) for enhanced content</li>
-                  <li>Automatic content parsing and navigation</li>
-                  <li>Full-text search capabilities</li>
-                </ul>
+              </h1>
 
-                <h3 class="text-lg font-semibold text-foreground">
-                  Content Components
-                </h3>
-                <p>Custom components for enhanced content presentation:</p>
-                <ul class="list-disc list-inside space-y-1 ml-4">
-                  <li>
-                    <code class="bg-muted px-2 py-1 rounded">CodeExample</code>
-                    - Interactive code snippets
-                  </li>
-                  <li>
-                    <code class="bg-muted px-2 py-1 rounded">Callout</code> -
-                    Highlighted information blocks
-                  </li>
-                  <li>
-                    <code class="bg-muted px-2 py-1 rounded">FeatureList</code>
-                    - Feature showcases
-                  </li>
-                  <li>
-                    <code class="bg-muted px-2 py-1 rounded"
-                      >LessonActions</code
-                    >
-                    - Navigation and progress controls
-                  </li>
-                </ul>
+              <p class="text-lg text-muted-foreground mb-6">
+                Comprehensive guide to managing and structuring content using
+                Nuxt Content.
+              </p>
 
-                <h3 class="text-lg font-semibold text-foreground">
-                  Frontmatter Schema
-                </h3>
-                <div class="bg-muted p-4 rounded-lg">
-                  <pre class="text-sm"><code>---
+              <h2>Nuxt Content Integration</h2>
+              <p>
+                Content is managed using Nuxt Content with Markdown files
+                supporting:
+              </p>
+              <ul>
+                <li>Frontmatter for metadata</li>
+                <li>MDC (Markdown Components) for enhanced content</li>
+                <li>Automatic content parsing and navigation</li>
+                <li>Full-text search capabilities</li>
+              </ul>
+
+              <h2>Content Components</h2>
+              <p>Custom components for enhanced content presentation:</p>
+              <ul>
+                <li><code>CodeExample</code> - Interactive code snippets</li>
+                <li><code>Callout</code> - Highlighted information blocks</li>
+                <li><code>FeatureList</code> - Feature showcases</li>
+                <li>
+                  <code>LessonActions</code> - Navigation and progress controls
+                </li>
+              </ul>
+
+              <h2>Frontmatter Schema</h2>
+              <div
+                class="bg-gray-50 dark:bg-gray-900 border rounded-lg p-4 my-4"
+              >
+                <pre class="text-sm overflow-x-auto"><code>---
 title: "Lesson Title"
 description: "Lesson description"
 duration: 30
@@ -399,90 +424,80 @@ objectives:
   - "Learning objective 2"
 prerequisite: "previous-lesson"
 ---</code></pre>
-                </div>
               </div>
-            </section>
+            </div>
 
             <!-- Key Features -->
-            <section id="features" class="p-6">
-              <h2
-                class="text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"
-              >
-                <Icon name="heroicons:star" class="w-6 h-6" />
+            <div v-else-if="activeSection === 'features'">
+              <h1 class="flex items-center gap-3 mb-6">
+                <Icon name="heroicons:star" class="w-8 h-8 text-primary" />
                 Key Features
-              </h2>
-              <div class="space-y-4 text-muted-foreground">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 class="text-lg font-semibold mb-2 text-foreground">
-                      Multilingual Support
-                    </h3>
-                    <ul class="list-disc list-inside space-y-1 text-sm">
-                      <li>English and Arabic languages</li>
-                      <li>RTL support for Arabic</li>
-                      <li>Locale-specific routing</li>
-                      <li>Content translation management</li>
-                    </ul>
-                  </div>
+              </h1>
 
-                  <div>
-                    <h3 class="text-lg font-semibold mb-2 text-foreground">
-                      Progress Tracking
-                    </h3>
-                    <ul class="list-disc list-inside space-y-1 text-sm">
-                      <li>Lesson completion tracking</li>
-                      <li>Module progress calculation</li>
-                      <li>Course completion certificates</li>
-                      <li>Learning analytics</li>
-                    </ul>
-                  </div>
+              <p class="text-lg text-muted-foreground mb-6">
+                Explore the powerful features that make Learnova Academy a
+                comprehensive learning platform.
+              </p>
 
-                  <div>
-                    <h3 class="text-lg font-semibold mb-2 text-foreground">
-                      Interactive Learning
-                    </h3>
-                    <ul class="list-disc list-inside space-y-1 text-sm">
-                      <li>Interactive code examples</li>
-                      <li>Hands-on exercises</li>
-                      <li>Video content integration</li>
-                      <li>Quiz and assessment system</li>
-                    </ul>
-                  </div>
+              <h2>Multilingual Support</h2>
+              <ul>
+                <li>English and Arabic languages</li>
+                <li>RTL support for Arabic</li>
+                <li>Locale-specific routing</li>
+                <li>Content translation management</li>
+              </ul>
 
-                  <div>
-                    <h3 class="text-lg font-semibold mb-2 text-foreground">
-                      User Experience
-                    </h3>
-                    <ul class="list-disc list-inside space-y-1 text-sm">
-                      <li>Responsive design</li>
-                      <li>Dark/light mode support</li>
-                      <li>Accessible navigation</li>
-                      <li>Fast page loading</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </section>
+              <h2>Progress Tracking</h2>
+              <ul>
+                <li>Lesson completion tracking</li>
+                <li>Module progress calculation</li>
+                <li>Course completion certificates</li>
+                <li>Learning analytics</li>
+              </ul>
+
+              <h2>Interactive Learning</h2>
+              <ul>
+                <li>Interactive code examples</li>
+                <li>Hands-on exercises</li>
+                <li>Video content integration</li>
+                <li>Quiz and assessment system</li>
+              </ul>
+
+              <h2>User Experience</h2>
+              <ul>
+                <li>Responsive design</li>
+                <li>Dark/light mode support</li>
+                <li>Accessible navigation</li>
+                <li>Fast page loading</li>
+              </ul>
+            </div>
 
             <!-- Deployment -->
-            <section id="deployment" class="p-6">
-              <h2
-                class="text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"
-              >
-                <Icon name="heroicons:cloud-arrow-up" class="w-6 h-6" />
+            <div v-else-if="activeSection === 'deployment'">
+              <h1 class="flex items-center gap-3 mb-6">
+                <Icon
+                  name="heroicons:cloud-arrow-up"
+                  class="w-8 h-8 text-primary"
+                />
                 Deployment
-              </h2>
-              <div class="space-y-4 text-muted-foreground">
-                <h3 class="text-lg font-semibold text-foreground">
-                  Vercel Deployment
-                </h3>
-                <p>
-                  The platform is optimized for Vercel deployment with
-                  configuration in
-                  <code class="bg-muted px-2 py-1 rounded">vercel.json</code>:
-                </p>
-                <div class="bg-muted p-4 rounded-lg">
-                  <pre class="text-sm"><code># Build for production
+              </h1>
+
+              <p class="text-lg text-muted-foreground mb-6">
+                Deploy your Learnova Academy platform to production with these
+                deployment strategies.
+              </p>
+
+              <h2>Vercel Deployment</h2>
+              <p>
+                The platform is optimized for Vercel deployment with
+                configuration in <code>vercel.json</code>:
+              </p>
+              <div
+                class="bg-gray-50 dark:bg-gray-900 border rounded-lg p-4 my-4"
+              >
+                <pre
+                  class="text-sm overflow-x-auto"
+                ><code># Build for production
 npm run build
 
 # Preview locally
@@ -490,52 +505,47 @@ npm run preview
 
 # Deploy to Vercel
 vercel --prod</code></pre>
-                </div>
-
-                <h3 class="text-lg font-semibold text-foreground">
-                  Environment Variables
-                </h3>
-                <ul class="list-disc list-inside space-y-1">
-                  <li>
-                    <code class="bg-muted px-2 py-1 rounded"
-                      >NUXT_PUBLIC_SITE_URL</code
-                    >
-                    - Public site URL
-                  </li>
-                  <li>
-                    <code class="bg-muted px-2 py-1 rounded"
-                      >NUXT_I18N_DEFAULT_LOCALE</code
-                    >
-                    - Default language
-                  </li>
-                </ul>
-
-                <h3 class="text-lg font-semibold text-foreground">
-                  Performance Optimizations
-                </h3>
-                <ul class="list-disc list-inside space-y-1">
-                  <li>Static site generation (SSG) for course content</li>
-                  <li>Image optimization with Nuxt Image</li>
-                  <li>Code splitting and lazy loading</li>
-                  <li>Content delivery network (CDN) integration</li>
-                </ul>
               </div>
-            </section>
+
+              <h2>Environment Variables</h2>
+              <ul>
+                <li><code>NUXT_PUBLIC_SITE_URL</code> - Public site URL</li>
+                <li>
+                  <code>NUXT_I18N_DEFAULT_LOCALE</code> - Default language
+                </li>
+              </ul>
+
+              <h2>Performance Optimizations</h2>
+              <ul>
+                <li>Static site generation (SSG) for course content</li>
+                <li>Image optimization with Nuxt Image</li>
+                <li>Code splitting and lazy loading</li>
+                <li>Content delivery network (CDN) integration</li>
+              </ul>
+            </div>
 
             <!-- Development Workflow -->
-            <section id="development" class="p-6">
-              <h2
-                class="text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"
-              >
-                <Icon name="heroicons:code-bracket" class="w-6 h-6" />
+            <div v-else-if="activeSection === 'development'">
+              <h1 class="flex items-center gap-3 mb-6">
+                <Icon
+                  name="heroicons:code-bracket"
+                  class="w-8 h-8 text-primary"
+                />
                 Development Workflow
-              </h2>
-              <div class="space-y-4 text-muted-foreground">
-                <h3 class="text-lg font-semibold text-foreground">
-                  Development Scripts
-                </h3>
-                <div class="bg-muted p-4 rounded-lg">
-                  <pre class="text-sm"><code># Start development server
+              </h1>
+
+              <p class="text-lg text-muted-foreground mb-6">
+                Best practices and workflows for developing and maintaining the
+                platform.
+              </p>
+
+              <h2>Development Scripts</h2>
+              <div
+                class="bg-gray-50 dark:bg-gray-900 border rounded-lg p-4 my-4"
+              >
+                <pre
+                  class="text-sm overflow-x-auto"
+                ><code># Start development server
 npm run dev
 
 # Type checking
@@ -549,120 +559,101 @@ npm run build
 
 # Preview production build
 npm run preview</code></pre>
-                </div>
-
-                <h3 class="text-lg font-semibold text-foreground">
-                  Code Quality
-                </h3>
-                <ul class="list-disc list-inside space-y-1">
-                  <li>ESLint for code linting</li>
-                  <li>TypeScript for type safety</li>
-                  <li>Prettier for code formatting</li>
-                  <li>Husky for git hooks</li>
-                </ul>
-
-                <h3 class="text-lg font-semibold text-foreground">
-                  Development Guidelines
-                </h3>
-                <ul class="list-disc list-inside space-y-1">
-                  <li>Use TypeScript for all new components</li>
-                  <li>Follow Vue 3 Composition API patterns</li>
-                  <li>Implement responsive design from mobile-first</li>
-                  <li>Ensure accessibility compliance</li>
-                  <li>Write comprehensive documentation</li>
-                </ul>
               </div>
-            </section>
+
+              <h2>Code Quality</h2>
+              <ul>
+                <li>ESLint for code linting</li>
+                <li>TypeScript for type safety</li>
+                <li>Prettier for code formatting</li>
+                <li>Husky for git hooks</li>
+              </ul>
+
+              <h2>Development Guidelines</h2>
+              <ul>
+                <li>Use TypeScript for all new components</li>
+                <li>Follow Vue 3 Composition API patterns</li>
+                <li>Implement responsive design from mobile-first</li>
+                <li>Ensure accessibility compliance</li>
+                <li>Write comprehensive documentation</li>
+              </ul>
+            </div>
 
             <!-- Troubleshooting -->
-            <section id="troubleshooting" class="p-6">
-              <h2
-                class="text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"
-              >
-                <Icon name="heroicons:wrench-screwdriver" class="w-6 h-6" />
+            <div v-else-if="activeSection === 'troubleshooting'">
+              <h1 class="flex items-center gap-3 mb-6">
+                <Icon
+                  name="heroicons:wrench-screwdriver"
+                  class="w-8 h-8 text-primary"
+                />
                 Troubleshooting
-              </h2>
-              <div class="space-y-4 text-muted-foreground">
-                <h3 class="text-lg font-semibold text-foreground">
-                  Common Issues
-                </h3>
+              </h1>
 
-                <div class="space-y-4">
-                  <div class="border border-border rounded-lg p-4">
-                    <h4 class="font-semibold mb-2 text-foreground">
-                      Build Errors
-                    </h4>
-                    <p class="text-sm">If you encounter build errors:</p>
-                    <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-                      <li>
-                        Clear the
-                        <code class="bg-muted px-1 rounded">.nuxt</code>
-                        directory
-                      </li>
-                      <li>
-                        Delete
-                        <code class="bg-muted px-1 rounded">node_modules</code>
-                        and reinstall
-                      </li>
-                      <li>
-                        Check TypeScript errors with
-                        <code class="bg-muted px-1 rounded"
-                          >npm run type-check</code
-                        >
-                      </li>
-                    </ul>
-                  </div>
+              <p class="text-lg text-muted-foreground mb-6">
+                Common issues and their solutions when working with the
+                platform.
+              </p>
 
-                  <div class="border border-border rounded-lg p-4">
-                    <h4 class="font-semibold mb-2 text-foreground">
-                      Content Not Loading
-                    </h4>
-                    <p class="text-sm">If course content doesn't load:</p>
-                    <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-                      <li>
-                        Verify content file paths match the expected structure
-                      </li>
-                      <li>Check frontmatter syntax in Markdown files</li>
-                      <li>
-                        Ensure course is registered in
-                        <code class="bg-muted px-1 rounded"
-                          >config/courses.ts</code
-                        >
-                      </li>
-                    </ul>
-                  </div>
+              <h2>Common Issues</h2>
 
-                  <div class="border border-border rounded-lg p-4">
-                    <h4 class="font-semibold mb-2 text-foreground">
-                      Translation Issues
-                    </h4>
-                    <p class="text-sm">If translations aren't working:</p>
-                    <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-                      <li>Check translation keys in locale files</li>
-                      <li>
-                        Verify i18n configuration in
-                        <code class="bg-muted px-1 rounded"
-                          >nuxt.config.ts</code
-                        >
-                      </li>
-                      <li>Clear browser cache and restart dev server</li>
-                    </ul>
+              <h3>Build Errors</h3>
+              <p>If you encounter build errors:</p>
+              <ul>
+                <li>Clear the <code>.nuxt</code> directory</li>
+                <li>Delete <code>node_modules</code> and reinstall</li>
+                <li>
+                  Check TypeScript errors with <code>npm run type-check</code>
+                </li>
+              </ul>
+
+              <h3>Content Not Loading</h3>
+              <p>If course content doesn't load:</p>
+              <ul>
+                <li>Verify content file paths match the expected structure</li>
+                <li>Check frontmatter syntax in Markdown files</li>
+                <li>
+                  Ensure course is registered in <code>config/courses.ts</code>
+                </li>
+              </ul>
+
+              <h3>Translation Issues</h3>
+              <p>If translations aren't working:</p>
+              <ul>
+                <li>Check translation keys in locale files</li>
+                <li>
+                  Verify i18n configuration in <code>nuxt.config.ts</code>
+                </li>
+                <li>Clear browser cache and restart dev server</li>
+              </ul>
+
+              <h2>Getting Help</h2>
+              <p>For additional support:</p>
+              <ul>
+                <li>Check the official Nuxt documentation</li>
+                <li>Review component source code for usage examples</li>
+                <li>Use browser dev tools for debugging</li>
+                <li>Check console for error messages</li>
+              </ul>
+
+              <div
+                class="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-4 my-6"
+              >
+                <div class="flex items-start gap-3">
+                  <Icon
+                    name="heroicons:light-bulb"
+                    class="w-5 h-5 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0"
+                  />
+                  <div>
+                    <p class="text-sm text-amber-800 dark:text-amber-200 m-0">
+                      <strong>Tip:</strong> Most issues can be resolved by
+                      ensuring your development environment matches the
+                      requirements and following the coding guidelines.
+                    </p>
                   </div>
                 </div>
-
-                <h3 class="text-lg font-semibold text-foreground">
-                  Getting Help
-                </h3>
-                <p>For additional support:</p>
-                <ul class="list-disc list-inside space-y-1">
-                  <li>Check the official Nuxt documentation</li>
-                  <li>Review component source code for usage examples</li>
-                  <li>Use browser dev tools for debugging</li>
-                  <li>Check console for error messages</li>
-                </ul>
               </div>
-            </section>
-          </UCard>
+            </div>
+          </div>
         </main>
       </div>
     </UContainer>
