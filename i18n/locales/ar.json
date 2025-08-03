@@ -388,5 +388,234 @@
         }
       }
     }
+  },
+  "admin": {
+    "interface": {
+      "title": "أدوات إنشاء الدورات",
+      "beta": "تجريبي",
+      "quickActions": "إجراءات سريعة",
+      "livePreview": "معاينة مباشرة"
+    },
+    "courseEditor": {
+      "title": "محرر الدورات",
+      "subtitle": "إنشاء وتحرير محتوى دورات شامل مع دعم متعدد اللغات"
+    },
+    "moduleEditor": {
+      "title": "محرر الوحدات",
+      "subtitle": "تنظيم محتوى دورتك في وحدات تعليمية منظمة"
+    },
+    "lessonEditor": {
+      "title": "محرر الدروس",
+      "subtitle": "إنشاء دروس جذابة مع محتوى تفاعلي وتقييمات"
+    },
+    "contentPreview": {
+      "title": "معاينة المحتوى",
+      "subtitle": "معاينة محتواك كما سيراه الطلاب عبر الأجهزة المختلفة"
+    },
+    "tabs": {
+      "course": "الدورة",
+      "module": "الوحدة",
+      "lesson": "الدرس",
+      "preview": "معاينة",
+      "settings": "الإعدادات"
+    },
+    "course": {
+      "id": "معرف الدورة",
+      "slug": "رابط الدورة",
+      "status": "الحالة",
+      "difficulty": "المستوى",
+      "estimatedHours": "الساعات المقدرة",
+      "price": "السعر",
+      "content": "محتوى الدورة",
+      "title": "عنوان الدورة",
+      "titlePlaceholder": "أدخل عنوان الدورة...",
+      "description": "الوصف",
+      "descriptionPlaceholder": "أدخل وصف الدورة...",
+      "technologies": "التقنيات",
+      "addTechnology": "إضافة تقنية...",
+      "prerequisites": "المتطلبات المسبقة",
+      "addPrerequisite": "إضافة متطلب مسبق...",
+      "media": "الوسائط والأصول",
+      "thumbnail": "صورة الدورة المصغرة",
+      "thumbnailPlaceholder": "أدخل رابط الصورة المصغرة..."
+    },
+    "module": {
+      "id": "معرف الوحدة",
+      "number": "رقم الوحدة",
+      "estimatedMinutes": "الدقائق المقدرة",
+      "title": "عنوان الوحدة",
+      "titlePlaceholder": "أدخل عنوان الوحدة...",
+      "description": "وصف الوحدة",
+      "descriptionPlaceholder": "أدخل وصف الوحدة...",
+      "objectives": "أهداف التعلم",
+      "addObjective": "إضافة هدف تعليمي...",
+      "lessons": "الدروس",
+      "addLesson": "إضافة درس",
+      "noLessons": "لم يتم إضافة دروس بعد. انقر على 'إضافة درس' للبدء.",
+      "lesson": "درس",
+      "untitledLesson": "درس بدون عنوان"
+    },
+    "lesson": {
+      "id": "معرف الدرس",
+      "number": "رقم الدرس",
+      "estimatedMinutes": "الدقائق المقدرة",
+      "slug": "رابط الدرس",
+      "features": "ميزات الدرس",
+      "difficulty": "مستوى الدرس",
+      "title": "عنوان الدرس",
+      "titlePlaceholder": "أدخل عنوان الدرس...",
+      "description": "وصف الدرس",
+      "descriptionPlaceholder": "أدخل وصف الدرس...",
+      "content": "محتوى الدرس",
+      "contentPlaceholder": "أدخل محتوى الدرس بتنسيق Markdown...",
+      "markdownSupport": "يدعم تنسيق Markdown",
+      "exercise": "التمرين",
+      "exercisePlaceholder": "أدخل تعليمات التمرين...",
+      "hasExercise": "يحتوي على تمرين",
+      "noExercise": "بدون تمرين",
+      "hasQuiz": "يحتوي على اختبار",
+      "noQuiz": "بدون اختبار",
+      "isPreview": "معاينة مجانية",
+      "requiresPrevious": "يتطلب الدروس السابقة",
+      "quizConfiguration": "إعداد الاختبار",
+      "lesson": "درس"
+    },
+    "instructor": {
+      "title": "معلومات المدرب",
+      "name": "اسم المدرب",
+      "namePlaceholder": "أدخل اسم المدرب...",
+      "avatar": "رابط الصورة الرمزية",
+      "avatarPlaceholder": "أدخل رابط صورة الصورة الرمزية...",
+      "bio": "السيرة الذاتية للمدرب",
+      "bioPlaceholder": "أدخل السيرة الذاتية للمدرب..."
+    },
+    "quiz": {
+      "timeLimit": "الحد الزمني (بالدقائق)",
+      "timeLimitPlaceholder": "0 لغير محدود",
+      "passingScore": "درجة النجاح (%)",
+      "questions": "أسئلة الاختبار",
+      "addQuestion": "إضافة سؤال",
+      "noQuestions": "لم يتم إضافة أسئلة بعد",
+      "question": "سؤال",
+      "questionText": "نص السؤال",
+      "questionPlaceholder": "أدخل سؤالك...",
+      "questionType": "نوع السؤال",
+      "multipleChoice": "اختيار من متعدد",
+      "trueFalse": "صح/خطأ",
+      "shortAnswer": "إجابة قصيرة",
+      "answers": "خيارات الإجابة",
+      "addAnswer": "إضافة إجابة",
+      "answerPlaceholder": "أدخل خيار الإجابة..."
+    },
+    "courseStatus": {
+      "draft": "مسودة",
+      "published": "منشور",
+      "archived": "مؤرشف"
+    },
+    "difficulty": {
+      "beginner": "مبتدئ",
+      "intermediate": "متوسط",
+      "advanced": "متقدم"
+    },
+    "priceType": {
+      "free": "مجاني",
+      "paid": "مدفوع",
+      "premium": "مميز"
+    },
+    "preview": {
+      "contentType": "نوع المحتوى",
+      "language": "اللغة",
+      "device": "الجهاز",
+      "refresh": "تحديث",
+      "openNewTab": "فتح في علامة تبويب جديدة",
+      "desktop": "سطح المكتب",
+      "tablet": "جهاز لوحي",
+      "mobile": "جوال",
+      "course": "دورة",
+      "module": "وحدة",
+      "lesson": "درس",
+      "courseModules": "وحدات الدورة",
+      "learningObjectives": "أهداف التعلم",
+      "lessons": "الدروس",
+      "noContent": "لا يوجد محتوى متاح للمعاينة",
+      "noPreview": "لا توجد معاينة متاحة",
+      "selectContent": "اختر محتوى للمعاينة",
+      "export": "تصدير",
+      "share": "مشاركة",
+      "shareTitle": "معاينة الدورة",
+      "shareText": "تحقق من معاينة هذه الدورة"
+    },
+    "settings": {
+      "title": "إعدادات الإدارة",
+      "courseSettings": "إعدادات الدورة",
+      "defaultLanguage": "اللغة الافتراضية",
+      "autoSave": "الحفظ التلقائي",
+      "enableAutoSave": "تمكين الحفظ التلقائي",
+      "validation": "التحقق من المحتوى",
+      "enableStrictValidation": "تمكين التحقق الصارم",
+      "previewSettings": "إعدادات المعاينة",
+      "previewTheme": "سمة المعاينة",
+      "livePreview": "المعاينة المباشرة",
+      "enableLivePreview": "تمكين لوحة المعاينة المباشرة"
+    },
+    "themes": {
+      "light": "فاتح",
+      "dark": "داكن",
+      "auto": "تلقائي"
+    },
+    "actions": {
+      "newCourse": "دورة جديدة",
+      "import": "استيراد المحتوى",
+      "export": "تصدير المحتوى"
+    },
+    "common": {
+      "add": "إضافة",
+      "create": "إنشاء",
+      "update": "تحديث",
+      "reset": "إعادة تعيين",
+      "preview": "معاينة",
+      "save": "حفظ",
+      "saveAll": "حفظ الكل",
+      "exit": "خروج",
+      "hours": "ساعات",
+      "minutes": "دقائق",
+      "lessons": "دروس"
+    },
+    "status": {
+      "ready": "جاهز",
+      "autoSaveEnabled": "الحفظ التلقائي مفعل",
+      "lastSaved": "آخر حفظ",
+      "never": "أبدًا",
+      "online": "متصل"
+    },
+    "notifications": {
+      "courseCreated": "تم إنشاء الدورة",
+      "courseCreatedDesc": "تم إنشاء دورتك بنجاح",
+      "courseSaved": "تم حفظ الدورة",
+      "courseSavedDesc": "تم حفظ تغييرات الدورة بنجاح",
+      "moduleSaved": "تم حفظ الوحدة",
+      "moduleSavedDesc": "تم حفظ الوحدة بنجاح",
+      "modulePreviewDesc": "تم إنشاء معاينة الوحدة",
+      "lessonSaved": "تم حفظ الدرس",
+      "lessonSavedDesc": "تم حفظ الدرس بنجاح",
+      "lessonPreviewDesc": "تم إنشاء معاينة الدرس",
+      "allSaved": "تم حفظ جميع المحتوى",
+      "allSavedDesc": "تم حفظ جميع المحتوى بنجاح",
+      "previewGenerated": "تم إنشاء المعاينة",
+      "previewDesc": "تم إنشاء معاينة المحتوى",
+      "previewRefreshed": "تم تحديث المعاينة",
+      "previewRefreshedDesc": "تم تحديث محتوى المعاينة",
+      "previewOpened": "تم فتح المعاينة",
+      "previewOpenedDesc": "تم فتح المعاينة في علامة تبويب جديدة",
+      "linkCopied": "تم نسخ الرابط",
+      "linkCopiedDesc": "تم نسخ رابط المعاينة إلى الحافظة",
+      "exportStarted": "بدأ التصدير",
+      "exportStartedDesc": "تم بدء تصدير المحتوى",
+      "importStarted": "بدأ الاستيراد",
+      "importStartedDesc": "تم بدء استيراد المحتوى",
+      "error": "خطأ",
+      "saveFailed": "فشل في حفظ المحتوى",
+      "loadFailed": "فشل في تحميل المحتوى"
+    }
   }
 }

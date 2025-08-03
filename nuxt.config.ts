@@ -115,6 +115,14 @@ export default defineNuxtConfig({
     },
   },
 
+  // Ensure proper component auto-imports
+  components: [
+    {
+      path: "~/components",
+      pathPrefix: false,
+    },
+  ],
+
   // Icon configuration
   icon: {
     // Register a custom collection for our project-specific icons

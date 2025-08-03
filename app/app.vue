@@ -55,6 +55,22 @@ useHead({
                 </NuxtLink>
               </div>
 
+              <!-- Admin Link (Dev Only) -->
+              <div v-if="isDev" class="mr-2">
+                <NuxtLink
+                  :to="localePath('/admin')"
+                  class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors duration-200"
+                >
+                  <UIcon name="i-lucide-settings" class="w-4 h-4" />
+                  <span>Admin</span>
+                  <span
+                    class="inline-flex items-center px-1.5 py-0.5 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded"
+                  >
+                    BETA
+                  </span>
+                </NuxtLink>
+              </div>
+
               <!-- Language Switcher -->
               <LanguageSwitcher />
 

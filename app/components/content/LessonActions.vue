@@ -153,22 +153,22 @@
           {{ $t("lesson.reportIssue") }}
         </h3>
 
-        <UFormGroup :label="$t('lesson.reportForm.type')" class="mb-4">
+        <FormGroup :label="$t('lesson.reportForm.type')" class="mb-4">
           <USelect
             v-model="reportIssueType"
             :options="reportIssueTypes"
             option-attribute="label"
             value-attribute="value"
           />
-        </UFormGroup>
+        </FormGroup>
 
-        <UFormGroup :label="$t('lesson.reportForm.description')" class="mb-4">
+        <FormGroup :label="$t('lesson.reportForm.description')" class="mb-4">
           <UTextarea
             v-model="reportIssueDescription"
             :placeholder="$t('lesson.reportForm.placeholder')"
             :rows="4"
           />
-        </UFormGroup>
+        </FormGroup>
 
         <div class="flex items-center justify-end gap-3">
           <UButton

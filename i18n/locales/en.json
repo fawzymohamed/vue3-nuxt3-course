@@ -422,5 +422,234 @@
         }
       }
     }
+  },
+  "admin": {
+    "interface": {
+      "title": "Course Creation Tools",
+      "beta": "Beta",
+      "quickActions": "Quick Actions",
+      "livePreview": "Live Preview"
+    },
+    "courseEditor": {
+      "title": "Course Editor",
+      "subtitle": "Create and edit comprehensive course content with multilingual support"
+    },
+    "moduleEditor": {
+      "title": "Module Editor",
+      "subtitle": "Structure your course content into organized learning modules"
+    },
+    "lessonEditor": {
+      "title": "Lesson Editor",
+      "subtitle": "Create engaging lessons with interactive content and assessments"
+    },
+    "contentPreview": {
+      "title": "Content Preview",
+      "subtitle": "Preview your content as students will see it across different devices"
+    },
+    "tabs": {
+      "course": "Course",
+      "module": "Module",
+      "lesson": "Lesson",
+      "preview": "Preview",
+      "settings": "Settings"
+    },
+    "course": {
+      "id": "Course ID",
+      "slug": "Course Slug",
+      "status": "Status",
+      "difficulty": "Difficulty",
+      "estimatedHours": "Estimated Hours",
+      "price": "Price",
+      "content": "Course Content",
+      "title": "Course Title",
+      "titlePlaceholder": "Enter course title...",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter course description...",
+      "technologies": "Technologies",
+      "addTechnology": "Add technology...",
+      "prerequisites": "Prerequisites",
+      "addPrerequisite": "Add prerequisite...",
+      "media": "Media & Assets",
+      "thumbnail": "Course Thumbnail",
+      "thumbnailPlaceholder": "Enter thumbnail URL..."
+    },
+    "module": {
+      "id": "Module ID",
+      "number": "Module Number",
+      "estimatedMinutes": "Estimated Minutes",
+      "title": "Module Title",
+      "titlePlaceholder": "Enter module title...",
+      "description": "Module Description",
+      "descriptionPlaceholder": "Enter module description...",
+      "objectives": "Learning Objectives",
+      "addObjective": "Add learning objective...",
+      "lessons": "Lessons",
+      "addLesson": "Add Lesson",
+      "noLessons": "No lessons added yet. Click 'Add Lesson' to get started.",
+      "lesson": "Lesson",
+      "untitledLesson": "Untitled Lesson"
+    },
+    "lesson": {
+      "id": "Lesson ID",
+      "number": "Lesson Number",
+      "estimatedMinutes": "Estimated Minutes",
+      "slug": "Lesson Slug",
+      "features": "Lesson Features",
+      "difficulty": "Lesson Difficulty",
+      "title": "Lesson Title",
+      "titlePlaceholder": "Enter lesson title...",
+      "description": "Lesson Description",
+      "descriptionPlaceholder": "Enter lesson description...",
+      "content": "Lesson Content",
+      "contentPlaceholder": "Enter lesson content in Markdown format...",
+      "markdownSupport": "Supports Markdown formatting",
+      "exercise": "Exercise",
+      "exercisePlaceholder": "Enter exercise instructions...",
+      "hasExercise": "Has Exercise",
+      "noExercise": "No Exercise",
+      "hasQuiz": "Has Quiz",
+      "noQuiz": "No Quiz",
+      "isPreview": "Free Preview",
+      "requiresPrevious": "Requires Previous Lessons",
+      "quizConfiguration": "Quiz Configuration",
+      "lesson": "Lesson"
+    },
+    "instructor": {
+      "title": "Instructor Information",
+      "name": "Instructor Name",
+      "namePlaceholder": "Enter instructor name...",
+      "avatar": "Avatar URL",
+      "avatarPlaceholder": "Enter avatar image URL...",
+      "bio": "Instructor Bio",
+      "bioPlaceholder": "Enter instructor biography..."
+    },
+    "quiz": {
+      "timeLimit": "Time Limit (minutes)",
+      "timeLimitPlaceholder": "0 for unlimited",
+      "passingScore": "Passing Score (%)",
+      "questions": "Quiz Questions",
+      "addQuestion": "Add Question",
+      "noQuestions": "No questions added yet",
+      "question": "Question",
+      "questionText": "Question Text",
+      "questionPlaceholder": "Enter your question...",
+      "questionType": "Question Type",
+      "multipleChoice": "Multiple Choice",
+      "trueFalse": "True/False",
+      "shortAnswer": "Short Answer",
+      "answers": "Answer Options",
+      "addAnswer": "Add Answer",
+      "answerPlaceholder": "Enter answer option..."
+    },
+    "courseStatus": {
+      "draft": "Draft",
+      "published": "Published",
+      "archived": "Archived"
+    },
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "priceType": {
+      "free": "Free",
+      "paid": "Paid",
+      "premium": "Premium"
+    },
+    "preview": {
+      "contentType": "Content Type",
+      "language": "Language",
+      "device": "Device",
+      "refresh": "Refresh",
+      "openNewTab": "Open in New Tab",
+      "desktop": "Desktop",
+      "tablet": "Tablet",
+      "mobile": "Mobile",
+      "course": "Course",
+      "module": "Module",
+      "lesson": "Lesson",
+      "courseModules": "Course Modules",
+      "learningObjectives": "Learning Objectives",
+      "lessons": "Lessons",
+      "noContent": "No content available for preview",
+      "noPreview": "No Preview Available",
+      "selectContent": "Select content to preview",
+      "export": "Export",
+      "share": "Share",
+      "shareTitle": "Course Preview",
+      "shareText": "Check out this course preview"
+    },
+    "settings": {
+      "title": "Admin Settings",
+      "courseSettings": "Course Settings",
+      "defaultLanguage": "Default Language",
+      "autoSave": "Auto Save",
+      "enableAutoSave": "Enable automatic saving",
+      "validation": "Content Validation",
+      "enableStrictValidation": "Enable strict validation",
+      "previewSettings": "Preview Settings",
+      "previewTheme": "Preview Theme",
+      "livePreview": "Live Preview",
+      "enableLivePreview": "Enable live preview panel"
+    },
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "auto": "Auto"
+    },
+    "actions": {
+      "newCourse": "New Course",
+      "import": "Import Content",
+      "export": "Export Content"
+    },
+    "common": {
+      "add": "Add",
+      "create": "Create",
+      "update": "Update",
+      "reset": "Reset",
+      "preview": "Preview",
+      "save": "Save",
+      "saveAll": "Save All",
+      "exit": "Exit",
+      "hours": "hours",
+      "minutes": "minutes",
+      "lessons": "lessons"
+    },
+    "status": {
+      "ready": "Ready",
+      "autoSaveEnabled": "Auto-save enabled",
+      "lastSaved": "Last saved",
+      "never": "Never",
+      "online": "Online"
+    },
+    "notifications": {
+      "courseCreated": "Course Created",
+      "courseCreatedDesc": "Your course has been successfully created",
+      "courseSaved": "Course Saved",
+      "courseSavedDesc": "Course changes have been saved successfully",
+      "moduleSaved": "Module Saved",
+      "moduleSavedDesc": "Module has been saved successfully",
+      "modulePreviewDesc": "Module preview has been generated",
+      "lessonSaved": "Lesson Saved",
+      "lessonSavedDesc": "Lesson has been saved successfully",
+      "lessonPreviewDesc": "Lesson preview has been generated",
+      "allSaved": "All Content Saved",
+      "allSavedDesc": "All content has been saved successfully",
+      "previewGenerated": "Preview Generated",
+      "previewDesc": "Content preview has been generated",
+      "previewRefreshed": "Preview Refreshed",
+      "previewRefreshedDesc": "Preview content has been updated",
+      "previewOpened": "Preview Opened",
+      "previewOpenedDesc": "Preview opened in new tab",
+      "linkCopied": "Link Copied",
+      "linkCopiedDesc": "Preview link copied to clipboard",
+      "exportStarted": "Export Started",
+      "exportStartedDesc": "Content export has been initiated",
+      "importStarted": "Import Started",
+      "importStartedDesc": "Content import has been initiated",
+      "error": "Error",
+      "saveFailed": "Failed to save content",
+      "loadFailed": "Failed to load content"
+    }
   }
 }
