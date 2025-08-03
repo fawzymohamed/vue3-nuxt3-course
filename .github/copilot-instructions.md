@@ -215,6 +215,94 @@ const lesson = await queryContent(
 ).findOne();
 ```
 
+### Nuxt Content Best Practices
+
+#### ✅ **Correct Pattern for Content Fetching and Rendering**
+
+```vue
+<script setup lang="ts">
+// ✅ Use queryCollection for content fetching
+const { data: overviewContent } = await useAsyncData("content-key", () =>
+  queryCollection("content").path("/path/to/content").first()
+);
+</script>
+
+<template>
+  <!-- ✅ Use ContentRenderer with proper loading states -->
+  <div>
+    <div v-if="!overviewContent" class="loading-state">
+      <p>Loading content...</p>
+    </div>
+
+    <ContentRenderer v-if="overviewContent" :value="overviewContent" />
+  </div>
+</template>
+```
+
+#### ❌ **Avoid These Common Mistakes**
+
+```vue
+<!-- ❌ Don't use ContentDoc directly (component resolution issues) -->
+<ContentDoc path="/dev-guide/en/overview" />
+
+<!-- ❌ Don't use queryContent without useAsyncData wrapper -->
+<script setup>
+const content = await queryContent("/path").findOne(); // This will cause hydration issues
+</script>
+
+<!-- ❌ Don't forget loading states -->
+<ContentRenderer :value="content" />
+<!-- Will show empty if content is still loading -->
+```
+
+#### **Content File Structure Guidelines**
+
+```
+content/
+├── dev-guide/
+│   └── en/                    # English-only content
+│       └── overview.md        # Content file
+├── courses/
+│   └── [courseId]/
+│       └── [locale]/          # Multi-language course content
+│           └── modules/
+```
+
+#### **Markdown Components (MDC) Support**
+
+Your content files support enhanced markdown with custom components:
+
+````markdown
+# Standard Markdown
+
+Regular markdown content with **bold** and _italic_ text.
+
+## Custom Components
+
+::callout{type="info"}
+This is an info callout using MDC syntax
+::
+
+::code-example
+
+```javascript
+console.log("This is enhanced code");
+```
+````
+
+::
+
+````
+
+#### **Content Validation Checklist**
+
+- ✅ Use `queryCollection("content").path().first()` for single content
+- ✅ Use `queryCollection("content").path().find()` for multiple content
+- ✅ Wrap queries in `useAsyncData()` for proper SSR/hydration
+- ✅ Use `ContentRenderer` component to display content
+- ✅ Always provide loading states
+- ✅ Test content in both development and production builds
+
 ### Frontmatter Standards
 
 ```yaml
@@ -242,7 +330,7 @@ estimatedMinutes: 30
 hasExercise: true
 hasQuiz: false
 ---
-```
+````
 
 ## VI. Progress Tracking System
 
@@ -515,6 +603,52 @@ npm run validate:courses # Validate course configurations
 npm run type-check      # TypeScript validation
 ```
 
+## XIII. Content Troubleshooting
+
+### Common Content Issues and Solutions
+
+#### **"Failed to resolve component: ContentDoc" Error**
+
+```bash
+# ❌ Problem: ContentDoc component not found
+<ContentDoc path="/dev-guide/en/overview" />
+
+# ✅ Solution: Use queryCollection + ContentRenderer instead
+<script setup>
+const { data: content } = await useAsyncData('key', () =>
+  queryCollection("content").path("/dev-guide/overview").first()
+);
+</script>
+<template>
+  <ContentRenderer v-if="content" :value="content" />
+</template>
+```
+
+#### **Content Not Loading Issues**
+
+1. **Check content file paths**: Ensure the path in `queryCollection().path()` matches your file structure
+2. **Verify useAsyncData usage**: Always wrap content queries in `useAsyncData()`
+3. **Restart dev server**: Content changes sometimes require server restart
+4. **Check content.config.ts**: Ensure your content configuration is correct
+
+#### **Hydration Mismatch Errors**
+
+```bash
+# ❌ Avoid: Direct queryContent without useAsyncData
+const content = await queryContent('/path').findOne();
+
+# ✅ Correct: Always use useAsyncData wrapper
+const { data: content } = await useAsyncData('unique-key', () =>
+  queryCollection("content").path("/path").first()
+);
+```
+
+#### **Content Components Not Rendering**
+
+1. **Check component availability**: Ensure components like `Callout.vue` exist in `components/content/`
+2. **Verify MDC syntax**: Use correct syntax like `::callout{type="info"}`
+3. **Content collection config**: Check `content.config.ts` for proper collection setup
+
 ## XIII. Common Patterns & Examples
 
 ### Course Component Integration
@@ -588,5 +722,6 @@ Before implementing any feature, ensure:
 - [ ] **Navigation**: Uses `localePath()` for all links
 - [ ] **SEO Friendly**: Proper meta tags and structure
 - [ ] **Performance**: Optimized loading and rendering
+- [ ] **Content Management**: Uses correct Nuxt Content patterns with proper loading states
 
 **The platform prioritizes user experience, type safety, internationalization, and scalable course management. Always follow these patterns to maintain consistency and quality across the codebase.**
