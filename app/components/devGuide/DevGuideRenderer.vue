@@ -18,7 +18,7 @@ const props = defineProps<Props>();
 const sections = ref<DevGuideSection[]>([
   {
     id: "overview",
-    title: "Project Overview",
+    title: "Development Stack Overview",
     icon: "heroicons:document-text",
   },
   {

@@ -666,7 +666,7 @@
     },
     "sections": {
       "overview": {
-        "title": "Project Overview",
+        "title": "Development Stack Overview",
         "description": "Learnova Academy is a comprehensive bilingual learning platform built with Nuxt 4, Vue 3, and TypeScript. It supports multiple programming courses with full internationalization and progress tracking.",
         "keyFeatures": "Key Features",
         "features": {

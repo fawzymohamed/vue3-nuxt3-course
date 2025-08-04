@@ -2,7 +2,7 @@
 
 You are an expert Vue 3 and Nuxt 4 developer, assisting in building a high-quality bilingual multi-course learning platform. Focus on understanding the existing architecture patterns before making changes.
 
-## 🎯 Project Overview
+## 🎯 Development Stack Overview
 
 **Learnova Academy** is a Nuxt 4-based multi-course learning platform with full internationalization support (English/Arabic with RTL). The platform uses a scalable multi-course architecture that supports various programming courses while maintaining excellent bilingual support and developer experience.
 
@@ -182,6 +182,119 @@ useHead({
 - **Purpose**: Display course branding and metadata
 - **Features**: Course title, instructor info, progress indicators
 - **Context**: Course → Module → Lesson hierarchy
+
+### Dev Guide Components
+
+The platform includes specialized components for the developer guide section (`/dev-guide`), providing a comprehensive documentation system with enhanced UI components.
+
+#### 6. **DevGuideContent.vue** - Main Dev Guide Renderer
+
+```vue
+<DevGuideContent :section="'overview'" />
+```
+
+- **Purpose**: Primary content renderer for dev guide sections
+- **Features**: Conditional section rendering, comprehensive code examples, structured content display
+- **Content**: Development stack overview, architecture patterns, best practices
+- **Key Features**: Auto-loading states, section-specific content, embedded code examples
+
+#### 7. **DevGuideSection.vue** - Section Headers
+
+```vue
+<DevGuideSection
+  title="Development Stack"
+  description="Core technologies and frameworks"
+  icon="🛠️"
+/>
+```
+
+- **Purpose**: Consistent section headers with anchor links
+- **Features**: Emoji icons, auto-generated anchor IDs, responsive design
+- **Usage**: Section dividers, navigation anchors
+
+#### 8. **DevGuideTechCard.vue** - Technology Showcase Cards
+
+```vue
+<DevGuideTechCard
+  name="Nuxt 4"
+  version="^4.0.1"
+  description="Full-stack Vue framework"
+  link="https://nuxt.com"
+  category="framework"
+/>
+```
+
+- **Purpose**: Professional technology cards with version badges
+- **Features**: Hover effects, external documentation links, version display
+- **Categories**: Framework, library, tool, language
+
+#### 9. **DevGuideCodeBlock.vue** - Enhanced Code Examples
+
+```vue
+<DevGuideCodeBlock
+  :code="codeExample"
+  language="vue"
+  filename="example.vue"
+  :showCopy="true"
+/>
+```
+
+- **Purpose**: Advanced code display with copy functionality
+- **Features**: Syntax highlighting, copy-to-clipboard, filename display
+- **Languages**: JavaScript, TypeScript, Vue, HTML, CSS, Bash
+
+#### 10. **DevGuideCallout.vue** - Information Boxes
+
+```vue
+<DevGuideCallout type="info" title="Important">
+  This is critical information for developers.
+</DevGuideCallout>
+```
+
+- **Purpose**: Themed callout boxes for warnings, tips, and information
+- **Types**: `info`, `success`, `warning`, `error`, `tip`
+- **Features**: Icon mapping, themed styling, optional titles
+
+#### 11. **DevGuideList.vue** - Feature Lists
+
+```vue
+<DevGuideList :items="featureList" type="features" :columns="2" />
+```
+
+- **Purpose**: Flexible list display with multiple visual styles
+- **Types**: `bullet`, `numbered`, `features`, `check`
+- **Features**: Grid layouts, badge system, responsive columns
+
+### Dev Guide Content Structure
+
+```
+content/dev-guide/
+├── overview.md          # Development stack overview
+├── architecture.md      # Platform architecture
+└── getting-started.md   # Setup instructions
+```
+
+### Dev Guide Template Literal Guidelines
+
+When working with DevGuideContent.vue, be aware of template literal parsing:
+
+```typescript
+// ✅ Correct: Escape closing script tags in template literals
+const codeExamples = {
+  vueComponent: `<script setup>
+// Vue component code
+<\/script>`, // Note the escaped forward slash
+};
+
+// ❌ Wrong: Unescaped closing tags cause parser errors
+const codeExamples = {
+  vueComponent: `<script setup>
+// Vue component code
+</script>`, // This breaks Vue template parsing
+};
+```
+
+**Critical Rule**: Always escape `</script>` as `<\/script>` in template literals within Vue components to prevent parser conflicts.
 
 ## V. Content Management Patterns
 
@@ -577,6 +690,7 @@ if (!isValid) {
 ### Content Structure
 
 - **Multi-Course Content**: `content/courses/[courseId]/[locale]/modules/[moduleId]/lessons/`
+- **Dev Guide Content**: `content/dev-guide/` - Developer documentation and guides
 
 ### Translation Files
 
@@ -589,6 +703,7 @@ if (!isValid) {
 - **Module Navigation**: `components/EnhancedCourseModuleNav.vue`
 - **Course Cards**: `components/CourseCard.vue`
 - **Content Rendering**: `components/content/LessonRenderer.vue`
+- **Dev Guide Components**: `components/devGuide/` - Specialized documentation components
 
 ## XII. Development Commands
 
@@ -649,7 +764,40 @@ const { data: content } = await useAsyncData('unique-key', () =>
 2. **Verify MDC syntax**: Use correct syntax like `::callout{type="info"}`
 3. **Content collection config**: Check `content.config.ts` for proper collection setup
 
-## XIII. Common Patterns & Examples
+#### **Dev Guide Template Literal Issues**
+
+**Problem**: Vue parser errors with `</script>` in template literals within DevGuideContent.vue
+
+```bash
+# ❌ Error: Invalid end tag / Unterminated template literal
+const codeExamples = {
+  example: `<script setup>
+const data = ref('')
+</script>`  // This breaks Vue template parsing
+};
+```
+
+**Solution**: Escape forward slash in closing script tags:
+
+```typescript
+// ✅ Correct: Escape the forward slash
+const codeExamples = {
+  example: `<script setup>
+const data = ref('')
+<\/script>`, // Escaped forward slash prevents parser conflict
+};
+```
+
+**Common Symptoms**:
+
+- "Invalid end tag" compile errors
+- "Unterminated template literal" errors
+- Dev guide page not loading despite server running
+- TypeScript/Vue parser confusion
+
+**Fix Pattern**: Replace all `</script>` with `<\/script>` in DevGuideContent.vue template literals.
+
+## XIV. Common Patterns & Examples
 
 ### Course Component Integration
 
@@ -723,5 +871,7 @@ Before implementing any feature, ensure:
 - [ ] **SEO Friendly**: Proper meta tags and structure
 - [ ] **Performance**: Optimized loading and rendering
 - [ ] **Content Management**: Uses correct Nuxt Content patterns with proper loading states
+- [ ] **Dev Guide Components**: Uses specialized DevGuide components for documentation sections
+- [ ] **Template Literal Safety**: Escapes `</script>` as `<\/script>` in Vue template literals
 
 **The platform prioritizes user experience, type safety, internationalization, and scalable course management. Always follow these patterns to maintain consistency and quality across the codebase.**

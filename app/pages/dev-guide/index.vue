@@ -48,7 +48,7 @@ useHead({
 const sections = ref([
   {
     id: "overview",
-    title: "Project Overview",
+    title: "Development Stack Overview",
     icon: "heroicons:document-text",
   },
   {

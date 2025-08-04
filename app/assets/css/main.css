@@ -51,3 +51,21 @@
   --ui-bg-muted: var(--ui-color-neutral-800); /* #2F2F2F equivalent */
   --ui-border: var(--ui-color-neutral-800);
 }
+
+/* Remove list styles globally for dev guide components */
+.dev-guide-list,
+.dev-guide-list *,
+.dev-guide-content ul,
+.dev-guide-content ol,
+.dev-guide-content li {
+  list-style: none !important;
+  list-style-type: none !important;
+  list-style-image: none !important;
+  padding-left: 0 !important;
+}
+
+/* Ensure no pseudo-elements create bullet points */
+.dev-guide-list *::before,
+.dev-guide-list *::after {
+  content: none !important;
+}
