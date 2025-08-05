@@ -20,7 +20,7 @@ const { data: allDevGuideContent } = await useAsyncData(
   async () => {
     try {
       // Query dev guide content using queryCollection
-      const [developmentStack, gettingStarted, architecture] =
+      const [developmentStack, gettingStarted, architecture, nuxtContent] =
         await Promise.all([
           queryCollection("content")
             .path("/dev-guide/development-stack")
@@ -34,9 +34,18 @@ const { data: allDevGuideContent } = await useAsyncData(
             .path("/dev-guide/architecture")
             .first()
             .catch(() => null),
+          queryCollection("content")
+            .path("/dev-guide/nuxt-content")
+            .first()
+            .catch(() => null),
         ]);
 
-      return [developmentStack, gettingStarted, architecture].filter(Boolean);
+      return [
+        developmentStack,
+        gettingStarted,
+        architecture,
+        nuxtContent,
+      ].filter(Boolean);
     } catch (error) {
       console.error("Error loading dev guide content:", error);
       return [];

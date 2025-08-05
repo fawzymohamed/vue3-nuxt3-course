@@ -26,7 +26,7 @@ const anchorId = computed(() => {
 <template>
   <section :id="anchorId" class="dev-guide-section">
     <!-- Section Header -->
-    <div class="section-header mb-6">
+    <div class="section-header my-6">
       <div class="flex items-center gap-3 mb-3">
         <span v-if="icon" class="text-2xl">{{ icon }}</span>
         <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">

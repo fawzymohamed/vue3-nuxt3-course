@@ -7,7 +7,15 @@ interface ListItem {
 }
 
 interface Props {
-  type?: "bullet" | "numbered" | "features" | "check";
+  type?:
+    | "bullet"
+    | "numbered"
+    | "features"
+    | "check"
+    | "components"
+    | "best-practices"
+    | "next-steps"
+    | "troubleshooting";
   columns?: 1 | 2 | 3 | "1" | "2" | "3";
   items?: Array<
     | string
@@ -70,6 +78,10 @@ const getListIcon = (type: string, index: number) => {
     numbered: undefined, // Will show numbers
     features: "i-heroicons-star",
     check: "i-heroicons-check",
+    components: "i-heroicons-cube",
+    "best-practices": "i-heroicons-light-bulb",
+    "next-steps": "i-heroicons-arrow-right",
+    troubleshooting: "i-heroicons-wrench-screwdriver",
   };
   return icons[type as keyof typeof icons];
 };
