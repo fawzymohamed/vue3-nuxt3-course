@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <UCard class="dev-tech-card">
+  <UCard class="dev-tech-card mt-5">
     <!-- Card Header -->
     <template #header>
       <div class="flex items-start justify-between">

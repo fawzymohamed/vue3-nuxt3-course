@@ -7,24 +7,60 @@ interface ListItem {
 }
 
 interface Props {
-  items: ListItem[] | string[];
-  type?: "bullet" | "numbered" | "feature" | "check";
-  columns?: 1 | 2 | 3;
+  type?: "bullet" | "numbered" | "features" | "check";
+  columns?: 1 | 2 | 3 | "1" | "2" | "3";
+  items?: Array<
+    | string
+    | { text: string; description?: string; icon?: string; badge?: string }
+  >;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   type: "bullet",
   columns: 1,
+  items: undefined,
 });
+
+// Parse slot content if no items prop provided
+const slots = useSlots();
 
 // Normalize items to have consistent structure
 const normalizedItems = computed(() => {
-  return props.items.map((item) => {
-    if (typeof item === "string") {
-      return { text: item };
-    }
-    return item;
-  });
+  if (props.items?.length) {
+    return props.items.map((item) => {
+      if (typeof item === "string") {
+        return { text: item };
+      }
+      return item;
+    });
+  }
+
+  // Parse slot content for list items
+  if (slots.default) {
+    const slotContent = slots.default();
+    const textContent = slotContent
+      .map((node) => {
+        if (typeof node.children === "string") {
+          return node.children;
+        }
+        return "";
+      })
+      .join("");
+
+    // Parse markdown-style list items
+    const lines = textContent.split("\n").filter((line) => line.trim());
+    return lines
+      .map((line) => {
+        const trimmed = line.trim();
+        if (trimmed.startsWith("- ")) {
+          return { text: trimmed.substring(2) };
+        }
+        return { text: trimmed };
+      })
+      .filter((item) => item.text);
+  }
+
+  return [];
 });
 
 // Icon mapping for different list types
@@ -32,7 +68,7 @@ const getListIcon = (type: string, index: number) => {
   const icons = {
     bullet: "i-heroicons-minus",
     numbered: undefined, // Will show numbers
-    feature: "i-heroicons-star",
+    features: "i-heroicons-star",
     check: "i-heroicons-check",
   };
   return icons[type as keyof typeof icons];
@@ -45,78 +81,23 @@ const gridClass = computed(() => {
     2: "grid-cols-1 md:grid-cols-2",
     3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
   };
-  return `grid gap-3 ${classes[props.columns]}`;
+  const columnValue = Number(props.columns);
+  return `grid gap-3 ${classes[columnValue as keyof typeof classes]}`;
 });
 </script>
 
 <template>
-  <div class="dev-guide-list">
-    <div :class="gridClass">
-      <div
-        v-for="(item, index) in normalizedItems"
-        :key="index"
-        class="list-item"
-        :class="{
-          'feature-item': type === 'feature',
-          'check-item': type === 'check',
-        }"
-      >
-        <div class="flex gap-3">
-          <!-- Icon or Number -->
-          <div class="flex-shrink-0 mt-0.5">
-            <!-- Numbered list -->
-            <div
-              v-if="type === 'numbered'"
-              class="w-6 h-6 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 text-sm font-semibold flex items-center justify-center"
-            >
-              {{ index + 1 }}
-            </div>
+  <div class="dev-guide-list" :class="`columns-${columns}`">
+    <!-- Render from items prop if provided -->
+    <ul v-if="items && items.length > 0" :class="gridClass">
+      <li v-for="(item, index) in items" :key="index">
+        {{ typeof item === "string" ? item : item.text }}
+      </li>
+    </ul>
 
-            <!-- Icon lists -->
-            <Icon
-              v-else-if="item.icon || getListIcon(type, index)"
-              :name="
-                item.icon || getListIcon(type, index) || 'i-heroicons-minus'
-              "
-              class="w-5 h-5"
-              :class="{
-                'text-gray-600 dark:text-gray-400': type === 'bullet',
-                'text-yellow-600 dark:text-yellow-400': type === 'feature',
-                'text-green-600 dark:text-green-400': type === 'check',
-              }"
-            />
-          </div>
-
-          <!-- Content -->
-          <div class="flex-1 min-w-0">
-            <div class="flex items-start justify-between gap-2">
-              <div class="flex-1">
-                <div class="text-gray-900 dark:text-gray-100 font-medium">
-                  {{ item.text }}
-                </div>
-
-                <div
-                  v-if="item.description"
-                  class="text-sm text-gray-600 dark:text-gray-400 mt-1"
-                >
-                  {{ item.description }}
-                </div>
-              </div>
-
-              <!-- Badge -->
-              <UBadge
-                v-if="item.badge"
-                variant="soft"
-                color="primary"
-                size="sm"
-                class="flex-shrink-0"
-              >
-                {{ item.badge }}
-              </UBadge>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- Render from slot content -->
+    <div v-else class="slot-content">
+      <slot />
     </div>
   </div>
 </template>

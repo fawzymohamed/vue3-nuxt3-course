@@ -1,98 +1,91 @@
 ---
-title: "Introduction "
-description: "Follow these steps to set up your development environment and start working with the Learnova Academy platform."
+title: "Getting Started"
+description: "Comprehensive overview of Learnova Academy's system architecture and design patterns"
 ---
 
-## Prerequisites
+::dev-guide-section{title="Getting Started" icon="🏗️"}
 
-Before you begin, ensure you have the following installed on your development machine:
-
-- **Node.js 18+** - Download from [nodejs.org](https://nodejs.org/)
-- **npm or yarn** - Package manager (npm comes with Node.js)
-- **Git** - Version control system
-- **VS Code** - Recommended code editor with Vue.js extensions
-
-## Quick Start
-
-### 1. Clone the Repository
-
-```bash
-# Clone the repository
-git clone [repository-url]
-cd learnova-academy
-```
-
-### 2. Install Dependencies
-
-```bash
-# Install all dependencies
-npm install
-
-# Or using yarn
-yarn install
-```
-
-### 3. Environment Setup
-
-Create a `.env` file in the root directory:
-
-```env
-# Development environment
-NUXT_PUBLIC_SITE_URL=http://localhost:3000
-NUXT_I18N_DEFAULT_LOCALE=en
-```
-
-### 4. Start Development Server
-
-```bash
-# Start the development server
-npm run dev
-
-# The server will be available at:
-# http://localhost:3000
-```
-
-::callout{type="success"}
-🎉 **Success!** Your development environment is now ready. You can start building amazing learning experiences.
+Learnova Academy follows a modern, component-based architecture built on Vue 3 and Nuxt 4.
 ::
 
-## Development Workflow
+::dev-guide-callout{type="info" title="Design Principles"}
+Our architecture is built on **modularity**, **scalability**, and **developer experience** principles.
+::
 
-### File Structure Overview
+::dev-guide-section{title="System Layers" icon="📚"}
+
+The application is organized into distinct layers for separation of concerns.
+
+::
+
+::dev-guide-list{type="numbered" columns="1"}
+
+- **Presentation Layer**: Vue components and pages
+- **Business Logic Layer**: Composables and utilities
+- **Data Layer**: Content management and state
+- **Configuration Layer**: App and build configuration
+  ::
+
+::dev-guide-section{title="Component Architecture" icon="🧩"}
+
+Reusable components organized by feature and functionality.
+
+::
+
+::dev-guide-code-block{language="text" filename="Component Structure"}
 
 ```
-learnova-academy/
-├── app/                    # Application source code
-│   ├── components/         # Vue components
-│   ├── composables/        # Composables and utilities
-│   ├── pages/             # Page routes
-│   └── assets/            # Static assets
-├── content/               # Markdown content
-│   ├── courses/           # Course content
-│   └── dev-guide/         # Development guide
-├── config/                # Configuration files
-└── i18n/                  # Internationalization
+app/components/
+├── content/              # Content rendering components
+│   ├── LessonRenderer.vue
+│   ├── CourseHeader.vue
+│   └── ContentSection.vue
+├── devGuide/            # Developer guide components
+│   ├── DevGuideSection.vue
+│   ├── DevGuideTechCard.vue
+│   └── DevGuideRenderer.vue
+├── admin/               # Admin interface components
+└── ui/                  # Base UI components
 ```
 
-### Essential Commands
+::
 
-| Command              | Description              |
-| -------------------- | ------------------------ |
-| `npm run dev`        | Start development server |
-| `npm run build`      | Build for production     |
-| `npm run preview`    | Preview production build |
-| `npm run type-check` | Run TypeScript checks    |
-| `npm run lint`       | Run ESLint               |
+::dev-guide-section{title="Data Flow" icon="🔄"}
 
-## Next Steps
+Understanding how data flows through the application.
 
-Once your environment is set up:
+::
 
-1. **Explore the codebase** - Familiarize yourself with the project structure
-2. **Read the Architecture guide** - Understand the design patterns used
-3. **Check out Course Management** - Learn how courses are structured
-4. **Review the Content Management** - Understand how content is organized
+::dev-guide-tech-card{title="Content Pipeline" description="Markdown files → Nuxt Content → Vue components → Rendered pages" badge="Core Flow" badgeColor="primary"}
+::
 
-::callout{type="info"}
-💡 **Tip:** Use the navigation sidebar to explore different sections of this developer guide. Each section contains detailed information to help you become productive quickly.
+::dev-guide-tech-card{title="State Management" description="Composables + Vue reactivity for local state, Pinia for global state" badge="State" badgeColor="success"}
+::
+
+::dev-guide-section{title="Routing Strategy" icon="🛣️"}
+
+File-based routing with dynamic course and lesson handling.
+
+::
+
+::dev-guide-code-block{language="text" filename="Route Structure"}
+
+```
+pages/
+├── index.vue                    # Homepage
+├── courses/
+│   ├── index.vue               # Course listing
+│   └── [courseSlug]/
+│       ├── index.vue           # Course overview
+│       └── [moduleSlug]/
+│           └── [lessonSlug].vue # Individual lesson
+├── dev-guide/
+│   └── index.vue               # Developer documentation
+└── admin.vue                   # Admin interface
+```
+
+::
+
+::dev-guide-callout{type="tip" title="Routing Tip"}
+Dynamic routes use file-based conventions. The `[param]` syntax creates dynamic route segments.
 ::

@@ -14,21 +14,34 @@ if (!isDev) {
   });
 }
 
-// Get the overview content for dynamic sections
-const { data: overviewContent } = await useAsyncData("dev-guide-overview", () =>
-  queryCollection("content").path("/dev-guide/overview").first()
-);
+// Get all dev guide content dynamically
+const { data: allDevGuideContent } = await useAsyncData(
+  "dev-guide-content",
+  async () => {
+    try {
+      // Query dev guide content using queryCollection
+      const [developmentStack, gettingStarted, architecture] =
+        await Promise.all([
+          queryCollection("content")
+            .path("/dev-guide/development-stack")
+            .first()
+            .catch(() => null),
+          queryCollection("content")
+            .path("/dev-guide/getting-started")
+            .first()
+            .catch(() => null),
+          queryCollection("content")
+            .path("/dev-guide/architecture")
+            .first()
+            .catch(() => null),
+        ]);
 
-// Get the getting-started content
-const { data: gettingStartedContent } = await useAsyncData(
-  "dev-guide-getting-started",
-  () => queryCollection("content").path("/dev-guide/getting-started").first()
-);
-
-// Get the architecture content
-const { data: architectureContent } = await useAsyncData(
-  "dev-guide-architecture",
-  () => queryCollection("content").path("/dev-guide/architecture").first()
+      return [developmentStack, gettingStarted, architecture].filter(Boolean);
+    } catch (error) {
+      console.error("Error loading dev guide content:", error);
+      return [];
+    }
+  }
 );
 
 // SEO - English only
@@ -45,77 +58,44 @@ useHead({
 });
 
 // Navigation sections - English only
-const sections = ref([
-  {
-    id: "overview",
-    title: "Development Stack Overview",
-    icon: "heroicons:document-text",
-  },
-  {
-    id: "getting-started",
-    title: "Getting Started",
-    icon: "heroicons:rocket-launch",
-  },
-  {
-    id: "architecture",
-    title: "Architecture",
-    icon: "heroicons:building-library",
-  },
-  {
-    id: "course-management",
-    title: "Course Management",
-    icon: "heroicons:academic-cap",
-  },
-  {
-    id: "content-management",
-    title: "Content Management",
-    icon: "heroicons:document-duplicate",
-  },
-  {
-    id: "features",
-    title: "Key Features",
-    icon: "heroicons:star",
-  },
-  {
-    id: "deployment",
-    title: "Deployment",
-    icon: "heroicons:cloud-arrow-up",
-  },
-  {
-    id: "development",
-    title: "Development Workflow",
-    icon: "heroicons:code-bracket",
-  },
-  {
-    id: "troubleshooting",
-    title: "Troubleshooting",
-    icon: "heroicons:wrench-screwdriver",
-  },
-]);
+const sections = computed(() => {
+  if (!allDevGuideContent.value || !Array.isArray(allDevGuideContent.value))
+    return [];
 
-const activeSection = ref("overview");
+  const generatedSections = allDevGuideContent.value.map((content: any) => {
+    const id =
+      content.path?.split("/").pop() ||
+      content.stem?.split("/").pop() ||
+      content.title.toLowerCase().replace(/\s+/g, "-");
+
+    return {
+      id,
+      title: content.title,
+      icon: content.icon || "heroicons:document-text",
+    };
+  });
+
+  return generatedSections;
+});
+
+const activeSection = ref("development-stack");
+
+// Get current content
+const currentContent = computed(() => {
+  if (!allDevGuideContent.value || !Array.isArray(allDevGuideContent.value))
+    return null;
+
+  const found = allDevGuideContent.value.find((content: any) =>
+    content.path?.includes(activeSection.value)
+  );
+
+  return found;
+});
 
 // Switch to selected section
 function selectSection(sectionId: string) {
   activeSection.value = sectionId;
 }
-
-// Content mapping for sections with content files
-const contentMap = computed(() => ({
-  overview: overviewContent.value,
-  "getting-started": gettingStartedContent.value,
-  architecture: architectureContent.value,
-}));
-
-// Check if current section has content file
-const hasContentFile = computed(() => {
-  return Object.keys(contentMap.value).includes(activeSection.value);
-});
-
-// Get current content safely
-const currentContent = computed(() => {
-  return contentMap.value[activeSection.value as keyof typeof contentMap.value];
-});
 </script>
 
 <template>
@@ -131,59 +111,25 @@ const currentContent = computed(() => {
           />
         </aside>
 
-        <!-- Main Content with Enhanced Components -->
+        <!-- Main Content -->
         <main class="lg:col-span-3">
-          <!-- Sections with Content Files -->
-          <div v-if="hasContentFile">
-            <DevGuideRenderer
-              :content="currentContent"
-              :section-id="activeSection"
-              :sections="sections"
-              @section-change="selectSection"
-            />
-          </div>
+          <!-- Direct content rendering without DevGuideRenderer -->
+          <div class="dev-guide-content">
+            <div class="prose prose-lg dark:prose-invert max-w-none">
+              <ContentRenderer v-if="currentContent" :value="currentContent" />
 
-          <!-- Other sections (can be converted to content files later) -->
-          <div v-else class="space-y-8">
-            <!-- Section Header for non-content sections -->
-            <DevGuideHeader
-              :section="
-                sections.find((s) => s.id === activeSection) || {
-                  id: activeSection,
-                  title: 'Section',
-                  icon: 'heroicons:document-text',
-                }
-              "
-              :content="null"
-            />
-
-            <!-- Section Content -->
-            <div class="prose prose-gray dark:prose-invert max-w-none">
-              <!-- Placeholder for other sections -->
-              <div>
-                <p class="text-lg text-muted-foreground mb-6">
-                  This section is under development. Content will be added soon.
-                </p>
-
+              <!-- Loading state -->
+              <div v-else class="animate-pulse">
                 <div
-                  class="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4"
-                >
-                  <div class="flex items-start gap-3">
-                    <Icon
-                      name="heroicons:information-circle"
-                      class="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0"
-                    />
-                    <div>
-                      <p class="text-sm text-blue-800 dark:text-blue-200 m-0">
-                        <strong>Coming Soon:</strong> This section will contain
-                        detailed information about
-                        {{
-                          sections.find((s) => s.id === activeSection)?.title ||
-                          activeSection
-                        }}.
-                      </p>
-                    </div>
-                  </div>
+                  class="h-8 bg-gray-200 dark:bg-gray-700 rounded mb-4"
+                ></div>
+                <div class="space-y-3">
+                  <div
+                    class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"
+                  ></div>
+                  <div
+                    class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"
+                  ></div>
                 </div>
               </div>
             </div>
@@ -193,21 +139,3 @@ const currentContent = computed(() => {
     </UContainer>
   </div>
 </template>
-
-<style scoped>
-code {
-  background-color: hsl(var(--muted));
-  padding: 0.125rem 0.25rem;
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
-}
-
-pre code {
-  background: none;
-  padding: 0;
-}
-
-.dark code {
-  background-color: hsl(var(--muted));
-}
-</style>

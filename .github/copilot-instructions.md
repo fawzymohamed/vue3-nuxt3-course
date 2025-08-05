@@ -10,7 +10,7 @@ You are an expert Vue 3 and Nuxt 4 developer, assisting in building a high-quali
 
 - **Multi-Course System**: Centralized course registry with individual course management
 - **Bilingual Support**: Full English/Arabic with RTL layout support
-- **Content Management**: File-based content system using @nuxt/content
+- **Content Management**: File-based content system using @nuxt/content with MDC (Markdown Components)
 - **Progress Tracking**: Comprehensive user progress across courses and lessons
 - **Responsive Design**: Mobile-first approach with @nuxt/ui components
 
@@ -68,6 +68,7 @@ const progress = getCourseProgress(course.id);
 
 - **Multi-course paths**: `content/courses/[courseId]/[locale]/modules/[moduleId]/lessons/`
 - **Course metadata**: Centralized in `config/courses.ts`
+- **Dev guide paths**: `content/dev-guide/`
 
 ## II. Tech Stack & Dependencies
 
@@ -75,7 +76,7 @@ const progress = getCourseProgress(course.id);
 
 - **Nuxt 4** with SSR enabled and TypeScript
 - **Vue 3** with Composition API and `<script setup>` pattern
-- **@nuxt/content** for content management
+- **@nuxt/content** for content management with MDC support
 - **@nuxtjs/i18n** with cookie-based language persistence
 
 ### UI & Styling
@@ -126,7 +127,118 @@ useHead({
 });
 ```
 
-## IV. Component Architecture
+## IV. Nuxt Content & MDC System
+
+### **CRITICAL: Mandatory Content Loading Pattern**
+
+All content loading MUST follow this pattern to ensure proper SSR/hydration:
+
+```vue
+<script setup lang="ts">
+// ✅ MANDATORY: Use queryCollection with useAsyncData wrapper
+const { data: content } = await useAsyncData("unique-key", () =>
+  queryCollection("content").path("/path/to/content").first()
+);
+
+// ✅ For multiple content files
+const { data: allContent } = await useAsyncData("content-list", () =>
+  queryCollection("content").path("/content/directory").find()
+);
+</script>
+
+<template>
+  <!-- ✅ MANDATORY: Always provide loading states -->
+  <div v-if="!content" class="loading-state">
+    <p>Loading content...</p>
+  </div>
+
+  <!-- ✅ MANDATORY: Use ContentRenderer for content display -->
+  <ContentRenderer v-if="content" :value="content" />
+</template>
+```
+
+### **MDC (Markdown Components) System**
+
+The platform uses MDC extensively for content-driven components. All content files support custom Vue components through MDC syntax:
+
+```markdown
+---
+title: "Content Title"
+description: "Content description"
+---
+
+::component-name{prop="value" anotherProp="another value"}
+Content inside the component
+::
+
+::dev-guide-section{title="Framework Overview" icon="🛠️"}
+This content will be rendered inside the DevGuideSection component
+::
+
+::dev-guide-tech-card{title="Nuxt 4" version="^4.0.1" description="Full-stack framework" link="https://nuxt.com" badge="Primary" badgeColor="primary"}
+::
+```
+
+### **MDC Component Development Rules**
+
+When creating MDC-compatible components:
+
+```vue
+<script setup lang="ts">
+// ✅ Define clear TypeScript interfaces for props
+interface Props {
+  title: string;
+  description?: string;
+  icon?: string;
+  type?: "info" | "warning" | "success";
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  description: undefined,
+  icon: undefined,
+  type: "info",
+});
+</script>
+
+<template>
+  <div class="mdc-component">
+    <h3>{{ title }}</h3>
+    <p v-if="description">{{ description }}</p>
+
+    <!-- ✅ Always support slot content for MDC -->
+    <div class="content">
+      <slot />
+    </div>
+  </div>
+</template>
+```
+
+### **Content Loading Anti-Patterns (AVOID)**
+
+```vue
+<!-- ❌ NEVER: Direct queryContent without useAsyncData -->
+<script setup>
+const content = await queryContent("/path").findOne(); // Causes hydration issues
+</script>
+
+<!-- ❌ NEVER: Use ContentDoc component -->
+<ContentDoc path="/content/path" />
+<!-- Component resolution issues -->
+
+<!-- ❌ NEVER: Missing loading states -->
+<ContentRenderer :value="content" />
+<!-- Shows empty during loading -->
+
+<!-- ❌ NEVER: Use $fetch for content -->
+const content = await $fetch("/api/content");
+<!-- Wrong API pattern -->
+```
+
+## V. Dev Guide Components System
+
+The platform includes specialized MDC components for developer documentation.
+
+## VI. Component Architecture
 
 ### Course-Aware Components
 
@@ -183,238 +295,91 @@ useHead({
 - **Features**: Course title, instructor info, progress indicators
 - **Context**: Course → Module → Lesson hierarchy
 
-### Dev Guide Components
-
-The platform includes specialized components for the developer guide section (`/dev-guide`), providing a comprehensive documentation system with enhanced UI components.
-
-#### 6. **DevGuideContent.vue** - Main Dev Guide Renderer
-
-```vue
-<DevGuideContent :section="'overview'" />
-```
-
-- **Purpose**: Primary content renderer for dev guide sections
-- **Features**: Conditional section rendering, comprehensive code examples, structured content display
-- **Content**: Development stack overview, architecture patterns, best practices
-- **Key Features**: Auto-loading states, section-specific content, embedded code examples
-
-#### 7. **DevGuideSection.vue** - Section Headers
-
-```vue
-<DevGuideSection
-  title="Development Stack"
-  description="Core technologies and frameworks"
-  icon="🛠️"
-/>
-```
-
-- **Purpose**: Consistent section headers with anchor links
-- **Features**: Emoji icons, auto-generated anchor IDs, responsive design
-- **Usage**: Section dividers, navigation anchors
-
-#### 8. **DevGuideTechCard.vue** - Technology Showcase Cards
-
-```vue
-<DevGuideTechCard
-  name="Nuxt 4"
-  version="^4.0.1"
-  description="Full-stack Vue framework"
-  link="https://nuxt.com"
-  category="framework"
-/>
-```
-
-- **Purpose**: Professional technology cards with version badges
-- **Features**: Hover effects, external documentation links, version display
-- **Categories**: Framework, library, tool, language
-
-#### 9. **DevGuideCodeBlock.vue** - Enhanced Code Examples
-
-```vue
-<DevGuideCodeBlock
-  :code="codeExample"
-  language="vue"
-  filename="example.vue"
-  :showCopy="true"
-/>
-```
-
-- **Purpose**: Advanced code display with copy functionality
-- **Features**: Syntax highlighting, copy-to-clipboard, filename display
-- **Languages**: JavaScript, TypeScript, Vue, HTML, CSS, Bash
-
-#### 10. **DevGuideCallout.vue** - Information Boxes
-
-```vue
-<DevGuideCallout type="info" title="Important">
-  This is critical information for developers.
-</DevGuideCallout>
-```
-
-- **Purpose**: Themed callout boxes for warnings, tips, and information
-- **Types**: `info`, `success`, `warning`, `error`, `tip`
-- **Features**: Icon mapping, themed styling, optional titles
-
-#### 11. **DevGuideList.vue** - Feature Lists
-
-```vue
-<DevGuideList :items="featureList" type="features" :columns="2" />
-```
-
-- **Purpose**: Flexible list display with multiple visual styles
-- **Types**: `bullet`, `numbered`, `features`, `check`
-- **Features**: Grid layouts, badge system, responsive columns
-
-### Dev Guide Content Structure
-
-```
-content/dev-guide/
-├── overview.md          # Development stack overview
-├── architecture.md      # Platform architecture
-└── getting-started.md   # Setup instructions
-```
-
-### Dev Guide Template Literal Guidelines
-
-When working with DevGuideContent.vue, be aware of template literal parsing:
-
-```typescript
-// ✅ Correct: Escape closing script tags in template literals
-const codeExamples = {
-  vueComponent: `<script setup>
-// Vue component code
-<\/script>`, // Note the escaped forward slash
-};
-
-// ❌ Wrong: Unescaped closing tags cause parser errors
-const codeExamples = {
-  vueComponent: `<script setup>
-// Vue component code
-</script>`, // This breaks Vue template parsing
-};
-```
-
-**Critical Rule**: Always escape `</script>` as `<\/script>` in template literals within Vue components to prevent parser conflicts.
-
-## V. Content Management Patterns
+## VII. Content Management Patterns
 
 ### Content Structure
 
 ```
-content/courses/[courseId]/[locale]/
-├── course.md                    # Course metadata
-└── modules/[moduleId]/
-    ├── module.md               # Module metadata
-    └── lessons/[lessonId].md   # Individual lessons
+content/
+├── courses/[courseId]/[locale]/
+│   ├── course.md                    # Course metadata
+│   └── modules/[moduleId]/
+│       ├── module.md               # Module metadata
+│       └── lessons/[lessonId].md   # Individual lessons
+└── dev-guide/
+    ├── development-stack.md        # Dev guide sections
+    ├── getting-started.md
+    └── architecture.md
 ```
 
-### Content Querying
+### Content Querying Examples
 
 ```typescript
-// Get course content
-const course = await getCourse(courseId);
-const modules = await getCourseModules(courseId);
-const lessons = await getCourseLessons(courseId, moduleId);
-
-// Query specific lesson
-const lesson = await queryContent(
-  "courses",
-  courseId,
-  locale,
-  "modules",
-  moduleId,
-  "lessons",
-  lessonSlug
-).findOne();
-```
-
-### Nuxt Content Best Practices
-
-#### ✅ **Correct Pattern for Content Fetching and Rendering**
-
-```vue
-<script setup lang="ts">
-// ✅ Use queryCollection for content fetching
-const { data: overviewContent } = await useAsyncData("content-key", () =>
-  queryCollection("content").path("/path/to/content").first()
+// ✅ Single content file
+const { data: course } = await useAsyncData("course-overview", () =>
+  queryCollection("content")
+    .path(`/courses/${courseId}/${locale}/course`)
+    .first()
 );
-</script>
 
-<template>
-  <!-- ✅ Use ContentRenderer with proper loading states -->
-  <div>
-    <div v-if="!overviewContent" class="loading-state">
-      <p>Loading content...</p>
-    </div>
+// ✅ Multiple content files
+const { data: devGuideContent } = await useAsyncData("dev-guide-content", () =>
+  queryCollection("content").path("/dev-guide").find()
+);
 
-    <ContentRenderer v-if="overviewContent" :value="overviewContent" />
-  </div>
-</template>
+// ✅ Specific lesson content
+const { data: lesson } = await useAsyncData(`lesson-${lessonSlug}`, () =>
+  queryCollection("content")
+    .path(
+      `/courses/${courseId}/${locale}/modules/${moduleId}/lessons/${lessonSlug}`
+    )
+    .first()
+);
 ```
 
-#### ❌ **Avoid These Common Mistakes**
-
-```vue
-<!-- ❌ Don't use ContentDoc directly (component resolution issues) -->
-<ContentDoc path="/dev-guide/en/overview" />
-
-<!-- ❌ Don't use queryContent without useAsyncData wrapper -->
-<script setup>
-const content = await queryContent("/path").findOne(); // This will cause hydration issues
-</script>
-
-<!-- ❌ Don't forget loading states -->
-<ContentRenderer :value="content" />
-<!-- Will show empty if content is still loading -->
-```
-
-#### **Content File Structure Guidelines**
-
-```
-content/
-├── dev-guide/
-│   └── en/                    # English-only content
-│       └── overview.md        # Content file
-├── courses/
-│   └── [courseId]/
-│       └── [locale]/          # Multi-language course content
-│           └── modules/
-```
-
-#### **Markdown Components (MDC) Support**
-
-Your content files support enhanced markdown with custom components:
+### MDC Content File Example
 
 ````markdown
-# Standard Markdown
+---
+title: "Development Stack Overview"
+description: "Core technologies and frameworks used in Learnova Academy"
+---
 
-Regular markdown content with **bold** and _italic_ text.
+::dev-guide-section{title="Core Framework" icon="🛠️"}
 
-## Custom Components
+Learnova Academy is built on a modern, scalable tech stack designed for performance and developer experience.
 
-::callout{type="info"}
-This is an info callout using MDC syntax
 ::
 
-::code-example
+::dev-guide-tech-card{title="Nuxt 4" version="^4.0.1" description="Full-stack Vue framework with SSR, SSG, and hybrid rendering" link="https://nuxt.com" badge="Primary Framework" badgeColor="primary"}
+::
 
-```javascript
-console.log("This is enhanced code");
+::dev-guide-list{type="features" columns="2"}
+
+- Server-side rendering capabilities
+- File-based routing system
+- Auto-imported composables
+- Built-in TypeScript support
+  ::
+
+::dev-guide-code-block{language="typescript" filename="composables/example.ts"}
+
+```typescript
+// Example composable
+export const useExample = () => {
+  const data = ref("Hello World");
+  return { data };
+};
 ```
 ````
 
 ::
 
+::dev-guide-callout{type="info" title="Development Tip"}
+All composables are auto-imported in Nuxt 4, so you can use them directly in components without manual imports.
+::
+
 ````
-
-#### **Content Validation Checklist**
-
-- ✅ Use `queryCollection("content").path().first()` for single content
-- ✅ Use `queryCollection("content").path().find()` for multiple content
-- ✅ Wrap queries in `useAsyncData()` for proper SSR/hydration
-- ✅ Use `ContentRenderer` component to display content
-- ✅ Always provide loading states
-- ✅ Test content in both development and production builds
 
 ### Frontmatter Standards
 
@@ -428,6 +393,7 @@ status: "published"
 difficulty: "beginner"
 estimatedHours: 40
 ---
+
 # Module-level (module.md)
 ---
 id: "module1"
@@ -435,6 +401,7 @@ title: "Vue.js Fundamentals"
 number: 1
 estimatedMinutes: 180
 ---
+
 # Lesson-level (lesson.md)
 ---
 title: "Introduction to Vue.js"
@@ -443,9 +410,15 @@ estimatedMinutes: 30
 hasExercise: true
 hasQuiz: false
 ---
+
+# Dev Guide sections
+---
+title: "Development Stack Overview"
+description: "Core technologies and frameworks"
+---
 ````
 
-## VI. Progress Tracking System
+## VIII. Progress Tracking System
 
 ### Comprehensive Progress Management
 
@@ -474,7 +447,7 @@ addLessonNotes(courseId, moduleId, lessonId, "Important notes");
 - **Course Level**: Overall progress, learning streaks, completion certificates
 - **User Level**: Global statistics, achievements, learning analytics
 
-## VII. Routing & Navigation
+## IX. Routing & Navigation
 
 ### Multi-Course URL Structure
 
@@ -484,6 +457,7 @@ addLessonNotes(courseId, moduleId, lessonId, "Important notes");
 /courses                         # All courses listing
 /courses/[courseId]             # Course overview
 /courses/[courseId]/[module]/[lessonSlug]  # Individual lessons
+/dev-guide                      # Developer documentation (dev mode only)
 ```
 
 ### Navigation Best Practices
@@ -508,7 +482,7 @@ const lessonUrl = localePath(
 </template>
 ```
 
-## VIII. Translation System
+## X. Translation System
 
 ### Translation File Structure
 
@@ -549,7 +523,7 @@ const lessonUrl = localePath(
 - **Icon positioning** - Ensure icons work in both LTR and RTL
 - **Text alignment** - Proper text flow for both languages
 
-## IX. Component Development Guidelines
+## XI. Component Development Guidelines
 
 ### Vue 3 + Nuxt 4 Best Practices
 
@@ -560,14 +534,18 @@ const { t } = useI18n();
 const localePath = useLocalePath();
 const { getCourseBySlug } = useCourseRegistry();
 
-// ✅ Typed props
+// ✅ Typed props for MDC compatibility
 interface Props {
   courseId: string;
   showProgress?: boolean;
+  title?: string;
+  description?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   showProgress: true,
+  title: undefined,
+  description: undefined,
 });
 
 // ✅ Typed emits
@@ -591,6 +569,11 @@ const progress = getCourseProgress(props.courseId);
       v-if="showProgress"
       :value="progress?.completionPercentage || 0"
     />
+
+    <!-- ✅ MDC slot support -->
+    <div class="content">
+      <slot />
+    </div>
 
     <!-- ✅ Course-aware navigation -->
     <NuxtLink :to="localePath(`/courses/${course.slug}`)">
@@ -627,7 +610,7 @@ const progress = getCourseProgress(props.courseId);
 </template>
 ```
 
-## X. Course Registry Management
+## XII. Course Registry Management
 
 ### Adding New Courses
 
@@ -666,19 +649,7 @@ export const coursesConfig = [
 ];
 ```
 
-### Course Validation
-
-```typescript
-// Always validate course configuration
-import { validateCourseConfig } from "~/utils/courseValidation";
-
-const isValid = validateCourseConfig(courseConfig);
-if (!isValid) {
-  throw new Error("Invalid course configuration");
-}
-```
-
-## XI. File Locations & Organization
+## XIII. File Locations & Organization
 
 ### Essential Files
 
@@ -690,7 +661,7 @@ if (!isValid) {
 ### Content Structure
 
 - **Multi-Course Content**: `content/courses/[courseId]/[locale]/modules/[moduleId]/lessons/`
-- **Dev Guide Content**: `content/dev-guide/` - Developer documentation and guides
+- **Dev Guide Content**: `content/dev-guide/` - Developer documentation with MDC components
 
 ### Translation Files
 
@@ -703,9 +674,95 @@ if (!isValid) {
 - **Module Navigation**: `components/EnhancedCourseModuleNav.vue`
 - **Course Cards**: `components/CourseCard.vue`
 - **Content Rendering**: `components/content/LessonRenderer.vue`
-- **Dev Guide Components**: `components/devGuide/` - Specialized documentation components
+- **Dev Guide Components**: `components/devGuide/` - MDC-compatible documentation components
 
-## XII. Development Commands
+## XIV. Content Troubleshooting
+
+### Critical Content Loading Rules
+
+#### ✅ **Correct Patterns**
+
+```vue
+<!-- ✅ Always use this pattern for content loading -->
+<script setup lang="ts">
+const { data: content } = await useAsyncData("unique-key", () =>
+  queryCollection("content").path("/path/to/content").first()
+);
+</script>
+
+<template>
+  <!-- ✅ Always provide loading states -->
+  <div v-if="!content" class="animate-pulse">
+    <div class="h-8 bg-gray-200 rounded mb-4"></div>
+    <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+  </div>
+
+  <!-- ✅ Use ContentRenderer for content display -->
+  <ContentRenderer v-if="content" :value="content" />
+</template>
+```
+
+#### ❌ **Anti-Patterns (NEVER USE)**
+
+```vue
+<!-- ❌ NEVER: Direct queryContent -->
+<script setup>
+const content = await queryContent("/path").findOne(); // Hydration issues
+</script>
+
+<!-- ❌ NEVER: ContentDoc component -->
+<ContentDoc path="/content/path" />
+<!-- Component resolution issues -->
+
+<!-- ❌ NEVER: Missing loading states -->
+<ContentRenderer :value="content" />
+<!-- Shows empty during loading -->
+
+<!-- ❌ NEVER: $fetch for content -->
+const content = await $fetch('/api/content');
+<!-- Wrong API -->
+```
+
+### Common Issues and Solutions
+
+#### **MDC Components Not Rendering**
+
+1. **Check component naming**: MDC uses kebab-case (`dev-guide-section` not `DevGuideSection`)
+2. **Verify component location**: Components must be in `components/` directory for auto-discovery
+3. **Check MDC syntax**: Use `::component-name{props}` with content `::` to close
+
+#### **Content Path Issues**
+
+```typescript
+// ✅ Correct path patterns
+queryCollection("content").path("/dev-guide/development-stack").first();
+queryCollection("content").path("/courses/vue-nuxt-mastery/en/course").first();
+
+// ❌ Wrong paths
+queryCollection("content").path("dev-guide/development-stack").first(); // Missing leading slash
+queryCollection("content").path("/dev-guide/development-stack.md").first(); // Don't include .md
+```
+
+#### **Hydration Mismatch Prevention**
+
+```vue
+<!-- ✅ Always wrap content queries -->
+<script setup lang="ts">
+const { data: content } = await useAsyncData("content-key", () =>
+  queryCollection("content").path("/path").first()
+);
+</script>
+
+<!-- ✅ Conditional rendering prevents hydration issues -->
+<template>
+  <div>
+    <div v-if="!content" class="loading">Loading...</div>
+    <ContentRenderer v-if="content" :value="content" />
+  </div>
+</template>
+```
+
+## XV. Development Commands
 
 ```bash
 # Development
@@ -718,125 +775,110 @@ npm run validate:courses # Validate course configurations
 npm run type-check      # TypeScript validation
 ```
 
-## XIII. Content Troubleshooting
+## XVI. Common Patterns & Examples
 
-### Common Content Issues and Solutions
-
-#### **"Failed to resolve component: ContentDoc" Error**
-
-```bash
-# ❌ Problem: ContentDoc component not found
-<ContentDoc path="/dev-guide/en/overview" />
-
-# ✅ Solution: Use queryCollection + ContentRenderer instead
-<script setup>
-const { data: content } = await useAsyncData('key', () =>
-  queryCollection("content").path("/dev-guide/overview").first()
-);
-</script>
-<template>
-  <ContentRenderer v-if="content" :value="content" />
-</template>
-```
-
-#### **Content Not Loading Issues**
-
-1. **Check content file paths**: Ensure the path in `queryCollection().path()` matches your file structure
-2. **Verify useAsyncData usage**: Always wrap content queries in `useAsyncData()`
-3. **Restart dev server**: Content changes sometimes require server restart
-4. **Check content.config.ts**: Ensure your content configuration is correct
-
-#### **Hydration Mismatch Errors**
-
-```bash
-# ❌ Avoid: Direct queryContent without useAsyncData
-const content = await queryContent('/path').findOne();
-
-# ✅ Correct: Always use useAsyncData wrapper
-const { data: content } = await useAsyncData('unique-key', () =>
-  queryCollection("content").path("/path").first()
-);
-```
-
-#### **Content Components Not Rendering**
-
-1. **Check component availability**: Ensure components like `Callout.vue` exist in `components/content/`
-2. **Verify MDC syntax**: Use correct syntax like `::callout{type="info"}`
-3. **Content collection config**: Check `content.config.ts` for proper collection setup
-
-#### **Dev Guide Template Literal Issues**
-
-**Problem**: Vue parser errors with `</script>` in template literals within DevGuideContent.vue
-
-```bash
-# ❌ Error: Invalid end tag / Unterminated template literal
-const codeExamples = {
-  example: `<script setup>
-const data = ref('')
-</script>`  // This breaks Vue template parsing
-};
-```
-
-**Solution**: Escape forward slash in closing script tags:
-
-```typescript
-// ✅ Correct: Escape the forward slash
-const codeExamples = {
-  example: `<script setup>
-const data = ref('')
-<\/script>`, // Escaped forward slash prevents parser conflict
-};
-```
-
-**Common Symptoms**:
-
-- "Invalid end tag" compile errors
-- "Unterminated template literal" errors
-- Dev guide page not loading despite server running
-- TypeScript/Vue parser confusion
-
-**Fix Pattern**: Replace all `</script>` with `<\/script>` in DevGuideContent.vue template literals.
-
-## XIV. Common Patterns & Examples
-
-### Course Component Integration
+### MDC Content Page Implementation
 
 ```vue
-<script setup>
-// Standard course component setup
-const { getCourseBySlug } = useCourseRegistry();
-const { getCourseProgress, markLessonComplete } = useCourseProgress();
-const { getCourseModules } = useCourses();
-const localePath = useLocalePath();
-const { t } = useI18n();
+<script setup lang="ts">
+// ✅ Standard MDC content page pattern
+const { data: allContent } = await useAsyncData("section-content", async () => {
+  try {
+    const [section1, section2, section3] = await Promise.all([
+      queryCollection("content")
+        .path("/content/section1")
+        .first()
+        .catch(() => null),
+      queryCollection("content")
+        .path("/content/section2")
+        .first()
+        .catch(() => null),
+      queryCollection("content")
+        .path("/content/section3")
+        .first()
+        .catch(() => null),
+    ]);
+    return [section1, section2, section3].filter(Boolean);
+  } catch (error) {
+    console.error("Error loading content:", error);
+    return [];
+  }
+});
 
-// Get course data
-const course = getCourseBySlug("vue-nuxt-mastery");
-const progress = getCourseProgress(course.id);
-const modules = await getCourseModules(course.id);
+// ✅ Navigation sections
+const sections = computed(() => {
+  if (!allContent.value) return [];
 
-// Handle lesson completion
-const handleLessonComplete = (moduleId: string, lessonId: string) => {
-  markLessonComplete(course.id, moduleId, lessonId, {
-    timeSpent: timeSpent.value,
-    score: quizScore.value
+  return allContent.value.map((content) => {
+    const id =
+      content.path?.split("/").pop() ||
+      content.title.toLowerCase().replace(/\s+/g, "-");
+    return {
+      id,
+      title: content.title,
+      icon: content.icon || "heroicons:document-text",
+    };
   });
-};
+});
+
+const activeSection = ref(sections.value[0]?.id || "default");
+
+// ✅ Current content matching
+const currentContent = computed(() => {
+  if (!allContent.value) return null;
+  return allContent.value.find((content) =>
+    content.path?.includes(activeSection.value)
+  );
+});
+
+function selectSection(sectionId: string) {
+  activeSection.value = sectionId;
+}
 </script>
 
 <template>
-  <div class="course-layout">
-    <!-- Enhanced course navigation -->
-    <EnhancedCourseNavigation
-      :course="course"
-      :current-progress="progress"
-      @lesson-complete="handleLessonComplete"
-    />
+  <div class="min-h-screen bg-background">
+    <UContainer class="py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <!-- Navigation Sidebar -->
+        <aside class="lg:col-span-1">
+          <nav class="space-y-2">
+            <button
+              v-for="section in sections"
+              :key="section.id"
+              @click="selectSection(section.id)"
+              class="w-full text-left p-3 rounded-lg transition-colors"
+              :class="{
+                'bg-primary-50 text-primary-700 dark:bg-primary-900 dark:text-primary-300':
+                  activeSection === section.id,
+                'hover:bg-gray-50 dark:hover:bg-gray-800':
+                  activeSection !== section.id,
+              }"
+            >
+              {{ section.title }}
+            </button>
+          </nav>
+        </aside>
 
-    <!-- Course content -->
-    <main class="course-content">
-      <slot />
-    </main>
+        <!-- Main Content -->
+        <main class="lg:col-span-3">
+          <div v-if="!currentContent" class="animate-pulse">
+            <div class="h-8 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
+            <div class="space-y-3">
+              <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+              <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+            </div>
+          </div>
+
+          <div
+            v-if="currentContent"
+            class="prose prose-lg dark:prose-invert max-w-none"
+          >
+            <ContentRenderer :value="currentContent" />
+          </div>
+        </main>
+      </div>
+    </UContainer>
   </div>
 </template>
 ```
@@ -844,14 +886,22 @@ const handleLessonComplete = (moduleId: string, lessonId: string) => {
 ### Error Handling
 
 ```typescript
-// Always handle course not found scenarios
-const course = getCourseBySlug(courseSlug);
-if (!course) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: "Course not found",
-  });
-}
+// Always handle content not found scenarios
+const { data: content } = await useAsyncData("content-key", async () => {
+  try {
+    const result = await queryCollection("content").path("/path").first();
+    if (!result) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: "Content not found",
+      });
+    }
+    return result;
+  } catch (error) {
+    console.error("Content loading error:", error);
+    return null;
+  }
+});
 ```
 
 ---
@@ -870,8 +920,9 @@ Before implementing any feature, ensure:
 - [ ] **Navigation**: Uses `localePath()` for all links
 - [ ] **SEO Friendly**: Proper meta tags and structure
 - [ ] **Performance**: Optimized loading and rendering
-- [ ] **Content Management**: Uses correct Nuxt Content patterns with proper loading states
-- [ ] **Dev Guide Components**: Uses specialized DevGuide components for documentation sections
-- [ ] **Template Literal Safety**: Escapes `</script>` as `<\/script>` in Vue template literals
+- [ ] **Content Management**: Uses mandatory `queryCollection + useAsyncData` pattern
+- [ ] **MDC Support**: Components work with MDC syntax and slot content
+- [ ] **Loading States**: Always provides loading states for content
+- [ ] **Error Handling**: Graceful fallbacks for content loading failures
 
-**The platform prioritizes user experience, type safety, internationalization, and scalable course management. Always follow these patterns to maintain consistency and quality across the codebase.**
+**The platform prioritizes user experience, type safety, internationalization, scalable course management, and robust content management through MDC. Always follow these patterns to maintain consistency and quality across the codebase.**

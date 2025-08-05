@@ -1,88 +1,202 @@
 <script setup lang="ts">
-import type { BundledLanguage } from "shiki";
-
 interface Props {
-  code: string;
-  language?: BundledLanguage;
+  code?: string;
+  language?: string;
   title?: string;
   description?: string;
   filename?: string;
   highlightLines?: number[];
   showLineNumbers?: boolean;
+  showCopy?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  code: undefined,
   language: "typescript",
   title: undefined,
   description: undefined,
   filename: undefined,
   highlightLines: () => [],
   showLineNumbers: false,
+  showCopy: true,
 });
 
-// Copy to clipboard functionality
+const slots = useSlots();
 const copied = ref(false);
 const highlightedCode = ref("");
 const isHighlighting = ref(true);
-const { highlightCode, highlightCodeSync } = useSyntaxHighlight();
-const { $colorMode } = useNuxtApp();
 
-const copyCode = async () => {
+// Extract code content from slot or prop
+const codeContent = computed(() => {
+  // If code prop is provided, use it
+  if (props.code) return props.code;
+
+  // Extract code from MDC slot content
+  if (slots.default) {
+    const slotContent = slots.default();
+
+    // Try multiple extraction methods
+    const extractText = (nodes: any[]): string => {
+      let result = "";
+
+      for (const node of nodes) {
+        if (typeof node === "string") {
+          result += node;
+        } else if (node && typeof node === "object") {
+          // For MDC components, check for children.default function
+          if (
+            node.children &&
+            node.children.default &&
+            typeof node.children.default === "function"
+          ) {
+            try {
+              const defaultContent = node.children.default();
+              if (Array.isArray(defaultContent)) {
+                result += extractText(defaultContent);
+              } else if (typeof defaultContent === "string") {
+                result += defaultContent;
+              }
+            } catch (e: unknown) {
+              console.warn("Error calling default function:", e);
+            }
+          }
+
+          // Check for various properties where text might be stored
+          if (node.children) {
+            if (typeof node.children === "string") {
+              result += node.children;
+            } else if (Array.isArray(node.children)) {
+              result += extractText(node.children);
+            }
+          }
+
+          // Check for text property
+          if (node.text) {
+            result += node.text;
+          }
+
+          // Check for innerHTML or textContent
+          if (node.props) {
+            if (node.props.innerHTML) result += node.props.innerHTML;
+            if (node.props.textContent) result += node.props.textContent;
+          }
+
+          // For MDC, sometimes content is in the default slot
+          if (node.type && typeof node.type === "object" && node.type.default) {
+            result += extractText([node.type.default]);
+          }
+        }
+      }
+
+      return result;
+    };
+
+    const extractedCode = extractText(slotContent).trim();
+
+    return extractedCode;
+  }
+
+  return "";
+});
+
+// Syntax highlighting with Shiki
+const highlightCode = async (): Promise<void> => {
+  const code = codeContent.value;
+  if (!code) {
+    highlightedCode.value = "";
+    isHighlighting.value = false;
+    return;
+  }
+
+  // Only run on client-side
+  if (!process.client) {
+    highlightedCode.value = `<pre><code class="language-${props.language}">${code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
+    isHighlighting.value = false;
+    return;
+  }
+
   try {
-    await navigator.clipboard.writeText(props.code);
+    // Import Shiki dynamically
+    const { createHighlighter } = await import("shiki");
+
+    const highlighter = await createHighlighter({
+      themes: ["github-light", "github-dark"],
+      langs: [
+        "javascript",
+        "typescript",
+        "vue",
+        "html",
+        "css",
+        "json",
+        "bash",
+        "sql",
+        "yaml",
+        "markdown",
+      ],
+    });
+
+    // Get current color mode (client-side only)
+    const isDark = process.client
+      ? document.documentElement.classList.contains("dark")
+      : false;
+    const theme = isDark ? "github-dark" : "github-light";
+
+    const highlighted = highlighter.codeToHtml(code, {
+      lang: props.language,
+      theme: theme,
+    });
+
+    highlightedCode.value = highlighted;
+    isHighlighting.value = false;
+  } catch (error: unknown) {
+    console.error("Failed to highlight code:", error);
+    // Fallback to plain text with proper formatting
+    highlightedCode.value = `<pre><code class="language-${props.language}">${code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
+    isHighlighting.value = false;
+  }
+};
+
+// Watch for code changes and re-highlight
+watch(
+  () => codeContent.value,
+  () => {
+    if (codeContent.value && process.client) {
+      highlightCode();
+    }
+  }
+);
+
+// Initialize highlighting on client-side mount
+onMounted(() => {
+  if (codeContent.value) {
+    highlightCode();
+  }
+});
+
+// Watch for color mode changes (client-side only)
+watch(
+  () => process.client && document.documentElement.classList.contains("dark"),
+  () => {
+    if (codeContent.value && process.client) {
+      highlightCode();
+    }
+  }
+);
+
+const copyCode = async (): Promise<void> => {
+  const code = codeContent.value;
+  if (!code) return;
+
+  try {
+    await navigator.clipboard.writeText(code);
     copied.value = true;
     setTimeout(() => {
       copied.value = false;
     }, 2000);
-  } catch (err) {
+  } catch (err: unknown) {
     console.error("Failed to copy code:", err);
   }
 };
-
-// Get the appropriate theme based on color mode
-const getTheme = () => {
-  if (process.client) {
-    return $colorMode.value === "dark" ? "github-dark" : "github-light";
-  }
-  return "github-light";
-};
-
-// Highlight the code
-const processCode = async () => {
-  try {
-    const theme = getTheme();
-    const highlighted = await highlightCode(props.code, props.language, theme);
-    highlightedCode.value = highlighted;
-    isHighlighting.value = false;
-  } catch (error) {
-    console.error("Failed to highlight code:", error);
-    // Fallback to plain text
-    highlightedCode.value = highlightCodeSync(props.code, props.language);
-    isHighlighting.value = false;
-  }
-};
-
-// Initialize with synchronous fallback, then enhance with async highlighting
-onMounted(() => {
-  // Start with immediate fallback
-  highlightedCode.value = highlightCodeSync(props.code, props.language);
-  isHighlighting.value = false;
-
-  // Then enhance with proper highlighting
-  nextTick(() => {
-    processCode();
-  });
-});
-
-// Watch for color mode changes to re-highlight
-watch(
-  () => $colorMode?.value,
-  () => {
-    if (process.client && !isHighlighting.value) {
-      processCode();
-    }
-  }
-);
 </script>
 
 <template>
@@ -117,6 +231,7 @@ watch(
 
         <!-- Copy Button -->
         <button
+          v-if="showCopy && codeContent"
           :title="copied ? 'Copied!' : 'Copy code'"
           class="cursor-pointer flex items-center gap-2 px-3 py-1 text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition-colors rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
           @click="copyCode"
@@ -165,7 +280,31 @@ watch(
 
       <!-- Code Content -->
       <div class="p-6 overflow-x-auto bg-white dark:bg-gray-900">
-        <div class="shiki-container" v-html="highlightedCode" />
+        <div v-if="!codeContent" class="text-gray-500 italic">
+          No code content provided
+        </div>
+
+        <!-- Loading state -->
+        <div v-else-if="isHighlighting" class="text-gray-500 italic">
+          Highlighting code...
+        </div>
+
+        <!-- Highlighted code -->
+        <div
+          v-else-if="highlightedCode"
+          class="shiki-container"
+          v-html="highlightedCode"
+        />
+
+        <!-- Fallback plain text -->
+        <pre v-else class="code-pre">
+          <code class="code-element language-" :class="props.language">{{ codeContent }}</code>
+        </pre>
+
+        <!-- Hidden slot for content extraction -->
+        <div style="display: none">
+          <slot />
+        </div>
       </div>
     </div>
   </div>
@@ -189,6 +328,8 @@ watch(
   line-height: 1.6;
   overflow-x: auto;
   border: none !important;
+  white-space: pre;
+  tab-size: 2;
 }
 
 .shiki-container :deep(code) {
@@ -205,6 +346,17 @@ watch(
   line-height: inherit;
 }
 
+/* Override Shiki's default background */
+.shiki-container :deep(.shiki) {
+  background: transparent !important;
+}
+
+/* Ensure line breaks and indentation are preserved */
+.shiki-container :deep(.line) {
+  display: block;
+  white-space: pre;
+}
+
 /* Fallback styles for non-highlighted code */
 .code-pre {
   background-color: transparent !important;
@@ -216,6 +368,8 @@ watch(
   font-size: 0.875rem;
   line-height: 1.6;
   overflow-x: auto;
+  white-space: pre;
+  tab-size: 2;
 }
 
 .code-element {
@@ -228,6 +382,9 @@ watch(
   tab-size: 2;
   font-weight: 400;
   color: #374151;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .dark .code-element {
